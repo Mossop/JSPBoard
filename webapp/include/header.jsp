@@ -25,19 +25,9 @@
         <td>
           <table>
             <tr>
-            	<jspb:secure groups="messageview">
-	              <td>
-	                <jspb:link href="/view/folder.jsp">Announcements</jspb:link>
-	              </td>
-              </jspb:secure>
             	<jspb:secure groups="contactview">
 	              <td>
 	                <jspb:link href="/view/contacts.jsp">Contacts</jspb:link>
-	              </td>
-              </jspb:secure>
-            	<jspb:secure groups="eventview">
-	              <td>
-	                <jspb:link href="/view/events.jsp">Events</jspb:link>
 	              </td>
               </jspb:secure>
             	<jspb:secure groups="loginview">
