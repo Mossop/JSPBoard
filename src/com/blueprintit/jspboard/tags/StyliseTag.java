@@ -3,6 +3,8 @@ package com.blueprintit.jspboard.tags;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import java.util.StringTokenizer;
 import java.io.BufferedReader;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class StyliseTag extends BodyTagSupport
 {
@@ -27,6 +29,25 @@ public class StyliseTag extends BodyTagSupport
 		}
 	}
 	
+	private String linkUrl(String line)
+	{
+		Pattern urlreg = Pattern.compile("((.*\\s)|(^))(https?://[\\w\\./]*)(($)|(\\s.*$))");
+		Matcher match = urlreg.matcher(line);
+		if (match.matches())
+		{
+			return linkUrl(match.group(1))+"<a href=\""+match.group(4)+"\">"+match.group(4)+"</a>"+linkUrl(match.group(5));
+		}
+		else
+		{
+			return line;
+		}
+	}
+	
+	private String style(String line)
+	{
+		return linkUrl(line);
+	}
+	
 	public int doAfterBody()
 	{
 		try
@@ -40,6 +61,7 @@ public class StyliseTag extends BodyTagSupport
 			int count=0;
 			while (line!=null)
 			{
+				line=style(line);
 				getPreviousOut().println(line+"<br>");
 				line=strip(in.readLine());
 				while ((line!=null)&&(line.length()==0))
