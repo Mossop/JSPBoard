@@ -41,7 +41,7 @@ public class SelectPersonTag extends DBResultTag
 			where.delete(where.length()-5,where.length());
 			where.insert(0," WHERE ");
 		}
-		where.insert(0,"SELECT * FROM Person");
+		where.insert(0,"SELECT *,CONCAT(title,' ',firstnames,' ',surname) AS fullname FROM Person");
 		where.append(" ORDER BY "+order+";");
 		return where.toString();
 	}

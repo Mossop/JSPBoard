@@ -32,12 +32,20 @@
 		</table>
 		<table>
     	<tr>
-    		<td><b>Fullname:</b></td>
-    		<td><%= person.getField("fullname") %></td>
+    		<td><b>Title:</b></td>
+    		<td><%= person.getField("title") %></td>
       </tr>
     	<tr>
-    		<td><b>Nickname:</b></td>
-    		<td><%= person.getField("nickname") %></td>
+    		<td><b>First names:</b></td>
+    		<td><%= person.getField("firstnames") %></td>
+      </tr>
+    	<tr>
+    		<td><b>Surname:</b></td>
+    		<td><%= person.getField("surname") %></td>
+      </tr>
+    	<tr>
+    		<td><b>Display name:</b></td>
+    		<td><%= person.getField("displayname") %></td>
       </tr>
     	<tr>
     		<td><b>Description:</b></td>

@@ -43,7 +43,7 @@
 												Posted by 
 												<jspb:link href="/view/contact.jsp">
 													<jspb:param name="id"><%= person.getField("id") %></jspb:param>
-													<%= person.getField("nickname") %>
+													<%= person.getField("displayname") %>
 												</jspb:link>
 											</jspb:SelectPerson>
 										</td>
@@ -57,7 +57,7 @@
 													Edited by 
 													<jspb:link href="/view/contact.jsp">
 														<jspb:param name="id"><%= person.getField("id") %></jspb:param>
-														<%= person.getField("nickname") %>
+														<%= person.getField("displayname") %>
 													</jspb:link>
 												</jspb:SelectPerson>
 	                		</td>

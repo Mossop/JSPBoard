@@ -17,7 +17,7 @@
 		<% boolean displayed = false; %>
     <jspb:SelectCategory var="category" order="id">
     	<% displayed=false; %>
-			<jspb:SelectPerson var="person" category='<%= category.getField("id") %>'>
+			<jspb:SelectPerson var="person" order="surname" category='<%= category.getField("id") %>'>
 				<% if (!displayed) { %>
 		    	<tr>
 		    		<td colspan="5" width="578">

@@ -20,6 +20,9 @@ CREATE TABLE Login (
 CREATE TABLE Person (
 	id		INTEGER AUTO_INCREMENT NOT NULL,
 	category	INTEGER,
+	title		VARCHAR(10),
+	firstnames	VARCHAR(30),
+	surname		VARCHAR(30),
 	fullname	VARCHAR(30),
 	email		VARCHAR(30),
 	nickname	VARCHAR(20),

@@ -23,12 +23,20 @@
 			<input type="hidden" name="redirect" value='/view/contact.jsp?id=<%= person.getField("id") %>'>
 			<table>
 	    	<tr>
-	    		<td><b>Fullname:</b></td>
-	    		<td><input name="fullname" value='<%= person.getField("fullname") %>'></td>
+	    		<td><b>Title:</b></td>
+	    		<td><input name="title" value='<%= person.getField("title") %>'></td>
 	      </tr>
 	    	<tr>
-	    		<td><b>Nickname:</b></td>
-	    		<td><input name="nickname" value='<%= person.getField("nickname") %>'></td>
+	    		<td><b>First names:</b></td>
+	    		<td><input name="firstnames" value='<%= person.getField("firstnames") %>'></td>
+	      </tr>
+	    	<tr>
+	    		<td><b>Surname:</b></td>
+	    		<td><input name="surname" value='<%= person.getField("surname") %>'></td>
+	      </tr>
+	    	<tr>
+	    		<td><b>Display name:</b></td>
+	    		<td><input name="displayname" value='<%= person.getField("displayname") %>'></td>
 	      </tr>
 	    	<tr>
 	    		<td><b>Description:</b></td>
