@@ -16,7 +16,8 @@ public class IncludesTag extends TagSupport
 		}
 		catch (Exception e)
 		{
-			pageContext.getServletContext().log("IncludesTag: Exception",e);
+			pageContext.getServletContext().log("IncludesTag: Exception - "+e.getMessage(),e);
+			System.out.println("BURRBLE");
 			return SKIP_BODY;
 		}
 	}

@@ -46,6 +46,11 @@
 	</servlet>
 	
 	<servlet>
+		<servlet-name>LoginUpdate</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.LoginUpdate</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>ThreadUpdate</servlet-name>
 		<servlet-class>com.blueprintit.jspboard.servlets.ThreadUpdate</servlet-class>
 	</servlet>
@@ -98,6 +103,11 @@
 	<servlet-mapping>
 		<servlet-name>ThreadUpdate</servlet-name>
 		<url-pattern>/update/thread</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>LoginUpdate</servlet-name>
+		<url-pattern>/update/login</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>

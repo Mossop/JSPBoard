@@ -53,7 +53,7 @@
 	  		<input type="hidden" name="redirect" value='/view/contact.jsp?id=<%= person.getField("id") %>'>
 	  		<input type="hidden" name="person" value='<%= person.getField("id") %>'>
 	  		Username: <input type="text" name="id">
-	  		Password: <input type="text" name="password">
+	  		Password: <input type="test" name="password">
 	  		<input type="submit" value="Add">
 	  	</form>
 	  </jspb:secure>

@@ -30,7 +30,7 @@ public class SelectLoginTag extends DBResultTag
 		StringBuffer where = new StringBuffer();
 		if (id!=null)
 		{
-			where.append("id="+id+" AND ");
+			where.append("id='"+id+"' AND ");
 		}
 		if (person!=null)
 		{

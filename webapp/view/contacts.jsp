@@ -59,7 +59,7 @@
 	  <form action="<%= context %>/add/person" method="post">
 	  	<input type="hidden" name="redirect" value="/view/contacts.jsp">
 	  	Add a new contact: <input type="text" name="fullname">
-	  	<input type="submit" value="add">
+	  	<input type="submit" value="Add">
 	  </form>
 	</jspb:secure>
 </jspb:includes>
