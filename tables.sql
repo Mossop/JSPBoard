@@ -56,6 +56,7 @@ CREATE TABLE Folder (
 	id		INTEGER AUTO_INCREMENT NOT NULL,
 	parent		INTEGER NOT NULL,
 	name		VARCHAR(50),
+	restricted	TINYINT,
 	PRIMARY KEY (id)
 );
 

@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import javax.servlet.http.HttpServletRequest;
 import com.blueprintit.jspboard.DBResults;
 import com.blueprintit.jspboard.Manager;
 import com.blueprintit.jspboard.FolderInfo;
@@ -40,9 +41,15 @@ public class FolderTreeTag extends TagSupport
 		return rootfolder;
 	}
 			
-	private void scanFolder(String person, int id, int depth) throws SQLException
+	private void scanFolder(String person, int id, int depth, boolean showrestricted) throws SQLException
 	{
-		DBResults results = new DBResults(conn.createStatement().executeQuery("SELECT * FROM Folder WHERE parent="+id+" ORDER BY name;"),this);
+		String query = "SELECT * FROM Folder WHERE parent="+id+" ";
+		if (!showrestricted)
+		{
+			query=query+"AND restricted=0 ";
+		}
+		query=query+"ORDER BY name;";
+		DBResults results = new DBResults(conn.createStatement().executeQuery(query),this);
 		if (results.next(this))
 		{
 			if (depth>maxdepth)
@@ -57,7 +64,7 @@ public class FolderTreeTag extends TagSupport
 				if (!String.valueOf(info.getId()).equals(ignore))
 				{
 					folders.add(info);
-					scanFolder(person,info.getId(),depth+1);
+					scanFolder(person,info.getId(),depth+1,showrestricted);
 				}
 			} while (results.next(this));
 		}
@@ -75,6 +82,12 @@ public class FolderTreeTag extends TagSupport
 	{
 		try
 		{
+			boolean showrestricted=false;
+			HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+      if (request.isUserInRole("admin"))
+			{
+				showrestricted=true;
+			}
 			Manager manager = (Manager)pageContext.findAttribute("jspboard.Manager");
 			String user = manager.getUsername();
 			conn = manager.getDBConnection();
@@ -85,7 +98,7 @@ public class FolderTreeTag extends TagSupport
 			maxdepth=0;
 			if (rootfolder==null)
 			{
-				scanFolder(person,-1,0);
+				scanFolder(person,-1,0,showrestricted);
 			}
 			else
 			{
@@ -100,7 +113,7 @@ public class FolderTreeTag extends TagSupport
 					if (!String.valueOf(root.getId()).equals(ignore))
 					{
 						folders.add(root);
-						scanFolder(person,root.getId(),1);
+						scanFolder(person,root.getId(),1,showrestricted);
 					}
 				}
 			}
