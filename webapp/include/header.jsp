@@ -39,7 +39,21 @@
           <table border="0">
             <tr>
               <td width="200" valign="top">
-              	<jsp:include page="/include/folderview.jsp"/>
+              	<table border="0">
+									<jspb:FolderTree>
+										<tr>
+											<% if (Integer.parseInt(depth)>0) { %>
+												<td colspan="<%= depth %>"></td>
+											<% } %>
+											<td colspan="1">
+												<a href=""><img align="top" src="images/closedfolder.gif"></a>
+											</td>
+											<td colspan="<%= Integer.parseInt(maxdepth)-Integer.parseInt(depth)+1 %>">
+												<a class="closedfolder" href=""><%= name %></a>
+											</td>
+										</tr>
+	              	</jspb:FolderTree>
+	              </table>
               	<hr>
               	<p>Change Password</p>
 								<p>Logout</p>

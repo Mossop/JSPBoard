@@ -22,6 +22,40 @@
   	<body-content>JSP</body-content>
   </tag>
   <tag>
+  	<name>FolderTree</name>
+  	<tag-class>com.blueprintit.jspboard.tags.FolderTreeTag</tag-class>
+  	<body-content>JSP</body-content>
+  	<variable>
+  		<name-given>maxdepth</name-given>
+  		<variable-class>java.lang.String</variable-class>
+  		<declare>true</declare>
+  		<scope>NESTED</scope>
+  	</variable>
+  	<variable>
+  		<name-given>depth</name-given>
+  		<variable-class>java.lang.String</variable-class>
+  		<declare>true</declare>
+  		<scope>NESTED</scope>
+  	</variable>
+  	<variable>
+  		<name-given>id</name-given>
+  		<variable-class>java.lang.String</variable-class>
+  		<declare>true</declare>
+  		<scope>NESTED</scope>
+  	</variable>
+  	<variable>
+  		<name-given>name</name-given>
+  		<variable-class>java.lang.String</variable-class>
+  		<declare>true</declare>
+  		<scope>NESTED</scope>
+  	</variable>
+  	<attribute>
+  		<name>rootFolder</name>
+  		<required>false</required>
+  		<rtexprvalue>true</rtexprvalue>
+  	</attribute>
+  </tag>
+  <tag>
   	<name>dbquery</name>
   	<tag-class>com.blueprintit.jspboard.tags.DBQueryTag</tag-class>
   	<tei-class>com.blueprintit.jspboard.tags.DBResultTEI</tei-class>
