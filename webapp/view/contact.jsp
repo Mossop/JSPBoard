@@ -38,6 +38,12 @@
     		<td><%= person.getField("nickname") %></td>
       </tr>
     	<tr>
+    		<td><b>Description:</b></td>
+    		<td>
+   				<%= person.getField("description") %>
+    		</td>
+      </tr>
+    	<tr>
     		<td><b>Email:</b></td>
     		<td>
     			<a href='mailto:<%= person.getField("email") %>'>

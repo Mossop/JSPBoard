@@ -7,6 +7,8 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.http.HttpSession;
 import javax.servlet.ServletContext;
 import java.util.Date;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
@@ -19,11 +21,13 @@ public class SessionHandler implements HttpSessionListener, ServletContextListen
 {
 	private ServletContext context;
 	private List sessions;
+	private Map dbconns;
 	private SimpleDateFormat mysqldate;
 	
 	public SessionHandler()
 	{
 		sessions = Collections.synchronizedList(new ArrayList());
+		dbconns = new HashMap();
 		mysqldate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try
 		{
@@ -71,18 +75,20 @@ public class SessionHandler implements HttpSessionListener, ServletContextListen
 	private void startSession(HttpSession session)
 	{
 		context.log("SessionHandler: Session created");
-		session.setAttribute("jspboard.DBConnection",newConnection());
+		Connection conn = newConnection();
+		dbconns.put(session,conn);
+		session.setAttribute("jspboard.DBConnection",conn);
 	}
 	
 	private void stopSession(HttpSession session)
 	{
 		if (session!=null)
 		{
-			Connection conn = (Connection)session.getAttribute("jspboard.DBConnection");
+			Connection conn = (Connection)dbconns.get(session);
 			Object user=session.getAttribute("jspboard.user");
 			try
 			{
-				if (user!=null)
+				if ((user!=null)&&(conn!=null))
 				{
 					conn.createStatement().executeUpdate("UPDATE Login SET lastaccess='"+mysqldate.format(new Date(session.getLastAccessedTime()))+"' WHERE id='"+user+"';");
 				}
@@ -91,6 +97,7 @@ public class SessionHandler implements HttpSessionListener, ServletContextListen
 			catch (Exception e)
 			{
 			}
+			dbconns.remove(session);
 			context.log("SessionHandler: Session destroyed");
 		}
 		else
@@ -99,56 +106,35 @@ public class SessionHandler implements HttpSessionListener, ServletContextListen
 		}
 	}
 	
-	private void sessionCreated(HttpSession session)
+	// context listener code
+	public void contextInitialized(ServletContextEvent e)
 	{
-		startSession(session);
-		sessions.add(session);
-	}
-	
-	private void sessionDestroyed(HttpSession session)
-	{
-		sessions.remove(session);
-		stopSession(session);
-	}
-
-	private void contextInitialised(ServletContext context)
-	{
-		this.context=context;
+		e.getServletContext().setAttribute("jspboard.SessionHandler",this);
 		context.log("SessionHandler: Context started");
 	}
-	
-	private void contextDestroyed(ServletContext context)
+
+	public void contextDestroyed(ServletContextEvent e)
 	{
-		context.log("SessionHandler: Context destroyed");
+		e.getServletContext().removeAttribute("jspboard.SessionHandler");
 		Iterator loop = sessions.iterator();
 		while (loop.hasNext())
 		{
 			stopSession((HttpSession)loop.next());
 		}
 		this.context=null;
-	}
-
-	// context listener code
-	public void contextInitialized(ServletContextEvent e)
-	{
-		contextInitialised(e.getServletContext());
-		e.getServletContext().setAttribute("jspboard.SessionHandler",this);
-	}
-
-	public void contextDestroyed(ServletContextEvent e)
-	{
-		contextDestroyed(e.getServletContext());
-		e.getServletContext().removeAttribute("jspboard.SessionHandler");
+		context.log("SessionHandler: Context destroyed");
 	}
 
 	// session listener code
 	public void sessionCreated(HttpSessionEvent e)
 	{
-			sessionCreated(e.getSession());
+		sessions.add(e.getSession());
+		startSession(e.getSession());
 	}
 	
 	public void sessionDestroyed(HttpSessionEvent e)
 	{
-			sessionDestroyed(e.getSession());
+		stopSession(e.getSession());
+		sessions.remove(e.getSession());
 	}
 }

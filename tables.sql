@@ -26,6 +26,7 @@ CREATE TABLE Person (
 	mobilephone	VARCHAR(20),
 	workphone	VARCHAR(20),
 	fax		VARCHAR(20),
+	description	VARCHAR(100),
 	PRIMARY KEY (id)
 );
 

@@ -12,10 +12,10 @@
         <b>Name</b>
       </td>
       <td>
-        <b>Email</b>
+      	<b>Description</b>
       </td>
       <td>
-        <b>Mobile Phone</b>
+        <b>Email</b>
       </td>
       <td></td>
     </tr>
@@ -26,12 +26,12 @@
 						<%= person.getField("fullname") %>
 					</a>
 				</td>
+				<td><%= person.getField("description") %></td>
 				<td>
 					<a href='mailto:<%= person.getField("email") %>'>
 						<%= person.getField("email") %>
 					</a>
 				</td>
-				<td><%= person.getField("mobilephone") %></td>
 				<td>
 					<% boolean haslogin=false; %>
 					<jspb:SelectLogin person='<%= person.getField("id") %>'>

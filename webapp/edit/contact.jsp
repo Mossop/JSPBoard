@@ -16,6 +16,10 @@
 	    		<td><input name="nickname" value='<%= person.getField("nickname") %>'></td>
 	      </tr>
 	    	<tr>
+	    		<td><b>Description:</b></td>
+	    		<td><input name="description" value='<%= person.getField("description") %>'></td>
+	      </tr>
+	    	<tr>
 	    		<td><b>Email:</b></td>
 	    		<td><input name="email" value='<%= person.getField("email") %>'></td>
 	      </tr>
