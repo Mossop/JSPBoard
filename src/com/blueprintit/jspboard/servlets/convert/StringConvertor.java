@@ -9,7 +9,7 @@ public class StringConvertor extends Convertor
 	
 	public String convert(String value)
 	{
-		return "'"+value+"'";
+		return "'"+value.replaceAll("\\\\","\\\\\\\\").replaceAll("'","\\\\'")+"'";
 	}
 	
 	public boolean validate(String value)
