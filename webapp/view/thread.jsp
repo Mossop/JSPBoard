@@ -25,16 +25,32 @@
 							<jspb:header>
 	              <table width="100%">
 	                <tr>
-	                  <td align="left"><img src="<%= context %>/images/read.gif" align="middle" alt="read">
+	                	<td align="left" width="15">
+	                		<img src="<%= context %>/images/read.gif" align="middle" alt="read">
+	                	</td>
+	                  <td align="left">
 											<jspb:SelectPerson var="person" id='<%= msg.getField("owner") %>'>
 												Posted by <%= person.getField("nickname") %>
 											</jspb:SelectPerson>
 										</td>
-	                  <td align="right"><%= msg.getField("created") %></td>
+	                  <td align="right"><%= msg.getDate("created") %></td>
 	                </tr>
+	                <jspb:SelectEdits var="edit" message='<%= msg.getField("id") %>'>
+	                	<tr>
+	                		<td></td>
+	                		<td>
+												<jspb:SelectPerson var="person" id='<%= edit.getField("person") %>'>
+													Edited by <%= person.getField("nickname") %>
+												</jspb:SelectPerson>
+	                		</td>
+	                		<td align="right">
+	                			<%= edit.getField("altered") %>
+	                		</td>
+	                	</tr>
+	                </jspb:SelectEdits>
 	                <jspb:secure person='<%= msg.getField("owner") %>' groups="messageadmin">
 		                <tr>
-		                  <td colspan="2">
+		                  <td colspan="3">
 		                    <table>
 		                      <tr>
 		                        <td valign="middle">

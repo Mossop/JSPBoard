@@ -4,7 +4,10 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Date;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class DBResults
 {
@@ -14,9 +17,13 @@ public class DBResults
 	private Map tablefields = new HashMap();
 	private int pos;
 	private Object lock;
+	private DateFormat standarddf;
+	private DateFormat mysqlparse;
 
 	public DBResults(ResultSet r, Object maker) throws SQLException
 	{
+		standarddf = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+		mysqlparse = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		results=r;
 		metadata=r.getMetaData();
 		for (int loop=1; loop<=metadata.getColumnCount(); loop++)
@@ -44,6 +51,55 @@ public class DBResults
 			}
 		}
 		return true;
+	}
+	
+	public String getDate(String field)
+	{
+		int col = findField(field);
+		if (col>=0)
+		{
+			try
+			{
+				String ans = results.getString(col);
+				if (results.wasNull())
+				{
+					return "";
+				}
+				else
+				{
+					return standarddf.format(mysqlparse.parse(ans));
+				}
+			}
+			catch (Exception e)
+			{
+			}
+		}
+		return "";
+	}
+	
+	public String getDate(String field, String format)
+	{
+		int col = findField(field);
+		if (col>=0)
+		{
+			try
+			{
+				String ans = results.getString(col);
+				if (results.wasNull())
+				{
+					return "";
+				}
+				else
+				{
+					DateFormat df = new SimpleDateFormat(format);
+					return df.format(mysqlparse.parse(ans));
+				}
+			}
+			catch (Exception e)
+			{
+			}
+		}
+		return "";
 	}
 	
 	public String getField(String field)

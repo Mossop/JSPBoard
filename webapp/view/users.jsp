@@ -36,7 +36,7 @@
 						else
 						{
 					%>
-						<%= login.getField("lastaccess") %>
+						<%= login.getDate("lastaccess") %>
 					<%
 						}
 					%>

@@ -37,10 +37,12 @@ public class SessionHandler implements HttpSessionListener, ServletContextListen
 	public boolean isLoggedIn(String id)
 	{
 		Iterator loop = sessions.iterator();
+		Object user;
 		while (loop.hasNext())
 		{
 			HttpSession session = (HttpSession)loop.next();
-			if (session.getAttribute("jspboard.user").equals(id))
+			user=session.getAttribute("jspboard.user");
+			if ((user!=null)&&(user.equals(id)))
 			{
 				return true;
 			}

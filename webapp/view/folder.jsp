@@ -49,11 +49,11 @@
 								</td>
 								<td>
 									<jspb:SelectPerson var="person" id='<%= thread.getField("owner") %>'>
-										<jspb:GetField field="nickname"/>
+										<%= thread.getField("nickname") %>
 									</jspb:SelectPerson>
 								</td>
 								<td align="right">
-									<jspb:GetField field="created"/>
+									<%= thread.getDate("created") %>
 								</td>
 							</tr>
 						</jspb:SelectThread>
