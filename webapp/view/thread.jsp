@@ -69,7 +69,7 @@
 		                        <td>|</td>
 		                        <td valign="middle">
 		                        	<img align="middle" src="<%= context %>/images/delete.gif">
-		                          <a href="">
+		                          <a href='<%= context %>/delete/message?id=<%= msg.getField("id") %>&redirect=/view/thread.jsp%3fid%3d<%= thread.getField("id") %>'>
 																Delete
 															</a>
 		                        </td>
@@ -93,9 +93,11 @@
 												</a>
                       </td>
                       <td>
-                        <a href="">
-                        	<img src="<%= context %>/images/delete.gif" alt="delete" align="middle">
-                        </a>
+				                <jspb:secure person='<%= msg.getField("owner") %>' groups="messageadmin">
+	                        <a href='<%= context %>/delete/file?id=<%= file.getField("id") %>&redirect=/view/thread.jsp%3fid%3d<%= thread.getField("id") %>'>
+	                        	<img src="<%= context %>/images/delete.gif" alt="delete" align="middle">
+	                        </a>
+	                      </jspb:secure>
                       </td>
                     </tr>
 									</jspb:SelectFile>

@@ -9,5 +9,11 @@
 			Set password: <input type="text" name="password">
 			<input type="submit" value="Set">
 		</form>
+		<hr>
+		<form action="<%= context %>/delete/login" method="post">
+			<input type="hidden" name="redirect" value="/view/users.jsp">
+			<input type="hidden" name="id" value='<%= login.getField("id") %>'>
+			<input type="submit" value="Delete Login">
+		</form>
 	</jspb:includes>
 </jspb:SelectLogin>

@@ -1,6 +1,9 @@
 <%@ taglib uri="/WEB-INF/jspboard.tld" prefix="jspb" %>
 
 <jspb:SelectFolder var="folder" id='<%= request.getParameter("id") %>'>
+	<%
+		request.setAttribute("folder",folder.getField("id"));
+	%>
 	<jspb:includes>
 		<h1><%= folder.getField("name") %></h1>
 		<form action="<%= context %>/update/folder" method="post">
@@ -16,6 +19,11 @@
 		</form>
 		<% if (!folder.getField("parent").equals("-1")) { %>
 		<hr>
+		<form action="<%= context %>/delete/folder" action="post">
+			<input type="hidden" name="id" value='<%= folder.getField("id") %>'>
+			<input type="hidden" name="redirect" value='/view/folder.jsp?id=<%= folder.getField("parent") %>'>
+			<input type="submit" value="Delete Folder"> (This will only work if the folder contains no threads)
+		</form>
 		<hr>
 		<p>If you wish to move this folder, simply select where to put it below:</p>
   	<table>

@@ -16,6 +16,31 @@
 	</servlet>
 	
 	<servlet>
+		<servlet-name>FileDelete</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.FileDelete</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>MessageDelete</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.MessageDelete</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>FolderDelete</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.FolderDelete</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>LoginDelete</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.LoginDelete</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>ThreadDelete</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.ThreadDelete</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>Password</servlet-name>
 		<servlet-class>com.blueprintit.jspboard.servlets.Password</servlet-class>
 	</servlet>
@@ -83,6 +108,31 @@
 	<servlet-mapping>
 		<servlet-name>Password</servlet-name>
 		<url-pattern>/update/password</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>FolderDelete</servlet-name>
+		<url-pattern>/delete/folder</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>LoginDelete</servlet-name>
+		<url-pattern>/delete/login</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>FileDelete</servlet-name>
+		<url-pattern>/delete/file</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>MessageDelete</servlet-name>
+		<url-pattern>/delete/message</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>ThreadDelete</servlet-name>
+		<url-pattern>/delete/thread</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
@@ -164,6 +214,7 @@
 			<url-pattern>/update/*</url-pattern>
 			<url-pattern>/add/*</url-pattern>
 			<url-pattern>/file/*</url-pattern>
+			<url-pattern>/delete/*</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>*</role-name>

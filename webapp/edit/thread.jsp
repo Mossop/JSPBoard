@@ -22,5 +22,11 @@
 				</tr>
 	  	</jspb:FolderTree>
 	  </table>
+	  <hr>
+	  <form action="<%= context %>/delete/thread" method="post">
+	  	<input type="hidden" name="redirect" value='/view/folder.jsp?id=<%= thread.getField("folder") %>'>
+	  	<input type="hidden" name="id" value='<%= thread.getField("id") %>'>
+	  	Delete this thread: <input type="submit" value="Delete">
+	  </form>
 	</jspb:includes>
 </jspb:SelectThread>

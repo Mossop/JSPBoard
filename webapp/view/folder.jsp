@@ -4,7 +4,11 @@
 	String folderid = request.getParameter("id");
 	if (folderid==null)
 	{
-		folderid="48";
+%>
+	<jspb:SelectFolder var="rootfinder" parentId="-1">
+		<% folderid=rootfinder.getField("id"); %>
+	</jspb:SelectFolder>
+<%
 	}
 	request.setAttribute("folder",folderid);
 %>
