@@ -16,18 +16,14 @@ insert into JSPBoard.UnreadMessage (message,person) select distinct message_id,p
 insert into JSPBoard.Groups
 (id) values
 ("admin"),
-("personadd"),
-("folderadd"),
-("messageadd"),
-("loginadd"),
-("personadmin"),
-("folderadmin"),
-("messageadmin"),
+("boardadmin"),
+("loginview"),
 ("loginadmin"),
-("personview"),
-("folderview"),
+("contactview"),
+("contactadmin"),
 ("messageview"),
-("loginview");
+("messageadd"),
+("messageadmin");
 
 insert into JSPBoard.UserGroup (id,group_id) values ('dave','admin');
 

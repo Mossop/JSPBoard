@@ -1,20 +1,20 @@
 package com.blueprintit.jspboard.tags;
 
-public class SelectLoginTag extends DBResultTag
+public class SelectFileTag extends DBResultTag
 {
-	private String order = "id";
-	private String person;
+	private String order = "name";
+	private String message;
 	
-	public void SetPerson(String value)
+	public void setMessage(String value)
 	{
-		person=value;
+		message=value;
 	}
 	
-	public String getPerson()
+	public String getMessage()
 	{
-		return person;
+		return message;
 	}
-	
+		
 	public void setOrder(String value)
 	{
 		order=value;
@@ -32,16 +32,16 @@ public class SelectLoginTag extends DBResultTag
 		{
 			where.append("id="+id+" AND ");
 		}
-		if (person!=null)
+		if (message!=null)
 		{
-			where.append("person="+person+" AND ");
+			where.append("message="+message+" AND ");
 		}
 		if (where.length()>0)
 		{
 			where.delete(where.length()-5,where.length());
 			where.insert(0," WHERE ");
 		}
-		where.insert(0,"SELECT * FROM Login");
+		where.insert(0,"SELECT * FROM File");
 		where.append(" ORDER BY "+order+";");
 		return where.toString();
 	}

@@ -17,9 +17,11 @@
 					<h1><%= folder.getField("name") %></h1>
 				</td>
 				<td valign="top" align="right">
-					<a href="<%= context %>/edit/folder.jsp?id=<%= folderid %>">
-						Administration
-					</a>
+					<jspb:secure groups="boardadmin">
+						<a href="<%= context %>/edit/folder.jsp?id=<%= folderid %>">
+							Administration
+						</a>
+					</jspb:secure>
 				</td>
 			</tr>
 			<tr>
@@ -59,7 +61,7 @@
 				</td>
 			</tr>
 			<tr>
-				<jspb:secure groups="admin">
+				<jspb:secure groups="messageadd">
 					<td colspan="2">
 						<hr>
 						<h2>Post a new thread:</h2>

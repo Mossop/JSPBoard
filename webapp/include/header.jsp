@@ -25,15 +25,21 @@
         <td>
           <table>
             <tr>
-              <td>
-                <a href="<%= context %>\view\folder.jsp">Announcements</a>
-              </td>
-              <td>
-                <a href="<%= context %>\view\contacts.jsp">Contacts</a>
-              </td>
-              <td>
-                <a href="<%= context %>\view\users.jsp">Users</a>
-              </td>
+            	<jspb:secure groups="messageview">
+	              <td>
+	                <a href="<%= context %>\view\folder.jsp">Announcements</a>
+	              </td>
+              </jspb:secure>
+            	<jspb:secure groups="contactview">
+	              <td>
+	                <a href="<%= context %>\view\contacts.jsp">Contacts</a>
+	              </td>
+              </jspb:secure>
+            	<jspb:secure groups="loginview">
+	              <td>
+	                <a href="<%= context %>\view\users.jsp">Users</a>
+	              </td>
+              </jspb:secure>
             </tr>
           </table>
         </td>
@@ -72,6 +78,6 @@
 	              	</jspb:FolderTree>
 	              </table>
               	<hr>
-              	Change Password
+              	<a href="<%= context %>/edit/password.jsp">Change Password</a>
               </td>
               <td width="578" valign="top">
