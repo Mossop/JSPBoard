@@ -63,7 +63,14 @@
 				</td>
 			</tr>
 			<tr>
-				<jspb:secure groups="messageadd">
+				<%
+					String groups = "messageadd";
+					if (folder.getField("parent").equals("-1"))
+					{
+						groups="boardadmin";
+					}
+				%>
+				<jspb:secure groups="<%= groups %>">
 					<td colspan="2">
 						<hr>
 						<h2>Post a new thread:</h2>

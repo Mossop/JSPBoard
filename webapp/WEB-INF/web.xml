@@ -16,6 +16,11 @@
 	</servlet>
 	
 	<servlet>
+		<servlet-name>FileUpload</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.FileUpload</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>Logout</servlet-name>
 		<servlet-class>com.blueprintit.jspboard.servlets.Logout</servlet-class>
 	</servlet>
@@ -48,6 +53,11 @@
 	<servlet-mapping>
 		<servlet-name>Logout</servlet-name>
 		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>FileUpload</servlet-name>
+		<url-pattern>/add/file</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>

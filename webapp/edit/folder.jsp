@@ -14,6 +14,8 @@
 				</tr>
 			</table>
 		</form>
+		<% if (!folder.getField("parent").equals("-1")) { %>
+		<hr>
 		<hr>
 		<p>If you wish to move this folder, simply select where to put it below:</p>
   	<table>
@@ -31,5 +33,6 @@
 				</tr>
 	  	</jspb:FolderTree>
 	  </table>
+	  <% } %>
 	</jspb:includes>
 </jspb:SelectFolder>

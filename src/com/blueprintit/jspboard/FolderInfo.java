@@ -6,8 +6,9 @@ public class FolderInfo
 	private int parent;
 	private String name;
 	private int depth;
+	private int unread;
 	
-	public FolderInfo(String id, String parent, String name, int depth)
+	public FolderInfo(String id, String parent, String name, String unread, int depth)
 	{
 		try
 		{
@@ -23,8 +24,20 @@ public class FolderInfo
 		catch (Exception e)
 		{
 		}
+		try
+		{
+			this.unread=Integer.parseInt(unread);
+		}
+		catch (Exception e)
+		{
+		}
 		this.name=name;
 		this.depth=depth;
+	}
+	
+	public int getUnread()
+	{
+		return unread;
 	}
 	
 	public int getDepth()

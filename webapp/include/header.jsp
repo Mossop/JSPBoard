@@ -69,10 +69,18 @@
 											</td>
 											<td colspan="<%= Integer.parseInt(maxdepth)-Integer.parseInt(depth)+1 %>">
 												<% if (folder.equals(id)) { %>
-													<a class="openfolder" href="<%= context %>/view/folder.jsp?id=<%= id %>"><%= name %></a>
+													<a class="openfolder" href="<%= context %>/view/folder.jsp?id=<%= id %>">
 												<% } else { %>
-													<a class="closedfolder" href="<%= context %>/view/folder.jsp?id=<%= id %>"><%= name %></a>
+													<a class="closedfolder" href="<%= context %>/view/folder.jsp?id=<%= id %>">
 												<% } %>
+												<% if (!unread.equals("0")) { %>
+												<i>
+												<% } %>
+													<%= name %>
+												<% if (!unread.equals("0")) { %>
+													(<%= unread %>)</i>
+												<% } %>
+												</a>
 											</td>
 										</tr>
 	              	</jspb:FolderTree>

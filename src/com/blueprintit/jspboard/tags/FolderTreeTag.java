@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.Iterator;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 import com.blueprintit.jspboard.DBResults;
 import com.blueprintit.jspboard.FolderInfo;
 
@@ -38,7 +39,7 @@ public class FolderTreeTag extends TagSupport
 		return rootfolder;
 	}
 			
-	private void scanFolder(int id, int depth) throws SQLException
+	private void scanFolder(String person, int id, int depth) throws SQLException
 	{
 		DBResults results = new DBResults(conn.createStatement().executeQuery("SELECT * FROM Folder WHERE parent="+id+" ORDER BY name;"),this);
 		if (results.next(this))
@@ -49,11 +50,13 @@ public class FolderTreeTag extends TagSupport
 			}
 			do
 			{
-				FolderInfo info = new FolderInfo(results.getField("id"),results.getField("parent"),results.getField("name"),depth);
+				ResultSet rs = conn.createStatement().executeQuery("SELECT COUNT(Message.id) FROM Thread,Message,UnreadMessage WHERE Thread.id=Message.thread AND Message.id=UnreadMessage.message AND UnreadMessage.person="+person+" AND Thread.folder="+results.getField("id")+";");
+				rs.next();
+				FolderInfo info = new FolderInfo(results.getField("id"),results.getField("parent"),results.getField("name"),rs.getString(1),depth);
 				if (!String.valueOf(info.getId()).equals(ignore))
 				{
 					folders.add(info);
-					scanFolder(info.getId(),depth+1);
+					scanFolder(person,info.getId(),depth+1);
 				}
 			} while (results.next(this));
 		}
@@ -64,29 +67,38 @@ public class FolderTreeTag extends TagSupport
 		pageContext.setAttribute("name",info.getName());
 		pageContext.setAttribute("id",String.valueOf(info.getId()));
 		pageContext.setAttribute("depth",String.valueOf(info.getDepth()));
+		pageContext.setAttribute("unread",String.valueOf(info.getUnread()));
 	}
 	
 	public int doStartTag()
 	{
 		try
 		{
+			String user = (String)pageContext.findAttribute("jspboard.user");
 			conn = (Connection)pageContext.findAttribute("jspboard.DBConnection");
+			ResultSet rs = conn.createStatement().executeQuery("SELECT person FROM Login WHERE id='"+user+"';");
+			rs.next();
+			String person = rs.getString(1);
 			folders = new LinkedList();
 			maxdepth=0;
 			if (rootfolder==null)
 			{
-				scanFolder(-1,0);
+				scanFolder(person,-1,0);
 			}
 			else
 			{
-				DBResults results = new DBResults(conn.createStatement().executeQuery("SELECT * FROM Folder WHERE id="+rootfolder+";"),this);
+				DBResults results = new DBResults(conn.createStatement().executeQuery("SELECT * FROM Folder WHERE id="+rootfolder+" ORDER BY name;"),this);
 				if (results.next(this))
 				{
-					FolderInfo root = new FolderInfo(results.getField("id"),results.getField("parent"),results.getField("name"),1);
+					String parent = results.getField("parent");
+					String name = results.getField("name");
+					rs = conn.createStatement().executeQuery("SELECT COUNT(Message.id) FROM Thread,Message,UnreadMessage WHERE Thread.id=Message.thread AND Message.id=UnreadMessage.message AND UnreadMessage.person="+person+" AND Thread.folder="+rootfolder+";");
+					rs.next();
+					FolderInfo root = new FolderInfo(rootfolder,parent,name,rs.getString(1),1);
 					if (!String.valueOf(root.getId()).equals(ignore))
 					{
 						folders.add(root);
-						scanFolder(root.getId(),1);
+						scanFolder(person,root.getId(),1);
 					}
 				}
 			}

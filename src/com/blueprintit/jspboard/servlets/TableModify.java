@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +29,11 @@ public abstract class TableModify extends HttpServlet
 	
 	protected abstract String getTable();
 	
-	protected abstract String generateQuery(String id, Map updates);
+	protected abstract String generateQuery(Map updates);
+	
+	protected void postModification(Connection conn, Map updates, String user) throws SQLException
+	{
+	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException
 	{
@@ -48,7 +53,7 @@ public abstract class TableModify extends HttpServlet
 			while (loop.hasMoreElements())
 			{
 				String param = loop.nextElement().toString();
-				if ((!param.equals("id"))&&(!param.equals("redirect"))&&(!param.equals("error")))
+				if ((!param.equals("redirect"))&&(!param.equals("error")))
 				{
 					conv = (Convertor)fields.get(param);
 					if ((conv!=null)&&(conv.validate(request.getParameter(param))))
@@ -61,13 +66,13 @@ public abstract class TableModify extends HttpServlet
 					}
 				}
 			}
-			String id = request.getParameter("id");
 			String redirect = request.getParameter("redirect");
 			if ((redirect!=null)&&(valid))
 			{
 				if (!updates.isEmpty())
 				{
-					conn.createStatement().executeUpdate(generateQuery(id,updates));
+					conn.createStatement().executeUpdate(generateQuery(new HashMap(updates)));
+					postModification(conn,updates,request.getRemoteUser());
 				}
 				request.getRequestDispatcher(redirect).forward(request,response);
 			}

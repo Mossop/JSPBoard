@@ -74,6 +74,12 @@
   		<scope>NESTED</scope>
   	</variable>
   	<variable>
+  		<name-given>unread</name-given>
+  		<variable-class>java.lang.String</variable-class>
+  		<declare>true</declare>
+  		<scope>NESTED</scope>
+  	</variable>
+  	<variable>
   		<name-given>id</name-given>
   		<variable-class>java.lang.String</variable-class>
   		<declare>true</declare>

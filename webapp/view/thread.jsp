@@ -55,14 +55,14 @@
 		                      <tr>
 		                        <td valign="middle">
 		                        	<img align="middle" src="<%= context %>/images/paperclip.gif">
-		                          <a href="">
+		                          <a href='<%= context %>/add/file.jsp?id=<%= msg.getField("id") %>'>
 																Attach File
 															</a>
 		                        </td>
 		                        <td>|</td>
 		                        <td valign="middle">
 		                        	<img align="middle" src="<%= context %>/images/edit.gif">
-		                          <a href="">
+		                          <a href='<%= context %>/edit/message.jsp?id=<%= msg.getField("id") %>'>
 																Edit
 															</a>
 		                        </td>

@@ -5,8 +5,10 @@ import java.util.Iterator;
 
 public abstract class TableUpdate extends TableModify
 {
-	protected String generateQuery(String id, Map updates)
+	protected String generateQuery(Map updates)
 	{
+		String id = (String)updates.get("id");
+		updates.remove("id");
 		if (id!=null)
 		{
 			StringBuffer query = new StringBuffer("UPDATE "+getTable()+" SET ");
