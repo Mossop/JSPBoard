@@ -15,8 +15,8 @@
       <tr>
         <td width="778">
           <h1 align="center">IEE Wales South West Younger Members Bulletin Board</h1>
-          <p>Please <a href="view/folder.jsp">click here</a> to login.</p>
-          <p>When you have finished please close your browser to logout.</p>
+          <p>You have been logged out. Please close your browser.</p>
+          <p><a href="view/folder.jsp">click here</a> to re-enter the board.</p>
         </td>
       </tr>
     </table>

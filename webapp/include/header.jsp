@@ -78,6 +78,7 @@
 	              	</jspb:FolderTree>
 	              </table>
               	<hr>
-              	<a href="<%= context %>/edit/password.jsp">Change Password</a>
+              	<a href="<%= context %>/edit/password.jsp">Change Password</a><br>
+              	<a href="<%= context %>/logout">Logout</a>
               </td>
               <td width="578" valign="top">

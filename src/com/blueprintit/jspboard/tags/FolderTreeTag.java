@@ -12,11 +12,22 @@ import com.blueprintit.jspboard.FolderInfo;
 public class FolderTreeTag extends TagSupport
 {
 	private String rootfolder;
+	private String ignore = "-1";
 	private Iterator loop;
 	private Connection conn;
 	private int maxdepth;
 	private List folders;
+
+	public void setIgnore(String value)
+	{
+		ignore=value;
+	}
 	
+	public String getIgnore()
+	{
+		return ignore;
+	}
+		
 	public void setRootFolder(String value)
 	{
 		rootfolder=value;
@@ -39,8 +50,11 @@ public class FolderTreeTag extends TagSupport
 			do
 			{
 				FolderInfo info = new FolderInfo(results.getField("id"),results.getField("parent"),results.getField("name"),depth);
-				folders.add(info);
-				scanFolder(info.getId(),depth+1);
+				if (!String.valueOf(info.getId()).equals(ignore))
+				{
+					folders.add(info);
+					scanFolder(info.getId(),depth+1);
+				}
 			} while (results.next(this));
 		}
 	}
@@ -69,8 +83,11 @@ public class FolderTreeTag extends TagSupport
 				if (results.next(this))
 				{
 					FolderInfo root = new FolderInfo(results.getField("id"),results.getField("parent"),results.getField("name"),1);
-					folders.add(root);
-					scanFolder(root.getId(),1);
+					if (!String.valueOf(root.getId()).equals(ignore))
+					{
+						folders.add(root);
+						scanFolder(root.getId(),1);
+					}
 				}
 			}
 			loop=folders.iterator();

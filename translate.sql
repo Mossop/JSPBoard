@@ -20,6 +20,7 @@ insert into JSPBoard.Groups
 ("loginview","Allows viewing of login information"),
 ("loginadmin","Allows creating and deleting logins"),
 ("contactview","Allows viewing the contacts"),
+("contactedit","Allows editing non-login contacts"),
 ("contactadmin","Allows creating and deleting contacts"),
 ("messageview","Allows viewing the messages. This is required for login"),
 ("messageadd","Allows adding new messages and threads"),

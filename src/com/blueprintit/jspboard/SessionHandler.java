@@ -2,6 +2,8 @@ package com.blueprintit.jspboard;
 
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
+import javax.servlet.http.HttpSessionAttributeListener;
+import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.http.HttpSession;
@@ -17,17 +19,17 @@ import java.sql.DriverManager;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 
-public class SessionHandler implements HttpSessionListener, ServletContextListener
+public class SessionHandler implements HttpSessionListener, ServletContextListener, HttpSessionAttributeListener
 {
 	private ServletContext context;
 	private List sessions;
-	private Map dbconns;
 	private SimpleDateFormat mysqldate;
-	
+	private Map users;
+		
 	public SessionHandler()
 	{
+		users = new HashMap();
 		sessions = Collections.synchronizedList(new ArrayList());
-		dbconns = new HashMap();
 		mysqldate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try
 		{
@@ -67,48 +69,15 @@ public class SessionHandler implements HttpSessionListener, ServletContextListen
 		}
 		catch (Exception e)
 		{
-			context.log("SessionHandler: Could not establish db connection");
+			context.log("SessionHandler: Could not establish DB connection",e);
 			return null;
-		}
-	}
-	
-	private void startSession(HttpSession session)
-	{
-		context.log("SessionHandler: Session created");
-		Connection conn = newConnection();
-		dbconns.put(session,conn);
-		session.setAttribute("jspboard.DBConnection",conn);
-	}
-	
-	private void stopSession(HttpSession session)
-	{
-		if (session!=null)
-		{
-			Connection conn = (Connection)dbconns.get(session);
-			Object user=session.getAttribute("jspboard.user");
-			try
-			{
-				if ((user!=null)&&(conn!=null))
-				{
-					conn.createStatement().executeUpdate("UPDATE Login SET lastaccess='"+mysqldate.format(new Date(session.getLastAccessedTime()))+"' WHERE id='"+user+"';");
-				}
-				conn.close();
-			}
-			catch (Exception e)
-			{
-			}
-			dbconns.remove(session);
-			context.log("SessionHandler: Session destroyed");
-		}
-		else
-		{
-			context.log("SessionHandler: Error trying to stop null session");
 		}
 	}
 	
 	// context listener code
 	public void contextInitialized(ServletContextEvent e)
 	{
+		context=e.getServletContext();
 		e.getServletContext().setAttribute("jspboard.SessionHandler",this);
 		context.log("SessionHandler: Context started");
 	}
@@ -116,25 +85,59 @@ public class SessionHandler implements HttpSessionListener, ServletContextListen
 	public void contextDestroyed(ServletContextEvent e)
 	{
 		e.getServletContext().removeAttribute("jspboard.SessionHandler");
-		Iterator loop = sessions.iterator();
-		while (loop.hasNext())
-		{
-			stopSession((HttpSession)loop.next());
-		}
-		this.context=null;
 		context.log("SessionHandler: Context destroyed");
+		this.context=null;
 	}
 
 	// session listener code
 	public void sessionCreated(HttpSessionEvent e)
 	{
+		context.log("SessionHandler: Session created");
+		e.getSession().setAttribute("jspboard.DBConnection",newConnection());
 		sessions.add(e.getSession());
-		startSession(e.getSession());
 	}
 	
 	public void sessionDestroyed(HttpSessionEvent e)
 	{
-		stopSession(e.getSession());
+		context.log("SessionHandler: Session destroyed");
 		sessions.remove(e.getSession());
+	}
+	
+	// session attribute listener code
+	public void attributeAdded(HttpSessionBindingEvent se)
+	{
+		if (se.getName().equals("jspboard.user"))
+		{
+			users.put(se.getSession(),se.getValue());
+		}
+	}
+
+	public void attributeRemoved(HttpSessionBindingEvent se)
+	{
+		if (se.getName().equals("jspboard.DBConnection"))
+		{
+			try
+			{
+				Connection conn = (Connection)se.getValue();
+				String user = (String)users.get(se.getSession());
+				if (conn!=null)
+				{
+					if (user!=null)
+					{
+						conn.createStatement().executeUpdate("UPDATE Login SET lastaccess='"+mysqldate.format(new Date(se.getSession().getLastAccessedTime()))+"' WHERE id='"+user+"';");
+					}
+					conn.close();
+				}
+			}
+			catch (Exception e)
+			{
+				context.log("SessionHandler: Exception closing DB connection",e);
+			}
+		}
+	}
+
+	public void attributeReplaced(HttpSessionBindingEvent se)
+	{
+		attributeAdded(se);
 	}
 }
