@@ -13,10 +13,10 @@
         </td>
         <td valign="top" align="right">
         	<jspb:secure person='<%= thread.getField("owner") %>' groups="messageadmin">
-	          <jspb:link href="/edit/thread.jsp">
+	         <!-- <jspb:link href="/edit/thread.jsp">
 	          	<jspb:param name="id"><%= thread.getField("id") %></jspb:param>
 							Administration
-						</jspb:link>
+						</jspb:link> -->
 					</jspb:secure>
         </td>
       </tr>

@@ -19,7 +19,8 @@
 		</jspb:form>
 		<hr>
 		<jspb:form action="/add/folder">
-			<input type="hidden" name="parent" value='<%= folder.getField("id") %>'>
+			<input type="hidden" name="parent" value='<%=	folder.getField("id") %>'>
+			<input type="hidden" name="restricted" value="0">
 			<input type="hidden" name="redirect" value='/view/folder.jsp?id=<%= folder.getField("id") %>'>
 			Create a subfolder: 
 			<input name="name">
@@ -27,10 +28,11 @@
 		</jspb:form>
 		<% if (!folder.getField("parent").equals("-1")) { %>
 		<hr>
-		<jspb:form action="/delete/folder">
-			<input type="hidden" name="id" value='<%= folder.getField("id") %>'>
+		<jspb:form action="/update/folder">
+			<input type="hidden" name="id" value='<%= folder.getField("id")	%>'>
+			<input type="hidden" name="parent" value="0">
 			<input type="hidden" name="redirect" value='/view/folder.jsp?id=<%= folder.getField("parent") %>'>
-			<input type="submit" value="Delete Folder"> (This will only work if the folder contains no threads)
+			<input type="submit" value="Delete Folder"> (This only moves the folder to a hidden archive)
 		</jspb:form>
 		<hr>
 		<p>If you wish to move this folder, simply select where to put it below:</p>
