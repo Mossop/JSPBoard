@@ -1,4 +1,3 @@
-
 <%@ taglib uri="/WEB-INF/jspboard.tld" prefix="jspb" %>
 
 <%
