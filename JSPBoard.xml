@@ -1,0 +1,14 @@
+<Context path="/JSPBoard" docBase="/home/dave/java/JSPBoard/webapp" debug="0">
+
+	<Realm className="org.apache.catalina.realm.JDBCRealm" debug="0"
+  		driverName="com.mysql.jdbc.Driver"
+      connectionPassword="tomcat379"
+      connectionURL="jdbc:mysql://localhost/JSPBoard?user=tomcat"
+      userTable="Login" userNameCol="id" userCredCol="password"
+      userRoleTable="UserGroup" roleNameCol="group_id" digest="MD5"/>
+
+	<Logger className="org.apache.catalina.logger.FileLogger"
+			directory="logs"  prefix="jspboard." suffix=".txt"
+			timestamp="true"/>
+
+</Context>
