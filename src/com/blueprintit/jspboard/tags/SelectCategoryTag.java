@@ -1,19 +1,8 @@
 package com.blueprintit.jspboard.tags;
 
-public class SelectPersonTag extends DBResultTag
+public class SelectCategoryTag extends DBResultTag
 {
-	private String order = "fullname";
-	private String category;
-	
-	public void setCategory(String value)
-	{
-		category=value;
-	}
-	
-	public String getCategory()
-	{
-		return category;
-	}
+	private String order = "description";
 	
 	public void setOrder(String value)
 	{
@@ -32,16 +21,12 @@ public class SelectPersonTag extends DBResultTag
 		{
 			where.append("id="+id+" AND ");
 		}
-		if (category!=null)
-		{
-			where.append("category="+category+" AND ");
-		}
 		if (where.length()>0)
 		{
 			where.delete(where.length()-5,where.length());
 			where.insert(0," WHERE ");
 		}
-		where.insert(0,"SELECT * FROM Person");
+		where.insert(0,"SELECT * FROM Category");
 		where.append(" ORDER BY "+order+";");
 		return where.toString();
 	}

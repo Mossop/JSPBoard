@@ -19,6 +19,7 @@ CREATE TABLE Login (
 
 CREATE TABLE Person (
 	id		INTEGER AUTO_INCREMENT NOT NULL,
+	category	INTEGER,
 	fullname	VARCHAR(30),
 	email		VARCHAR(30),
 	nickname	VARCHAR(20),
@@ -26,6 +27,12 @@ CREATE TABLE Person (
 	mobilephone	VARCHAR(20),
 	workphone	VARCHAR(20),
 	fax		VARCHAR(20),
+	description	VARCHAR(100),
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE Category (
+	id		INTEGER AUTO_INCREMENT NOT NULL,
 	description	VARCHAR(100),
 	PRIMARY KEY (id)
 );

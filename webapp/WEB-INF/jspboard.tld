@@ -303,6 +303,37 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+		<attribute>
+			<name>category</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+  	<attribute>
+  		<name>var</name>
+  		<required>false</required>
+  		<rtexprvalue>false</rtexprvalue>
+  	</attribute>
+    <attribute>
+      <name>extra</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+  </tag>
+  <tag>
+  	<name>SelectCategory</name>
+  	<tag-class>com.blueprintit.jspboard.tags.SelectCategoryTag</tag-class>
+  	<tei-class>com.blueprintit.jspboard.tags.DBResultTEI</tei-class>
+  	<body-content>JSP</body-content>
+		<attribute>
+			<name>order</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
   	<attribute>
   		<name>var</name>
   		<required>false</required>

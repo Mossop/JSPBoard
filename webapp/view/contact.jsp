@@ -43,6 +43,14 @@
    				<%= person.getField("description") %>
     		</td>
       </tr>
+      <tr>
+      	<td><b>Category:</b></td>
+      	<td>
+      		<jspb:SelectCategory var="category" id='<%= person.getField("category") %>'>
+						<%= category.getField("description") %>
+      		</jspb:SelectCategory>
+      	</td>
+      </tr>
     	<tr>
     		<td><b>Email:</b></td>
     		<td>

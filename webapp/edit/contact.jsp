@@ -34,6 +34,18 @@
 	    		<td><b>Description:</b></td>
 	    		<td><input name="description" value='<%= person.getField("description") %>'></td>
 	      </tr>
+	      <tr>
+	      	<td><b>Category:</b></td>
+	      	<td>
+	      		<select name="category">
+	      			<jspb:SelectCategory var="category">
+	      				<option value='<%= category.getField("id") %>'<% if (category.getField("id").equals(person.getField("category"))) { %> selected <% } %>>
+	      					<%= category.getField("description") %>
+	      				</option>
+	      			</jspb:SelectCategory>
+	      		</select>
+	      	</td>
+	      </tr>
 	    	<tr>
 	    		<td><b>Email:</b></td>
 	    		<td><input name="email" value='<%= person.getField("email") %>'></td>
