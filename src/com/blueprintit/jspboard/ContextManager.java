@@ -20,13 +20,11 @@ import java.sql.Connection;
 public class ContextManager implements HttpSessionListener, ServletContextListener
 {
 	private ServletContext context;
-	private List sessions;
-	private Map users;
+	private List managers;
 		
 	public ContextManager()
 	{
-		users = Collections.synchronizedMap(new HashMap());
-		sessions = Collections.synchronizedList(new ArrayList());
+		managers = Collections.synchronizedList(new ArrayList());
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
@@ -36,17 +34,34 @@ public class ContextManager implements HttpSessionListener, ServletContextListen
 		}
 	}
 	
-	public boolean isLoggedIn(String id)
+	public boolean isLoggedIn(String user)
 	{
-		return (users.containsKey(id));
+		boolean found=false;
+		Iterator loop = managers.iterator();
+		while ((loop.hasNext())&&(!found))
+		{
+			Manager manager = (Manager)loop.next();
+			found=manager.getUsername().equals(user);
+		}
+		return found;
 	}
 	
-	public List getSessions()
+	public void addManager(Manager session)
 	{
-		return Collections.unmodifiableList(sessions);
+		managers.add(session);
 	}
 	
-	public static Connection getConnection()
+	public void removeManager(Manager session)
+	{
+		managers.remove(session);
+	}
+	
+	public List getManagers()
+	{
+		return Collections.unmodifiableList(managers);
+	}
+	
+	public Connection getConnection()
 	{
 		try
 		{
@@ -54,7 +69,7 @@ public class ContextManager implements HttpSessionListener, ServletContextListen
 		}
 		catch (Exception e)
 		{
-			//context.log("Error establishing database connection",e);
+			context.log("Error establishing database connection",e);
 			return null;
 		}
 	}
@@ -74,6 +89,7 @@ public class ContextManager implements HttpSessionListener, ServletContextListen
 			context.removeAttribute("jspboard.Contextmanager");
 			context.log("ContextManager: Context destroyed");
 			this.context=null;
+			managers.clear();
 		}
 	}
 
@@ -82,12 +98,10 @@ public class ContextManager implements HttpSessionListener, ServletContextListen
 	{
 		//context.log("ContextManager: Session created");
 		e.getSession().setAttribute("jspboard.Manager",new SessionSpy());
-		sessions.add(e.getSession());
 	}
 	
 	public void sessionDestroyed(HttpSessionEvent e)
 	{
 		//context.log("ContextManager: Session destroyed");
-		sessions.remove(e.getSession());
 	}
 }

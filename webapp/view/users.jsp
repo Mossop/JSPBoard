@@ -1,3 +1,4 @@
+<%@ page import="com.blueprintit.jspboard.ContextManager" %>
 <%@ taglib uri="/WEB-INF/jspboard.tld" prefix="jspb" %>
 
 <jspb:includes>
@@ -32,7 +33,21 @@
 					</jspb:notsecure>
 				</td>
 				<td>
-					<%= login.getDate("lastaccess") %>
+        	<%
+            ContextManager handler = (ContextManager)pageContext.findAttribute("jspboard.ContextManager");
+            if (handler.isLoggedIn(login.getField("id")))
+            {
+          %>
+            Logged in
+          <%
+            }
+  	          else
+            {
+          %>
+            <%= login.getDate("lastaccess") %>
+          <%
+          	}
+          %>
 				</td>
 				<td>
 					<jspb:SelectPerson id='<%= login.getField("person") %>' var="person">
