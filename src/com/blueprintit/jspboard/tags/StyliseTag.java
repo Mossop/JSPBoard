@@ -29,17 +29,31 @@ public class StyliseTag extends BodyTagSupport
 		}
 	}
 	
-	private String linkUrl(String line)
+	private String linkEmail(String line)
 	{
-		Pattern urlreg = Pattern.compile("((.*\\s)|(^))(https?://[\\w\\./]*)(($)|(\\s.*$))");
+		Pattern urlreg = Pattern.compile("((.*\\s)|(^))([\\w\\.]*@[\\w\\.]*)(($)|(\\s.*$))");
 		Matcher match = urlreg.matcher(line);
 		if (match.matches())
 		{
-			return linkUrl(match.group(1))+"<a href=\""+match.group(4)+"\">"+match.group(4)+"</a>"+linkUrl(match.group(5));
+			return linkEmail(match.group(1))+"<a href=\"mailto:"+match.group(4)+"\">"+match.group(4)+"</a>"+linkEmail(match.group(5));
 		}
 		else
 		{
 			return line;
+		}
+	}
+	
+	private String linkUrl(String line)
+	{
+		Pattern urlreg = Pattern.compile("((.*\\s)|(^))((https?)|(ftp)://[\\w\\./]*)(($)|(\\s.*$))");
+		Matcher match = urlreg.matcher(line);
+		if (match.matches())
+		{
+			return linkUrl(match.group(1))+"<a href=\""+match.group(4)+"\">"+match.group(4)+"</a>"+linkUrl(match.group(7));
+		}
+		else
+		{
+			return linkEmail(line);
 		}
 	}
 	
