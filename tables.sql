@@ -10,17 +10,9 @@ DROP TABLE IF EXISTS File;
 DROP TABLE IF EXISTS UnreadMessage;
 DROP TABLE IF EXISTS EditedMessage;
 
-CREATE TABLE Board (
-	id		VARCHAR(8) NOT NULL,
-	rootfolder	INTEGER NOT NULL,
-	timeout		INTEGER,
-	PRIMARY KEY (id)
-);
-
 CREATE TABLE Login (
 	id		VARCHAR(15) NOT NULL,
 	password	CHAR(32) NOT NULL,
-	board		VARCHAR(8) NOT NULL,
 	lastaccess	DATETIME,
 	person		INTEGER NOT NULL,
 	PRIMARY KEY (id)
