@@ -31,6 +31,7 @@ CREATE TABLE Person (
 
 CREATE TABLE Groups (
 	id		VARCHAR(20) NOT NULL,
+	description	VARCHAR(100),
 	PRIMARY KEY (id)
 );
 

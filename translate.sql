@@ -14,16 +14,16 @@ insert into JSPBoard.EditedMessage (message,person,altered) select message_id,pe
 insert into JSPBoard.UnreadMessage (message,person) select distinct message_id,person from UnreadMessage,User where user_id=id;
 
 insert into JSPBoard.Groups
-(id) values
-("admin"),
-("boardadmin"),
-("loginview"),
-("loginadmin"),
-("contactview"),
-("contactadmin"),
-("messageview"),
-("messageadd"),
-("messageadmin");
+(id,description) values
+("admin","Total control. Equivalent to selecting all other priveleges"),
+("boardadmin","Admin for the folder structure of the board"),
+("loginview","Allows viewing of login information"),
+("loginadmin","Allows creating and deleting logins"),
+("contactview","Allows viewing the contacts"),
+("contactadmin","Allows creating and deleting contacts"),
+("messageview","Allows viewing the messages. This is required for login"),
+("messageadd","Allows adding new messages and threads"),
+("messageadmin","Allows modifying other peoples messages and threads");
 
 insert into JSPBoard.UserGroup (id,group_id) values ('dave','admin');
 
