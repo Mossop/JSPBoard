@@ -42,6 +42,10 @@
 	    		<td><b>Description:</b></td>
 	    		<td><input name="description" value='<%= person.getField("description") %>'></td>
 	      </tr>
+	    	<tr>
+	    		<td><b>IEE Membership Number:</b></td>
+	    		<td><input name="membership" value='<%= person.getField("membership") %>'></td>
+	      </tr>
 	      <tr>
 	      	<td><b>Category:</b></td>
 	      	<td>

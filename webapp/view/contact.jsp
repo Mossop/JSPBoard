@@ -54,6 +54,12 @@
     		</td>
       </tr>
       <tr>
+      	<td><b>IEE Membership Number:</b></td>
+      	<td>
+      		<%= person.getField("membership") %>
+      	</td>
+      </tr>
+      <tr>
       	<td><b>Category:</b></td>
       	<td>
       		<jspb:SelectCategory var="category" id='<%= person.getField("category") %>'>

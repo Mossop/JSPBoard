@@ -50,7 +50,7 @@ public class Stylise
 		Matcher match = urlreg.matcher(line);
 		if (match.matches())
 		{
-			return linkUrl(match.group(1))+"<a href=\""+match.group(4)+"\">"+match.group(4)+"</a>"+linkUrl(match.group(5));
+			return linkUrl(match.group(1))+"<a href=\""+match.group(4)+"\" target=\"_blank\">"+match.group(4)+"</a>"+linkUrl(match.group(5));
 		}
 		else
 		{
@@ -188,7 +188,7 @@ public class Stylise
 	
 	private static String styleLine(String line, boolean email)
 	{
-		if (email)
+		if (!email)
 		{
 			return applySmilies(linkUrl(line));
 		}

@@ -8,7 +8,7 @@ public abstract class Convertor
 	
 	public static Convertor getConvertor(String type)
 	{
-		if ((type.equals("VARCHAR"))||(type.equals("BLOB")))
+		if ((type.equals("VARCHAR"))||(type.equals("BLOB"))||(type.equals("TEXT")))
 		{
 			return StringConvertor.getInstance();
 		}

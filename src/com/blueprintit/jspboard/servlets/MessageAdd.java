@@ -115,18 +115,16 @@ public class MessageAdd extends TableAdd
 			
 			StringBuffer messagetext = new StringBuffer(request.getParameter("content"));
 			StringBuffer messagefooter = new StringBuffer("If you wish to reply to this message on the bulletin board, please click the following link:\n\n");
-			messagefooter.append("https://eeguinness.swan.ac.uk:8443"+request.getContextPath()+"/view/thread.jsp?id="+updates.get("thread")+"#unread");
+			messagefooter.append("http://www.blueprintit.co.uk"+request.getContextPath()+"/view/thread.jsp?id="+updates.get("thread")+"#unread");
 	
 			Map addresses = new HashMap();
 			ResultSet emails = conn.createStatement().executeQuery("SELECT DISTINCT CONCAT(title,' ',firstnames,' ',surname) AS fullname,email FROM Person,Login WHERE Person.id=Login.person");
 			while (emails.next())
 			{
-				//addresses.put(emails.getString(2),emails.getString(1));
+				addresses.put(emails.getString(2),emails.getString(1));
 			}
-			addresses.put("dave@brass-bullet.co.uk","Dave Townsend");
-			addresses.put("dtownsend@iee.org","Dave Townsend");
-				
-			Email.sendMailshot(messageheader.toString(),messagefooter.toString(),request.getParameter("content"),"IEE WSWYM Bulletin board message: "+threadname,email,person,addresses);
+			
+			Email.sendMailshot(messageheader.toString(),messagefooter.toString(),request.getParameter("content"),"IEE WSWYM Bulletin board message: "+threadname,"walessw_ym@iee.org","IEE WSWYM Bulletin Board",addresses);
 		}
 		catch (Exception e)
 		{

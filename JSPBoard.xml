@@ -3,7 +3,7 @@
 	<Realm className="org.apache.catalina.realm.JDBCRealm" debug="0"
   		driverName="com.mysql.jdbc.Driver"
       connectionPassword="tomcat379"
-      connectionURL="jdbc:mysql://localhost/JSPBoard?user=tomcat"
+      connectionURL="jdbc:mysql://localhost:3305/JSPBoard?user=tomcat"
       userTable="Login" userNameCol="id" userCredCol="password"
       userRoleTable="UserGroup" roleNameCol="group_id" digest="MD5"/>
 
