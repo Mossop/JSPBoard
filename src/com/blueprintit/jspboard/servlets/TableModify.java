@@ -24,7 +24,7 @@ public abstract class TableModify extends HttpServlet
 	
 	private void prepareFields() throws Exception
 	{
-		Connection conn = ((ContextManager)getServletContext().getAttribute("jsboard.ContextManager")).getConnection();
+		Connection conn = ((ContextManager)getServletContext().getAttribute("jspboard.ContextManager")).getConnection();
 		prepareFields(conn);
 		conn.close();
 	}
