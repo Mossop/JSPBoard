@@ -18,49 +18,56 @@
       </tr>
       <tr>
       	<td align="center" colspan="2" width="578">
-					<jspb:window>
-						<jspb:header>
-              <table width="100%">
-                <tr>
-                  <td align="left"><img src="<%= context %>/images/read.gif" align="middle" alt="read">
-										Posted by Dave
-									</td>
-                  <td align="right">19:59, 23rd May 2002</td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <table>
-                      <tr>
-                        <td valign="middle">
-                        	<img align="middle" src="<%= context %>/images/paperclip.gif">
-                          <a href="">
-														Attach File
-													</a>
-                        </td>
-                        <td>|</td>
-                        <td valign="middle">
-                        	<img align="middle" src="<%= context %>/images/edit.gif">
-                          <a href="">
-														Edit
-													</a>
-                        </td>
-                        <td>|</td>
-                        <td valign="middle">
-                        	<img align="middle" src="<%= context %>/images/delete.gif">
-                          <a href="">
-														Delete
-													</a>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </jspb:header>
-            <jspb:footer>
-            	Test
-            </jspb:footer>
-          </jspb:window>
+      		<jspb:SelectMessage var="msg" thread='<%= thread.getField("id") %>'>
+						<jspb:window>
+							<jspb:header>
+	              <table width="100%">
+	                <tr>
+	                  <td align="left"><img src="<%= context %>/images/read.gif" align="middle" alt="read">
+											<jspb:SelectPerson var="person" id='<%= msg.getField("owner") %>'>
+												Posted by <%= person.getField("nickname") %>
+											</jspb:SelectPerson>
+										</td>
+	                  <td align="right"><%= msg.getField("created") %></td>
+	                </tr>
+	                <tr>
+	                  <td colspan="2">
+	                    <table>
+	                      <tr>
+	                        <td valign="middle">
+	                        	<img align="middle" src="<%= context %>/images/paperclip.gif">
+	                          <a href="">
+															Attach File
+														</a>
+	                        </td>
+	                        <td>|</td>
+	                        <td valign="middle">
+	                        	<img align="middle" src="<%= context %>/images/edit.gif">
+	                          <a href="">
+															Edit
+														</a>
+	                        </td>
+	                        <td>|</td>
+	                        <td valign="middle">
+	                        	<img align="middle" src="<%= context %>/images/delete.gif">
+	                          <a href="">
+															Delete
+														</a>
+	                        </td>
+	                      </tr>
+	                    </table>
+	                  </td>
+	                </tr>
+	              </table>
+	            </jspb:header>
+	            <jspb:footer>
+	            	<jspb:stylise>
+		            	<%= msg.getField("content") %>
+		            </jspb:stylise>
+		          </jspb:footer>
+	          </jspb:window>
+	          <br>
+	        </jspb:SelectMessage>
         </td>
       </tr>
       <tr>

@@ -47,6 +47,11 @@
     <tag-class>com.blueprintit.jspboard.tags.WindowFooterTag</tag-class>
     <body-content>JSP</body-content>
   </tag>
+	<tag>
+    <name>stylise</name>
+    <tag-class>com.blueprintit.jspboard.tags.StyliseTag</tag-class>
+    <body-content>JSP</body-content>
+  </tag>
   <tag>
   	<name>FolderTree</name>
   	<tag-class>com.blueprintit.jspboard.tags.FolderTreeTag</tag-class>
