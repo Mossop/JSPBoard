@@ -16,9 +16,19 @@
 	</servlet>
 	
 	<servlet>
+		<servlet-name>PersonUpdate</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.PersonUpdate</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>FileDownload</servlet-name>
 		<servlet-class>com.blueprintit.jspboard.servlets.FileDownload</servlet-class>
 	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>PersonUpdate</servlet-name>
+		<url-pattern>/update/person</url-pattern>
+	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>SessionViewer</servlet-name>
@@ -91,6 +101,8 @@
 			<web-resource-name>Contactview</web-resource-name>
 			<url-pattern>/view/contacts.jsp</url-pattern>
 			<url-pattern>/view/contact.jsp</url-pattern>
+			<url-pattern>/edit/contact.jsp</url-pattern>
+			<url-pattern>/update/person</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>contactview</role-name>

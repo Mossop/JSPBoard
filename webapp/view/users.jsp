@@ -22,7 +22,13 @@
 		<jspb:SelectLogin var="login">
 			<tr>
 				<td>
-					<%= login.getField("id") %>
+					<jspb:secure groups="loginadmin">
+						<a href='<%= context %>/edit/user.jsp?id=<%= login.getField("id") %>'>
+					</jspb:secure>
+						<%= login.getField("id") %>
+					<jspb:secure groups="loginadmin">
+						</a>
+					</jspb:secure>
 				</td>
 				<td>
 					<%
@@ -43,7 +49,9 @@
 				</td>
 				<td>
 					<jspb:SelectPerson id='<%= login.getField("person") %>' var="person">
-						<%= person.getField("fullname") %>
+						<a href='contact.jsp?id=<%= person.getField("id") %>'>
+							<%= person.getField("fullname") %>
+						</a>
 					</jspb:SelectPerson>
 				</td>
 			</tr>

@@ -2,7 +2,32 @@
 
 <jspb:SelectPerson var="person" id='<%= request.getParameter("id") %>'>
 	<jspb:includes>
-		<h1>Details for <%= person.getField("fullname") %></h1>
+		<table width="578">
+			<tr>
+				<td>
+					<h1>Details for <%= person.getField("fullname") %></h1>
+				</td>
+				<td valign="top" align="right">
+					<% boolean haslogin=false; %>
+					<jspb:SelectLogin person='<%= person.getField("id") %>'>
+						<% haslogin=true; %>
+					</jspb:SelectLogin>
+					<% if (haslogin) { %>
+						<jspb:secure groups="contactadmin" person='<%= person.getField("id") %>'>
+							<a href='<%= context %>/edit/contact.jsp?id=<%= person.getField("id") %>'>
+								Edit
+							</a>
+						</jspb:secure>
+					<% } else {%>
+						<jspb:secure groups="contactview">
+							<a href='<%= context %>/edit/contact.jsp?id=<%= person.getField("id") %>'>
+								Edit
+							</a>
+						</jspb:secure>
+					<% } %>
+				</td>
+			</tr>
+		</table>
 		<table>
     	<tr>
     		<td><b>Fullname:</b></td>
@@ -36,6 +61,22 @@
     		<td><b>Fax number:</b></td>
     		<td><%= person.getField("fax") %></td>
       </tr>
+      <jspb:secure groups="loginview" person='<%= person.getField("id") %>'>
+      	<tr>
+      		<td><b>Logins:</b></td>
+      		<td>
+      			<jspb:SelectLogin person='<%= person.getField("id") %>' var="login">
+							<jspb:secure groups="loginadmin">
+								<a href='<%= context %>/edit/user.jsp?id=<%= login.getField("id") %>'>
+							</jspb:secure>
+								<%= login.getField("id") %>
+							<jspb:secure groups="loginadmin">
+								</a>
+							</jspb:secure>
+      			</jspb:SelectLogin>
+      		</td>
+      	</tr>
+      </jspb:secure>
     </table>
 	</jspb:includes>
 </jspb:SelectPerson>

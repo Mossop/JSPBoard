@@ -17,6 +17,7 @@
       <td>
         <b>Mobile Phone</b>
       </td>
+      <td></td>
     </tr>
 		<jspb:SelectPerson var="person">
 			<tr>
@@ -31,6 +32,25 @@
 					</a>
 				</td>
 				<td><%= person.getField("mobilephone") %></td>
+				<td>
+					<% boolean haslogin=false; %>
+					<jspb:SelectLogin person='<%= person.getField("id") %>'>
+						<% haslogin=true; %>
+					</jspb:SelectLogin>
+					<% if (haslogin) { %>
+						<jspb:secure groups="contactadmin" person='<%= person.getField("id") %>'>
+							<a href='<%= context %>/edit/contact.jsp?id=<%= person.getField("id") %>'>
+								Edit
+							</a>
+						</jspb:secure>
+					<% } else {%>
+						<jspb:secure groups="contactview">
+							<a href='<%= context %>/edit/contact.jsp?id=<%= person.getField("id") %>'>
+								Edit
+							</a>
+						</jspb:secure>
+					<% } %>
+				</td>
 			</tr>
 		</jspb:SelectPerson>
   </table>

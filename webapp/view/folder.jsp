@@ -45,11 +45,13 @@
 									<img src="<%= context %>/images/read.gif" alt="read" align="middle">
 								</td>
 								<td>
-									<a href='<%= context %>/view/thread.jsp?id=<%= thread.getField("id") %>'><jspb:GetField field="name"/></a>
+									<a href='<%= context %>/view/thread.jsp?id=<%= thread.getField("id") %>'><%= thread.getField("name") %></a>
 								</td>
 								<td>
 									<jspb:SelectPerson var="person" id='<%= thread.getField("owner") %>'>
-										<%= thread.getField("nickname") %>
+										<a href='<%= context %>/view/contact.jsp?id=<%= person.getField("id") %>'>
+											<%= person.getField("nickname") %>
+										</a>
 									</jspb:SelectPerson>
 								</td>
 								<td align="right">

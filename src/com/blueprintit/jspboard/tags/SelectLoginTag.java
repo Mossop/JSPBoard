@@ -5,7 +5,7 @@ public class SelectLoginTag extends DBResultTag
 	private String order = "id";
 	private String person;
 	
-	public void SetPerson(String value)
+	public void setPerson(String value)
 	{
 		person=value;
 	}

@@ -30,7 +30,7 @@
 	                	</td>
 	                  <td align="left">
 											<jspb:SelectPerson var="person" id='<%= msg.getField("owner") %>'>
-												Posted by <%= person.getField("nickname") %>
+												Posted by <a href='contact.jsp?id=<%= person.getField("id") %>'><%= person.getField("nickname") %></a>
 											</jspb:SelectPerson>
 										</td>
 	                  <td align="right"><%= msg.getDate("created") %></td>
@@ -40,11 +40,11 @@
 	                		<td></td>
 	                		<td>
 												<jspb:SelectPerson var="person" id='<%= edit.getField("person") %>'>
-													Edited by <%= person.getField("nickname") %>
+													Edited by <a href='contact.jsp?id=<%= person.getField("id") %>'><%= person.getField("nickname") %></a>
 												</jspb:SelectPerson>
 	                		</td>
 	                		<td align="right">
-	                			<%= edit.getField("altered") %>
+	                			<%= edit.getDate("altered") %>
 	                		</td>
 	                	</tr>
 	                </jspb:SelectEdits>
