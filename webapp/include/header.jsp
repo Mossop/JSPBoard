@@ -40,6 +40,11 @@
 	                <jspb:link href="/view/users.jsp">Users</jspb:link>
 	              </td>
               </jspb:secure>
+            	<jspb:secure groups="admin">
+	              <td>
+	                <jspb:link href="/view/sessions.jsp">Sessions</jspb:link>
+	              </td>
+              </jspb:secure>
             </tr>
           </table>
         </td>
