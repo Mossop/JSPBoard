@@ -14,13 +14,15 @@
 		<listener-class>com.blueprintit.jspboard.listeners.SessionListener</listener-class>
 	</listener>
 	
-	<!--
 	<servlet>
-		<servlet-name>SessionHandler</servlet-name>
-		<servlet-class>com.blueprintit.jspboard.servlets.SessionHandler</servlet-class>
-		<load-on-startup>10</load-on-startup>
+		<servlet-name>SessionViewer</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.SessionView</servlet-class>
 	</servlet>
-	-->
+	
+	<servlet-mapping>
+		<servlet-name>SessionViewer</servlet-name>
+		<url-pattern>/sessions</url-pattern>
+	</servlet-mapping>
 	
   <session-config>
     <session-timeout>120</session-timeout>

@@ -9,6 +9,7 @@ public class IncludesTag extends TagSupport
 	{
 		try
 		{
+			pageContext.getSession().setAttribute("jspboard.user",((HttpServletRequest)pageContext.getRequest()).getRemoteUser());
 			pageContext.include("/include/header.jsp");
 			return EVAL_BODY_INCLUDE;
 		}
