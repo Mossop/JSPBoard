@@ -1,0 +1,4 @@
+#! /bin/sh
+
+cat tables.sql | mysql -u JSPBoard -pjspb379 JSPBoard
+cat translate.sql | mysql -u root -p PhpBoard

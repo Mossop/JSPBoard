@@ -19,7 +19,7 @@ CREATE TABLE Board (
 
 CREATE TABLE Login (
 	id		VARCHAR(15) NOT NULL,
-	password	CHAR(16) NOT NULL,
+	password	CHAR(32) NOT NULL,
 	board		VARCHAR(8) NOT NULL,
 	lastaccess	DATETIME,
 	person		INTEGER NOT NULL,
@@ -44,9 +44,9 @@ CREATE TABLE Groups (
 );
 
 CREATE TABLE UserGroup (
-	user		VARCHAR(15) NOT NULL,
+	id		VARCHAR(15) NOT NULL,
 	group_id	VARCHAR(20) NOT NULL,
-	PRIMARY KEY (user, group_id)
+	PRIMARY KEY (id, group_id)
 );
 
 CREATE TABLE Folder (
