@@ -93,6 +93,11 @@
 	</servlet>
 	
 	<servlet>
+		<servlet-name>FileUpdate</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.FileUpdate</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>ThreadUpdate</servlet-name>
 		<servlet-class>com.blueprintit.jspboard.servlets.ThreadUpdate</servlet-class>
 	</servlet>
@@ -125,6 +130,11 @@
 	<servlet-mapping>
 		<servlet-name>FolderDelete</servlet-name>
 		<url-pattern>/delete/folder</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>FileUpdate</servlet-name>
+		<url-pattern>/update/file</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>

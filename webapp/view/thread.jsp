@@ -95,7 +95,14 @@
                   	<tr>
                     	<td width="10"><img src="<%= context %>/images/paperclip.gif"></td>
                       <td width="20"><%= count %>:</td>
-                      <td width="400"><%= file.getField("description") %></td>
+                      <td width="400">
+                      	<%= file.getField("description") %>
+				                <jspb:secure person='<%= msg.getField("owner") %>' groups="messageadmin">
+													<a href='<%= context %>/edit/file.jsp?id=<%= file.getField("id") %>'>
+														[Edit name]
+													</a>
+	                      </jspb:secure>
+				              </td>
                       <td align="right" width="158">
                       	<a href='<%= context %>/files/<%= file.getField("name").replaceAll(" ","%20") %>?id=<%= file.getField("id") %>'>
 													<%= file.getField("name") %>
