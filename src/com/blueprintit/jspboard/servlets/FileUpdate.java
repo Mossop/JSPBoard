@@ -23,7 +23,7 @@ public class FileUpdate extends TableUpdate
 				String id = (String)fields.get("id");
 				if (id!=null)
 				{
-					ResultSet results = conn.createStatement().executeQuery("SELECT Login.id FROM Login,Message,File WHERE Login.person=Message.owner Message.id=File.message AND File.id="+id+";");
+					ResultSet results = conn.createStatement().executeQuery("SELECT Login.id FROM Login,Message,File WHERE Login.person=Message.owner AND Message.id=File.message AND File.id="+id+";");
 					if (results.next())
 					{
 						if (results.getString(1).equals(request.getRemoteUser()))
