@@ -43,26 +43,36 @@
 								<b>Started</b>
 							</td>
 						</tr>
-						<jspb:SelectThread var="thread" folder="<%= folderid %>">
-							<tr>
-								<td>
-									<img src="<%= context %>/images/read.gif" alt="read" align="middle">
-								</td>
-								<td>
-									<a href='<%= context %>/view/thread.jsp?id=<%= thread.getField("id") %>'><%= thread.getField("name") %></a>
-								</td>
-								<td>
-									<jspb:SelectPerson var="person" id='<%= thread.getField("owner") %>'>
-										<a href='<%= context %>/view/contact.jsp?id=<%= person.getField("id") %>'>
-											<%= person.getField("nickname") %>
-										</a>
-									</jspb:SelectPerson>
-								</td>
-								<td align="right">
-									<%= thread.getDate("created") %>
-								</td>
-							</tr>
-						</jspb:SelectThread>
+						<jspb:SelectLogin var="login" id="<%= request.getRemoteUser() %>">
+							<jspb:SelectThread var="thread" folder="<%= folderid %>" countUnread='<%= login.getField("person") %>'>
+								<tr>
+									<td>
+										<% if (thread.getField("unreadcount").equals("0")) { %>
+											<img src="<%= context %>/images/read.gif" alt="read" align="middle">
+										<% } else { %>
+											<img src="<%= context %>/images/unread.gif" alt="unread" align="middle">
+										<% } %>
+									</td>
+									<td>
+										<% if (thread.getField("unreadcount").equals("0")) { %>
+											<a href='<%= context %>/view/thread.jsp?id=<%= thread.getField("id") %>'><%= thread.getField("name") %></a>
+										<% } else { %>
+											<a href='<%= context %>/view/thread.jsp?id=<%= thread.getField("id") %>'><i><%= thread.getField("name") %> (<%= thread.getField("unreadcount") %>)</i></a>
+										<% } %>
+									</td>
+									<td>
+										<jspb:SelectPerson var="person" id='<%= thread.getField("owner") %>'>
+											<a href='<%= context %>/view/contact.jsp?id=<%= person.getField("id") %>'>
+												<%= person.getField("nickname") %>
+											</a>
+										</jspb:SelectPerson>
+									</td>
+									<td align="right">
+										<%= thread.getDate("created") %>
+									</td>
+								</tr>
+							</jspb:SelectThread>
+						</jspb:SelectLogin>
 					</table>
 				</td>
 			</tr>
