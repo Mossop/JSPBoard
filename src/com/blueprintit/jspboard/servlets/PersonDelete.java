@@ -33,7 +33,7 @@ public class PersonDelete extends HttpServlet
 					conn.createStatement().executeUpdate("UPDATE EditedMessage SET person=NULL WHERE person="+id+";");
 					conn.createStatement().executeUpdate("UPDATE Message SET owner=NULL WHERE owner="+id+";");
 					conn.createStatement().executeUpdate("UPDATE Thread SET owner=NULL WHERE owner="+id+";");
-					request.getRequestDispatcher(redirect).forward(request,response);
+					response.sendRedirect(request.getContextPath()+redirect);
 				}
 				else
 				{

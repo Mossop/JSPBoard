@@ -29,7 +29,7 @@ public class LoginDelete extends HttpServlet
 					Connection conn = (Connection)request.getSession().getAttribute("jspboard.DBConnection");
 					conn.createStatement().executeUpdate("DELETE FROM Login WHERE id='"+id+"';");
 					conn.createStatement().executeUpdate("DELETE FROM UserGroup WHERE id='"+id+"';");
-					request.getRequestDispatcher(redirect).forward(request,response);
+					response.sendRedirect(request.getContextPath()+redirect);
 				}
 				else
 				{

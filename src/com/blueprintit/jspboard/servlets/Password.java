@@ -36,14 +36,14 @@ public class Password extends HttpServlet
 				if ((results.next())&&(oldpw.equals("'"+results.getString(1)+"'")))
 				{
 					conn.createStatement().executeUpdate("UPDATE Login SET password="+pass.convert(pw1)+" WHERE id='"+request.getRemoteUser()+"';");
-					request.getRequestDispatcher(redirect).forward(request,response);
+					response.sendRedirect(request.getContextPath()+redirect);
 				}
 				else
 				{
 					String error = request.getParameter("error");
 					if (error!=null)
 					{
-						request.getRequestDispatcher(error).forward(request,response);
+						response.sendRedirect(request.getContextPath()+error);
 					}
 					else
 					{
@@ -56,7 +56,7 @@ public class Password extends HttpServlet
 				String error = request.getParameter("error");
 				if (error!=null)
 				{
-					request.getRequestDispatcher(error).forward(request,response);
+					response.sendRedirect(request.getContextPath()+error);
 				}
 				else
 				{

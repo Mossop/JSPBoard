@@ -42,7 +42,7 @@ public class ThreadDelete extends HttpServlet
 					}
 					conn.createStatement().executeUpdate("DELETE FROM Message WHERE thread="+id+";");
 					conn.createStatement().executeUpdate("DELETE FROM Thread WHERE id="+id+";");
-					request.getRequestDispatcher(redirect).forward(request,response);
+					response.sendRedirect(request.getContextPath()+redirect);
 				}
 				else
 				{

@@ -30,7 +30,7 @@ public class FileDelete extends HttpServlet
 				{
 					conn.createStatement().executeUpdate("DELETE FROM File WHERE id="+id+";");
 					(new File(getServletContext().getRealPath("/files/"+results.getString(2)))).delete();
-					request.getRequestDispatcher(redirect).forward(request,response);
+					response.sendRedirect(request.getContextPath()+redirect);
 				}
 				else
 				{

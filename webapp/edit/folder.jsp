@@ -33,10 +33,10 @@
 						<td colspan="<%= depth %>"></td>
 					<% } %>
 					<td colspan="1">
-						<a href='<%= context %>/update/folder?id=<%= folder.getField("id") %>&parent=<%= id %>&redirect=%2fview%2ffolder.jsp'><img align="top" src="<%= context %>/images/closedfolder.gif"></a>
+						<a href='<%= context %>/update/folder?id=<%= folder.getField("id") %>&parent=<%= id %>&redirect=/view/folder.jsp%3fid%3d<%= folder.getField("id") %>'><img align="top" src="<%= context %>/images/closedfolder.gif"></a>
 					</td>
 					<td colspan="<%= Integer.parseInt(maxdepth)-Integer.parseInt(depth)+1 %>">
-						<a class="closedfolder" href='<%= context %>/update/folder?id=<%= folder.getField("id") %>&parent=<%= id %>&redirect=%2Fview%2Ffolder.jsp'><%= name %></a>
+						<a class="closedfolder" href='<%= context %>/update/folder?id=<%= folder.getField("id") %>&parent=<%= id %>&redirect=/view/folder.jsp%3fid%3d<%= folder.getField("id") %>'><%= name %></a>
 					</td>
 				</tr>
 	  	</jspb:FolderTree>
