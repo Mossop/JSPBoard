@@ -20,6 +20,10 @@ public abstract class Convertor
 		{
 			return DateConvertor.getInstance();
 		}
+		else if (type.equals("MD5PASS"))
+		{
+			return MD5Convertor.getInstance();
+		}
 		else
 		{
 			throw new IllegalArgumentException("No convertor available for type "+type);

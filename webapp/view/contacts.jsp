@@ -22,7 +22,7 @@
 		<jspb:SelectPerson var="person">
 			<tr>
 				<td>
-					<a href='contact.jsp?id=<%= person.getField("id") %>'>
+					<a href='<%= context %>/view/contact.jsp?id=<%= person.getField("id") %>'>
 						<%= person.getField("fullname") %>
 					</a>
 				</td>
@@ -44,7 +44,7 @@
 							</a>
 						</jspb:secure>
 					<% } else {%>
-						<jspb:secure groups="contactview">
+						<jspb:secure groups="contactedit">
 							<a href='<%= context %>/edit/contact.jsp?id=<%= person.getField("id") %>'>
 								Edit
 							</a>
@@ -54,4 +54,12 @@
 			</tr>
 		</jspb:SelectPerson>
   </table>
+  <jspb:secure groups="contactedit">
+	  <hr>
+	  <form action="<%= context %>/add/person" method="post">
+	  	<input type="hidden" name="redirect" value="/view/contacts.jsp">
+	  	Add a new contact: <input type="text" name="fullname">
+	  	<input type="submit" value="add">
+	  </form>
+	</jspb:secure>
 </jspb:includes>

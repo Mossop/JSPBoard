@@ -19,7 +19,7 @@
 							</a>
 						</jspb:secure>
 					<% } else {%>
-						<jspb:secure groups="contactview">
+						<jspb:secure groups="contactedit">
 							<a href='<%= context %>/edit/contact.jsp?id=<%= person.getField("id") %>'>
 								Edit
 							</a>

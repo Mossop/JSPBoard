@@ -21,6 +21,16 @@
 	</servlet>
 	
 	<servlet>
+		<servlet-name>PersonAdd</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.PersonAdd</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>LoginAdd</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.LoginAdd</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>FileUpload</servlet-name>
 		<servlet-class>com.blueprintit.jspboard.servlets.FileUpload</servlet-class>
 	</servlet>
@@ -63,6 +73,16 @@
 	<servlet-mapping>
 		<servlet-name>MessageAdd</servlet-name>
 		<url-pattern>/add/message</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>LoginAdd</servlet-name>
+		<url-pattern>/add/login</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>PersonAdd</servlet-name>
+		<url-pattern>/add/person</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>

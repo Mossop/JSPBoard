@@ -16,7 +16,7 @@ import com.blueprintit.jspboard.SessionHandler;
 
 public abstract class TableModify extends HttpServlet
 {
-	private Map fields;
+	protected Map fields;
 	
 	private void prepareFields() throws Exception
 	{
@@ -25,7 +25,7 @@ public abstract class TableModify extends HttpServlet
 		conn.close();
 	}
 	
-	private void prepareFields(Connection conn) throws Exception
+	protected void prepareFields(Connection conn) throws Exception
 	{
 		ResultSetMetaData data = conn.createStatement().executeQuery("SELECT * FROM "+getTable()+" WHERE 0=1;").getMetaData();
 		fields = new HashMap();
