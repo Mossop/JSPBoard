@@ -12,7 +12,7 @@ public abstract class Convertor
 		{
 			return StringConvertor.getInstance();
 		}
-		else if (type.equals("LONG"))
+		else if ((type.equals("LONG"))||(type.equals("TINY")))
 		{
 			return IntegerConvertor.getInstance();
 		}
