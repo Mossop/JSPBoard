@@ -15,9 +15,24 @@
 		<servlet-class>com.blueprintit.jspboard.servlets.SessionView</servlet-class>
 	</servlet>
 	
+	<servlet>
+		<servlet-name>FileDownload</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.FileDownload</servlet-class>
+	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>SessionViewer</servlet-name>
 		<url-pattern>/sessions</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>FileDownload</servlet-name>
+		<url-pattern>/view/file</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>FileDownload</servlet-name>
+		<url-pattern>/file/*</url-pattern>
 	</servlet-mapping>
 	
   <session-config>
@@ -99,7 +114,8 @@
 			<web-resource-name>Messageview</web-resource-name>
 			<url-pattern>/view/folder.jsp</url-pattern>
 			<url-pattern>/view/thread.jsp</url-pattern>
-			<url-pattern>/download-file</url-pattern>
+			<url-pattern>/view/file</url-pattern>
+			<url-pattern>/files/*</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>messageview</role-name>
