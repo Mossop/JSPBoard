@@ -28,6 +28,21 @@
 	</servlet>
 	
 	<servlet>
+		<servlet-name>CategoryDelete</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.CategoryDelete</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>CategoryUpdate</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.CategoryUpdate</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>CategoryAdd</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.CategoryAdd</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>MessageDelete</servlet-name>
 		<servlet-class>com.blueprintit.jspboard.servlets.MessageDelete</servlet-class>
 	</servlet>
@@ -130,6 +145,21 @@
 	<servlet-mapping>
 		<servlet-name>FolderDelete</servlet-name>
 		<url-pattern>/delete/folder</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>CategoryDelete</servlet-name>
+		<url-pattern>/delete/category</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>CategoryUpdate</servlet-name>
+		<url-pattern>/update/category</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>CategoryAdd</servlet-name>
+		<url-pattern>/add/category</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
