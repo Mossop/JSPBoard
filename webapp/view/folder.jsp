@@ -104,6 +104,21 @@
 				</td>
 			</tr>
 			<tr>
+				<td colspan="2" width="578">
+					<hr>
+					<h1>Files</h1>
+					<table width="578">
+						<jspb:SelectFile directory='<%= folder.getField("directory") %>' var="file">
+							<tr>
+								<td width="20"><img src='<%= context %>/images/filetypes/<%= file.getFileType() %>.gif'></td>
+								<td width="500"><a href='<%= context %>/files<%= folder.getField("directory")+file.getFilename() %>'><%= file.getFilename() %></a></td>
+								<td width="58" align="right"><%= file.getFileSize() %></td>
+							</tr>
+						</jspb:SelectFile>
+					</table>
+				</td>
+			</tr>
+			<tr>
 				<%
 					String groups = "messageadd";
 					if (folder.getField("parent").equals("-1"))

@@ -132,7 +132,7 @@
 	              </table>
                 <table>
 									<% int count=0; %>
-									<jspb:SelectFile message='<%= msg.getField("id") %>' var="file">
+									<jspb:SelectAttachment message='<%= msg.getField("id") %>' var="file">
 										<% count++; %>
                   	<tr>
                     	<td width="10"><img src="<%= context %>/images/paperclip.gif"></td>
@@ -147,9 +147,8 @@
 	                      </jspb:secure>
 				              </td>
                       <td align="right" width="158">
-                      	<jspb:link href='<%= "/files/"+file.getField("name").replaceAll(" ","%20") %>'>
-                      		<jspb:param name="id"><%= file.getField("id") %></jspb:param>
-													<%= file.getField("name") %>
+                      	<jspb:link href='<%= "/files"+file.getField("directory")+file.getField("filename").replaceAll(" ","%20") %>'>
+													<%= file.getField("filename") %>
 												</jspb:link>
                       </td>
                       <td>
@@ -162,7 +161,7 @@
 	                      </jspb:secure>
                       </td>
                     </tr>
-									</jspb:SelectFile>
+									</jspb:SelectAttachment>
                 </table>
 	            </jspb:header>
 	            <jspb:footer>
