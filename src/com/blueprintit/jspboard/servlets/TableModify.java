@@ -29,6 +29,11 @@ public abstract class TableModify extends HttpServlet
 	
 	protected abstract String getTable();
 	
+	protected boolean allowQuery(Connection conn, Map updates, HttpServletRequest request)
+	{
+		return true;
+	}
+	
 	protected abstract String generateQuery(Map updates);
 	
 	protected void postModification(Connection conn, Map updates, String user) throws SQLException
@@ -69,7 +74,7 @@ public abstract class TableModify extends HttpServlet
 			String redirect = request.getParameter("redirect");
 			if ((redirect!=null)&&(valid))
 			{
-				if (!updates.isEmpty())
+				if ((!updates.isEmpty())&&(allowQuery(conn,updates,request)))
 				{
 					conn.createStatement().executeUpdate(generateQuery(new HashMap(updates)));
 					postModification(conn,updates,request.getRemoteUser());
