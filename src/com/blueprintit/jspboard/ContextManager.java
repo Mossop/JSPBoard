@@ -41,7 +41,10 @@ public class ContextManager implements HttpSessionListener, ServletContextListen
 		while ((loop.hasNext())&&(!found))
 		{
 			Manager manager = (Manager)loop.next();
-			found=manager.getUsername().equals(user);
+			if (manager!=null)
+			{
+				found=manager.getUsername().equals(user);
+			}
 		}
 		return found;
 	}

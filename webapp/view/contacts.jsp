@@ -150,7 +150,7 @@
   <jspb:secure groups="contactedit">
 	  <jspb:form action="/add/person" method="post">
 	  	<input type="hidden" name="redirect" value="/view/contacts.jsp">
-	  	Add a new contact: <input type="text" name="fullname">
+	  	Add a new contact: <input type="text" name="displayname">
 	  	<input type="submit" value="Add">
 	  	<select name="category">
 	  		<jspb:SelectCategory var="category">
