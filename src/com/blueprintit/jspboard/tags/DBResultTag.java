@@ -15,7 +15,18 @@ public abstract class DBResultTag extends TagSupport
 	private Map fields = new HashMap();
 	private Map tablefields = new HashMap();
 	private int pos;
+	protected String extra;
 	
+	public void setExtra(String value)
+	{
+		extra=value;
+	}
+	
+	public String getExtra()
+	{
+		return extra;
+	}
+
 	public abstract String generateQuery();
 
 	public ResultSet getResults()
@@ -95,6 +106,21 @@ public abstract class DBResultTag extends TagSupport
 		return findResults(target.getParent(),id);
 	}
 	
+	private void setupVariables()
+	{
+		try
+		{
+			for (int loop=1; loop<=metadata.getColumnCount(); loop++)
+			{
+				String varname = metadata.getColumnName(loop);
+				pageContext.setAttribute(varname,results.getString(loop));
+			}
+		}
+		catch (Exception e)
+		{
+		}
+	}
+	
 	public int doStartTag()
 	{
 		try
@@ -114,6 +140,7 @@ public abstract class DBResultTag extends TagSupport
 						tablefields.put(metadata.getTableName(loop)+"."+metadata.getColumnName(loop),thisone);
 					}
 					pos=0;
+					setupVariables();
 					return EVAL_BODY_INCLUDE;
 				}
 				else
@@ -140,6 +167,7 @@ public abstract class DBResultTag extends TagSupport
 			if (results.next())
 			{
 				pos++;
+				setupVariables();
 				return EVAL_BODY_AGAIN;
 			}
 			else

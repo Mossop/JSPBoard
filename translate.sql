@@ -31,5 +31,9 @@ insert into JSPBoard.Groups
 
 insert into JSPBoard.UserGroup (id,group_id) values ('dave','admin');
 
-update JSPBoard.Login set password=MD5("Tequila8791") where id="dave";
-update JSPBoard.Login set password=MD5("nma640v") where id="mike";
+update JSPBoard.Login set password=MD5("Tequila8791") where password=PASSWORD("Tequila8791");
+update JSPBoard.Login set password=MD5("nma640v") where password=PASSWORD("nma640v");
+update JSPBoard.Login set password=MD5("pear") where password=PASSWORD("pear");
+update JSPBoard.Login set password=MD5("apple") where password=PASSWORD("apple");
+update JSPBoard.Login set password=MD5("d615vrc") where password=PASSWORD("d615vrc");
+update JSPBoard.Login set password=MD5("postman") where password=PASSWORD("postman");
