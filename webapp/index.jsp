@@ -1,4 +1,6 @@
-<html xmlns="http://www.w3.org/1999/xhtml1/strict">
+<%@ taglib uri="/WEB-INF/jspboard.tld" prefix="jspb" %>
+
+<html>
   <head>
     <title>IEE Wales South West Younger Members Bulletin Board</title>
     <link rel="stylesheet" href="styles/branches.css" type="text/css">
@@ -29,7 +31,6 @@
         <td align="right">
 							Currently logged in as
 							<%= request.getRemoteUser() %>
-							(Dave Townsend)
 						</td>
       </tr>
       <tr>
@@ -72,6 +73,7 @@
                     </td>
                   </tr>
                   <tr>
+                  	<jspb:secure groups="admin">
                     <td colspan="2">
                       <hr>
                       <h2>Post a new thread:</h2>
@@ -96,6 +98,7 @@
                         </table>
                       </form>
                     </td>
+                    </jspb:secure>
                   </tr>
                   <tr>
                     <td align="center" colspan="2"></td>
