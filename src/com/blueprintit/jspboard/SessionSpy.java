@@ -47,6 +47,7 @@ public class SessionSpy implements HttpSessionActivationListener, HttpSessionBin
 			{
 			}
 		}
+		dbconn=null;
 	}
 	
 	public Connection getDBConnection()
