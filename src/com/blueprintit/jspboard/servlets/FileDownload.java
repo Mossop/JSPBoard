@@ -49,7 +49,7 @@ public class FileDownload extends HttpServlet
 		catch (Exception e)
 		{
 			log("Exception",e);
-			throw new ServletException("Failed trying to download file",e);
+			throw new ServletException("Failed downloading file",e);
 		}
 	}
 }
