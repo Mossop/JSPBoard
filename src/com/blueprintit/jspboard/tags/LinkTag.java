@@ -9,6 +9,7 @@ public class LinkTag extends BodyTagSupport
 {
 	private String href;
 	private String name;
+	private String style;
 	private StringBuffer params = new StringBuffer();
 	
 	public String getName()
@@ -19,6 +20,16 @@ public class LinkTag extends BodyTagSupport
 	public void setName(String value)
 	{
 		name=value;
+	}
+	
+	public String getStyle()
+	{
+		return style;
+	}
+	
+	public void setStyle(String value)
+	{
+		style=value;
 	}
 	
 	public String getHref()
@@ -57,7 +68,12 @@ public class LinkTag extends BodyTagSupport
 		url = ((HttpServletResponse)pageContext.getResponse()).encodeURL(url);
 		try
 		{
-			getPreviousOut().print("<a href=\""+url+"\">");
+			getPreviousOut().print("<a href=\""+url+"\"");
+			if (style!=null)
+			{
+				getPreviousOut().print(" class=\""+style+"\"");
+			}
+			getPreviousOut().print(">");
 			getBodyContent().writeOut(getPreviousOut());
 			getPreviousOut().print("</a>");
 			params = new StringBuffer();

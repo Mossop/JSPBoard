@@ -12,9 +12,10 @@
         </td>
         <td valign="top" align="right">
         	<jspb:secure person='<%= thread.getField("owner") %>' groups="messageadmin">
-	          <a href='<%= context %>/edit/thread.jsp?id=<%= thread.getField("id") %>'>
+	          <jspb:link href="/edit/thread.jsp">
+	          	<jspb:param name="id"><%= thread.getField("id") %></jspb:param>
 							Administration
-						</a>
+						</jspb:link>
 					</jspb:secure>
         </td>
       </tr>
@@ -39,7 +40,11 @@
 	                	</td>
 	                  <td align="left">
 											<jspb:SelectPerson var="person" id='<%= msg.getField("owner") %>'>
-												Posted by <a href='contact.jsp?id=<%= person.getField("id") %>'><%= person.getField("nickname") %></a>
+												Posted by 
+												<jspb:link href="/view/contact.jsp">
+													<jspb:param name="id"><%= person.getField("id") %></jspb:param>
+													<%= person.getField("nickname") %>
+												</jspb:link>
 											</jspb:SelectPerson>
 										</td>
 	                  <td align="right"><%= msg.getDate("created") %></td>
@@ -49,7 +54,11 @@
 	                		<td></td>
 	                		<td>
 												<jspb:SelectPerson var="person" id='<%= edit.getField("person") %>'>
-													Edited by <a href='contact.jsp?id=<%= person.getField("id") %>'><%= person.getField("nickname") %></a>
+													Edited by 
+													<jspb:link href="/view/contact.jsp">
+														<jspb:param name="id"><%= person.getField("id") %></jspb:param>
+														<%= person.getField("nickname") %>
+													</jspb:link>
 												</jspb:SelectPerson>
 	                		</td>
 	                		<td align="right">
@@ -64,23 +73,27 @@
 		                      <tr>
 		                        <td valign="middle">
 		                        	<img align="middle" src="<%= context %>/images/paperclip.gif">
-		                          <a href='<%= context %>/add/file.jsp?id=<%= msg.getField("id") %>'>
+		                          <jspb:link href="/add/file.jsp">
+		                          	<jspb:param name="id"><%= msg.getField("id") %></jspb:param>
 																Attach File
-															</a>
+															</jspb:link>
 		                        </td>
 		                        <td>|</td>
 		                        <td valign="middle">
 		                        	<img align="middle" src="<%= context %>/images/edit.gif">
-		                          <a href='<%= context %>/edit/message.jsp?id=<%= msg.getField("id") %>'>
+		                          <jspb:link href="/edit/message.jsp">
+		                          	<jspb:param name="id"><%= msg.getField("id") %></jspb:param>
 																Edit
-															</a>
+															</jspb:link>
 		                        </td>
 		                        <td>|</td>
 		                        <td valign="middle">
 		                        	<img align="middle" src="<%= context %>/images/delete.gif">
-		                          <a href='<%= context %>/delete/message?id=<%= msg.getField("id") %>&redirect=/view/thread.jsp%3fid%3d<%= thread.getField("id") %>'>
+		                          <jspb:link href="/delete/message">
+		                          	<jspb:param name="id"><%= msg.getField("id") %></jspb:param>
+		                          	<jspb:param name="redirect">/view/thread.jsp?id=<%= thread.getField("id") %></jspb:param>
 																Delete
-															</a>
+															</jspb:link>
 		                        </td>
 		                      </tr>
 		                    </table>
@@ -98,21 +111,25 @@
                       <td width="400">
                       	<%= file.getField("description") %>
 				                <jspb:secure person='<%= msg.getField("owner") %>' groups="messageadmin">
-													<a href='<%= context %>/edit/file.jsp?id=<%= file.getField("id") %>'>
+													<jspb:link href="/edit/file.jsp">
+														<jspb:param name="id"><%= file.getField("id") %></jspb:param>
 														[Edit name]
-													</a>
+													</jspb:link>
 	                      </jspb:secure>
 				              </td>
                       <td align="right" width="158">
-                      	<a href='<%= context %>/files/<%= file.getField("name").replaceAll(" ","%20") %>?id=<%= file.getField("id") %>'>
+                      	<jspb:link href='<%= "/files/"+file.getField("name").replaceAll(" ","%20") %>'>
+                      		<jspb:param name="id"><%= file.getField("id") %></jspb:param>
 													<%= file.getField("name") %>
-												</a>
+												</jspb:link>
                       </td>
                       <td>
 				                <jspb:secure person='<%= msg.getField("owner") %>' groups="messageadmin">
-	                        <a href='<%= context %>/delete/file?id=<%= file.getField("id") %>&redirect=/view/thread.jsp%3fid%3d<%= thread.getField("id") %>'>
+	                        <jspb:link href="/delete/file">
+	                        	<jspb:param name="id"><%= file.getField("id") %></jspb:param>
+	                        	<jspb:param name="redirect">/view/thread.jsp?id=<%= thread.getField("id") %></jspb:param>
 	                        	<img src="<%= context %>/images/delete.gif" alt="delete" align="middle">
-	                        </a>
+	                        </jspb:link>
 	                      </jspb:secure>
                       </td>
                     </tr>
@@ -139,7 +156,7 @@
 	      <tr>
 	        <td colspan="2">
 	          <h2>Add a new reply to this thread:</h2>
-	          <form action="<%= context %>/add/message" method="post" enctype="multipart/form-data">
+	          <jspb:form action="/add/message" method="post" enctype="multipart/form-data">
 	          	<input type="hidden" name="thread" value='<%= thread.getField("id") %>'>
 	          	<input type="hidden" name="redirect" value='/view/thread.jsp?id=<%= thread.getField("id") %>'>
 	          	<table>
@@ -162,7 +179,7 @@
 	                </td>
 	              </tr>
 	            </table>
-	          </form>
+	          </jspb:form>
 	        </td>
 	      </tr>
 	    </jspb:secure>

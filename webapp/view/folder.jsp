@@ -35,9 +35,10 @@
 				</td>
 				<td valign="top" align="right">
 					<jspb:secure groups="boardadmin">
-						<a href="<%= context %>/edit/folder.jsp?id=<%= folderid %>">
+						<jspb:link href="/edit/folder.jsp">
+							<jspb:param name="id"><%= folderid %></jspb:param>
 							Administration
-						</a>
+						</jspb:link>
 					</jspb:secure>
 				</td>
 			</tr>
@@ -61,27 +62,36 @@
 								<tr>
 									<td>
 										<% if (thread.getField("unreadcount").equals("0")) { %>
-											<a href='<%= context %>/view/thread.jsp?id=<%= thread.getField("id") %>'>
+											<jspb:link href="/view/thread.jsp">
+												<jspb:param name="id"><%= thread.getField("id") %></jspb:param>
 												<img src="<%= context %>/images/read.gif" alt="read" align="middle">
-											</a>
+											</jspb:link>
 										<% } else { %>
-											<a href='<%= context %>/view/thread.jsp?id=<%= thread.getField("id") %>#unread'>
+											<jspb:link href="/view/thread.jsp" name="unread">
+												<jspb:param name="id"><%= thread.getField("id") %></jspb:param>
 												<img src="<%= context %>/images/unread.gif" alt="unread" align="middle">
-											</a>
+											</jspb:link>
 										<% } %>
 									</td>
 									<td>
 										<% if (thread.getField("unreadcount").equals("0")) { %>
-											<a href='<%= context %>/view/thread.jsp?id=<%= thread.getField("id") %>'><%= thread.getField("name") %></a>
+											<jspb:link href="/view/thread.jsp">
+												<jspb:param name="id"><%= thread.getField("id") %></jspb:param>
+												<%= thread.getField("name") %>
+											</jspb:link>
 										<% } else { %>
-											<a href='<%= context %>/view/thread.jsp?id=<%= thread.getField("id") %>#unread'><i><%= thread.getField("name") %> (<%= thread.getField("unreadcount") %>)</i></a>
+											<jspb:link href="/view/thread.jsp" name="unread">
+												<jspb:param name="id"><%= thread.getField("id") %></jspb:param>
+												<i><%= thread.getField("name") %> (<%= thread.getField("unreadcount") %>)</i>
+											</jspb:link>
 										<% } %>
 									</td>
 									<td>
 										<jspb:SelectPerson var="person" id='<%= thread.getField("owner") %>'>
-											<a href='<%= context %>/view/contact.jsp?id=<%= person.getField("id") %>'>
+											<jspb:link href="/view/contact.jsp">
+												<jspb:param name="id"><%= person.getField("id") %></jspb:param>
 												<%= person.getField("nickname") %>
-											</a>
+											</jspb:link>
 										</jspb:SelectPerson>
 									</td>
 									<td align="right">
@@ -105,7 +115,7 @@
 					<td colspan="2">
 						<hr>
 						<h2>Post a new thread:</h2>
-						<form name="mainform" onSubmit="return validate()" action="<%= context %>/add/message" method="post" enctype="multipart/form-data">
+						<jspb:form name="mainform" onSubmit="return validate()" action="/add/message" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="folder" value='<%= folder.getField("id") %>'>
 							<input type="hidden" name="redirect" value='/view/folder.jsp?id=<%= folderid %>'>
 							<table>
@@ -134,7 +144,7 @@
 									</td>
 								</tr>
 							</table>
-						</form>
+						</jspb:form>
 					</td>
 				</jspb:secure>
 			</tr>

@@ -14,15 +14,17 @@
 					</jspb:SelectLogin>
 					<% if (haslogin) { %>
 						<jspb:secure groups="contactadmin" person='<%= person.getField("id") %>'>
-							<a href='<%= context %>/edit/contact.jsp?id=<%= person.getField("id") %>'>
+							<jspb:link href="/edit/contact.jsp">
+								<jspb:param name="id"><%= person.getField("id") %></jspb:param>
 								Edit
-							</a>
+							</jspb:link>
 						</jspb:secure>
 					<% } else {%>
 						<jspb:secure groups="contactedit">
-							<a href='<%= context %>/edit/contact.jsp?id=<%= person.getField("id") %>'>
+							<jspb:link href="/edit/contact.jsp">
+								<jspb:param name="id"><%= person.getField("id") %></jspb:param>
 								Edit
-							</a>
+							</jspb:link>
 						</jspb:secure>
 					<% } %>
 				</td>
@@ -79,15 +81,19 @@
       	<tr>
       		<td><b>Logins:</b></td>
       		<td>
-      			<jspb:SelectLogin person='<%= person.getField("id") %>' var="login">
-							<jspb:secure groups="loginadmin">
-								<a href='<%= context %>/edit/user.jsp?id=<%= login.getField("id") %>'>
-							</jspb:secure>
+      			<jspb:secure groups="loginadmin">
+	      			<jspb:SelectLogin person='<%= person.getField("id") %>' var="login">
+								<jspb:link href="/edit/user.jsp">
+									<jspb:param name="id"><%= login.getField("id") %></jspb:param>
+									<%= login.getField("id") %>
+								</jspb:link>
+	      			</jspb:SelectLogin>
+	      		</jspb:secure>
+      			<jspb:notsecure groups="loginadmin">
+	      			<jspb:SelectLogin person='<%= person.getField("id") %>' var="login">
 								<%= login.getField("id") %>
-							<jspb:secure groups="loginadmin">
-								</a>
-							</jspb:secure>
-      			</jspb:SelectLogin>
+	      			</jspb:SelectLogin>
+	      		</jspb:notsecure>
       		</td>
       	</tr>
       </jspb:secure>

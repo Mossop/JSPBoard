@@ -9,6 +9,9 @@ public class FormTag extends TagSupport
 {
 	private String action;
 	private String method;
+	private String enctype;
+	private String onsubmit;
+	private String name;
 	
 	public String getAction()
 	{
@@ -18,6 +21,36 @@ public class FormTag extends TagSupport
 	public void setAction(String value)
 	{
 		action=value;
+	}
+	
+	public String getName()
+	{
+		return name;
+	}
+	
+	public void setName(String value)
+	{
+		name=value;
+	}
+	
+	public String getOnSubmit()
+	{
+		return onsubmit;
+	}
+	
+	public void setOnSubmit(String value)
+	{
+		onsubmit=value;
+	}
+	
+	public String getEnctype()
+	{
+		return enctype;
+	}
+	
+	public void setEnctype(String value)
+	{
+		enctype=value;
 	}
 	
 	public String getMethod()
@@ -40,6 +73,18 @@ public class FormTag extends TagSupport
 			}
 			String url = ((HttpServletResponse)pageContext.getResponse()).encodeURL(action);
 			pageContext.getOut().print("<form action=\""+url+"\"");
+			if (enctype!=null)
+			{
+				pageContext.getOut().print(" enctype=\""+enctype+"\"");
+			}
+			if (name!=null)
+			{
+				pageContext.getOut().print(" name=\""+name+"\"");
+			}
+			if (onsubmit!=null)
+			{
+				pageContext.getOut().print(" onSubmit=\""+onsubmit+"\"");
+			}
 			if (method!=null)
 			{
 				pageContext.getOut().print(" method=\""+method+"\">");

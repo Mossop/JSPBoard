@@ -9,16 +9,16 @@
 				</td>
 				<td align="right">
 					<jspb:secure groups="contactadmin">
-						<form action="<%= context %>/delete/person" method="post">
+						<jspb:form action="/delete/person" method="post">
 							<input type="hidden" name="id" value='<%= person.getField("id") %>'>
 							<input type="hidden" name="redirect" value="/view/contacts.jsp">
 							<input type="submit" value="Delete">
-						</form>
+						</jspb:form>
 					</jspb:secure>
 				</td>
 			</tr>
 		</table>
-		<form action="<%= context %>/update/person" method="post">
+		<jspb:form action="/update/person" method="post">
 			<input type="hidden" name="id" value='<%= person.getField("id") %>'>
 			<input type="hidden" name="redirect" value='/view/contact.jsp?id=<%= person.getField("id") %>'>
 			<table>
@@ -72,17 +72,17 @@
 	      	</td>
 	      </tr>
 	    </table>
-	  </form>
+	  </jspb:form>
 	  <jspb:secure groups="loginadmin">
 	  	<hr>
 	  	Add a login:
-	  	<form action="<%= context %>/add/login">
+	  	<jspb:form action="/add/login">
 	  		<input type="hidden" name="redirect" value='/view/contact.jsp?id=<%= person.getField("id") %>'>
 	  		<input type="hidden" name="person" value='<%= person.getField("id") %>'>
 	  		Username: <input type="text" name="id"><br>
 	  		Password: <input type="test" name="password">
 	  		<input type="submit" value="Add">
-	  	</form>
+	  	</jspb:form>
 	  </jspb:secure>
 	</jspb:includes>
 </jspb:SelectPerson>

@@ -1,4 +1,3 @@
-<%@ page import="com.blueprintit.jspboard.SessionHandler" %>
 <%@ taglib uri="/WEB-INF/jspboard.tld" prefix="jspb" %>
 
 <jspb:includes>
@@ -23,21 +22,24 @@
 			<tr>
 				<td>
 					<jspb:secure groups="loginadmin">
-						<a href='<%= context %>/edit/user.jsp?id=<%= login.getField("id") %>'>
+						<jspb:link href="/edit/user.jsp">
+							<jspb:param name="id"><%= login.getField("id") %></jspb:param>
+							<%= login.getField("id") %>
+						</jspb:link>
 					</jspb:secure>
+					<jspb:notsecure groups="loginadmin">
 						<%= login.getField("id") %>
-					<jspb:secure groups="loginadmin">
-						</a>
-					</jspb:secure>
+					</jspb:notsecure>
 				</td>
 				<td>
 					<%= login.getDate("lastaccess") %>
 				</td>
 				<td>
 					<jspb:SelectPerson id='<%= login.getField("person") %>' var="person">
-						<a href='contact.jsp?id=<%= person.getField("id") %>'>
+						<jspb:link href="contact.jsp">
+							<jspb:param name="id"><%= person.getField("id") %></jspb:param>
 							<%= person.getField("fullname") %>
-						</a>
+						</jspb:link>
 					</jspb:SelectPerson>
 				</td>
 			</tr>

@@ -14,19 +14,29 @@
 						<td colspan="<%= depth %>"></td>
 					<% } %>
 					<td colspan="1">
-						<a href='<%= context %>/update/thread?id=<%= thread.getField("id") %>&folder=<%= id %>&redirect=/view/thread.jsp%3fid%3d<%= thread.getField("id") %>'><img align="top" src="<%= context %>/images/closedfolder.gif"></a>
+						<jspb:link href="/update/thread">
+							<jspb:param name="id"><%= thread.getField("id") %></jspb:param>
+							<jspb:param name="folder"><%= id %></jspb:param>
+							<jspb:param name="redirect">/view/thread.jsp?id=<%= thread.getField("id") %></jspb:param>
+							<img align="top" src="<%= context %>/images/closedfolder.gif">
+						</jspb:link>
 					</td>
 					<td colspan="<%= Integer.parseInt(maxdepth)-Integer.parseInt(depth)+1 %>">
-						<a class="closedfolder" href='<%= context %>/update/thread?id=<%= thread.getField("id") %>&folder=<%= id %>&redirect=/view/thread.jsp%3fid%3d<%= thread.getField("id") %>'><%= name %></a>
+						<jspb:link style="closedfolder" href="/update/thread">
+							<jspb:param name="id"><%= thread.getField("id") %></jspb:param>
+							<jspb:param name="folder"><%= id %></jsbp:param>
+							<jspb:param name="redirect">/view/thread.jsp?id=<%= thread.getField("id") %></jspb:param>
+							<%= name %>
+						</jspb:link>
 					</td>
 				</tr>
 	  	</jspb:FolderTree>
 	  </table>
 	  <hr>
-	  <form action="<%= context %>/delete/thread" method="post">
+	  <jspb:form action="/delete/thread" method="post">
 	  	<input type="hidden" name="redirect" value='/view/folder.jsp?id=<%= thread.getField("folder") %>'>
 	  	<input type="hidden" name="id" value='<%= thread.getField("id") %>'>
 	  	Delete this thread: <input type="submit" value="Delete">
-	  </form>
+	  </jspb:form>
 	</jspb:includes>
 </jspb:SelectThread>

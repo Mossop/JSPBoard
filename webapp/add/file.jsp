@@ -3,7 +3,7 @@
 <jspb:SelectMessage var="msg" id='<%= request.getParameter("id") %>'>
 	<jspb:includes>
   	<h1>File upload:</h1>
-    <form action="<%= context %>/add/file" method="post" enctype="multipart/form-data">
+  	<jspb:form action="/add/file" enctype="multipart/form-data">
 			<input type="hidden" name="message" value='<%= msg.getField("id") %>'>
 			<input type="hidden" name="redirect" value='/view/thread.jsp?id=<%= msg.getField("thread") %>'>
       <table>
@@ -25,6 +25,6 @@
           </td>
         </tr>
       </table>
-    </form>
+    </jspb:form>
 	</jspb:includes>
 </jspb:SelectMessage>

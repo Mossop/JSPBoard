@@ -21,32 +21,37 @@
 											<% } %>
 											<td colspan="1">
 												<% if (folder.equals(id)) { %>
-													<a href="<%= context %>/view/folder.jsp?id=<%= id %>"><img align="top" src="<%= context %>/images/openfolder.gif"></a>
+													<jspb:link href="/view/folder.jsp">
+														<jspb:param name="id"><%= id %></jspb:param>
+														<img align="top" src="<%= context %>/images/openfolder.gif">
+													</jspb:link>
 												<% } else { %>
-													<a href="<%= context %>/view/folder.jsp?id=<%= id %>"><img align="top" src="<%= context %>/images/closedfolder.gif"></a>
+													<jspb:link href="/view/folder.jsp?id=<%= id %>">
+														<jspb:param name="id"><%= id %></jspb:param>
+														<img align="top" src="<%= context %>/images/closedfolder.gif">
+													</jspb:link>
 												<% } %>
 											</td>
 											<td colspan="<%= Integer.parseInt(maxdepth)-Integer.parseInt(depth)+1 %>">
-												<% if (folder.equals(id)) { %>
-													<a class="openfolder" href="<%= context %>/view/folder.jsp?id=<%= id %>">
-												<% } else { %>
-													<a class="closedfolder" href="<%= context %>/view/folder.jsp?id=<%= id %>">
-												<% } %>
-												<% if (!unread.equals("0")) { %>
-												<i>
-												<% } %>
-													<%= name %>
-												<% if (!unread.equals("0")) { %>
-													(<%= unread %>)</i>
-												<% } %>
-												</a>
+												<% String style = "closedfolder"; %>
+												<% if (folder.equals(id)) { style="openfolder"; }%>
+												<jspb:link style="<%= style %>" href="/view/folder.jsp">
+													<jspb:param name="id"><%= id %></jspb:param>
+													<% if (!unread.equals("0")) { %>
+													<i>
+													<% } %>
+														<%= name %>
+													<% if (!unread.equals("0")) { %>
+														(<%= unread %>)</i>
+													<% } %>
+												</jspb:link>
 											</td>
 										</tr>
 	              	</jspb:FolderTree>
 	              </table>
               	<hr>
-              	<a href="<%= context %>/edit/password.jsp">Change Password</a><br>
-              	<a href="<%= context %>/logout">Logout</a>
+              	<jspb:link href="/edit/password.jsp">Change Password</jspb:link><br>
+              	<jspb:link href="/logout">Logout</jspb:link>
               </td>
             </tr>
           </table>

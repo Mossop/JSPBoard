@@ -4,7 +4,7 @@
 	<jspb:SelectMessage var="msg" id='<%= file.getField("message") %>'>
 		<jspb:includes>
 	  	<h1>Editing file</h1>
-			<form action="<%= context %>/update/file" method="post">
+			<jspb:form action="/update/file" method="post">
 				<input type="hidden" name="id" value='<%= file.getField("id") %>'>
 				<input type="hidden" name="redirect" value='/view/thread.jsp?id=<%= msg.getField("thread") %>'>
 		    <table>
@@ -22,7 +22,7 @@
 		        </td>
 	        </tr>
 		    </table>
-		  </form>
+		  </jspb:form>
 		</jspb:includes>
 	</jspb:SelectMessage>
 </jspb:SelectFile>

@@ -8,7 +8,7 @@
 			</td>
 			<td align="right" valign="top">
 				<jspb:secure groups="contactadmin">
-					<a href="<%= context %>/edit/categories.jsp">Modify Categories</a>
+					<jspb:link href="/edit/categories.jsp">Modify Categories</jspb:link>
 				</jspb:secure>
 			</td>
 		</tr>
@@ -42,9 +42,10 @@
 				<tr>
 					<td width="20"></td>
 					<td>
-						<a href='<%= context %>/view/contact.jsp?id=<%= person.getField("id") %>'>
+						<jspb:link href="/view/contact.jsp">
+							<jspb:param name="id"><%= person.getField("id") %></jspb:param>
 							<%= person.getField("fullname") %>
-						</a>
+						</jspb:link>
 					</td>
 					<td><%= person.getField("description") %></td>
 					<td>
@@ -59,15 +60,17 @@
 						</jspb:SelectLogin>
 						<% if (haslogin) { %>
 							<jspb:secure groups="contactadmin" person='<%= person.getField("id") %>'>
-								<a href='<%= context %>/edit/contact.jsp?id=<%= person.getField("id") %>'>
+								<jspb:link href="/edit/contact.jsp">
+									<jspb:param name="id"><%= person.getField("id") %></jspb:param>
 									Edit
-								</a>
+								</jspb:link>
 							</jspb:secure>
 						<% } else {%>
 							<jspb:secure groups="contactedit">
-								<a href='<%= context %>/edit/contact.jsp?id=<%= person.getField("id") %>'>
+								<jspb:link href="/edit/contact.jsp">
+									<jspb:param name="id"><%= person.getField("id") %></jspb:param>
 									Edit
-								</a>
+								</jspb:link>
 							</jspb:secure>
 						<% } %>
 					</td>
@@ -104,9 +107,10 @@
 			<tr>
 				<td width="20"></td>
 				<td>
-					<a href='<%= context %>/view/contact.jsp?id=<%= person.getField("id") %>'>
+					<jspb:link href="/view/contact.jsp">
+						<jspb:param name="id"><%= person.getField("id") %></jspb:param>
 						<%= person.getField("fullname") %>
-					</a>
+					</jspb:link>
 				</td>
 				<td><%= person.getField("description") %></td>
 				<td>
@@ -121,15 +125,17 @@
 					</jspb:SelectLogin>
 					<% if (haslogin) { %>
 						<jspb:secure groups="contactadmin" person='<%= person.getField("id") %>'>
-							<a href='<%= context %>/edit/contact.jsp?id=<%= person.getField("id") %>'>
+							<jspb:link href="/edit/contact.jsp">
+								<jspb:param name="id"><%= person.getField("id") %></jspb:param>
 								Edit
-							</a>
+							</jspb:link>
 						</jspb:secure>
 					<% } else {%>
 						<jspb:secure groups="contactedit">
-							<a href='<%= context %>/edit/contact.jsp?id=<%= person.getField("id") %>'>
+							<jspb:link href="/edit/contact.jsp">
+								<jspb:param name="id"><%= person.getField("id") %></jspb:param>
 								Edit
-							</a>
+							</jspb:link>
 						</jspb:secure>
 					<% } %>
 				</td>
@@ -142,7 +148,7 @@
 		<% } %>
   </table>
   <jspb:secure groups="contactedit">
-	  <form action="<%= context %>/add/person" method="post">
+	  <jspb:form action="/add/person" method="post">
 	  	<input type="hidden" name="redirect" value="/view/contacts.jsp">
 	  	Add a new contact: <input type="text" name="fullname">
 	  	<input type="submit" value="Add">
@@ -153,6 +159,6 @@
 	  			</option>
 	  		</jspb:SelectCategory>
 	  	</select>
-	  </form>
+	  </jspb:form>
 	</jspb:secure>
 </jspb:includes>

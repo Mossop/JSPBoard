@@ -27,17 +27,17 @@
             <tr>
             	<jspb:secure groups="messageview">
 	              <td>
-	                <a href="<%= context %>\view\folder.jsp">Announcements</a>
+	                <jspb:link href="/view/folder.jsp">Announcements</jspb:link>
 	              </td>
               </jspb:secure>
             	<jspb:secure groups="contactview">
 	              <td>
-	                <a href="<%= context %>\view\contacts.jsp">Contacts</a>
+	                <jspb:link href="/view/contacts.jsp">Contacts</jspb:link>
 	              </td>
               </jspb:secure>
             	<jspb:secure groups="loginview">
 	              <td>
-	                <a href="<%= context %>\view\users.jsp">Users</a>
+	                <jspb:link href="/view/users.jsp">Users</jspb:link>
 	              </td>
               </jspb:secure>
             </tr>

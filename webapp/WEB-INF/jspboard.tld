@@ -21,6 +21,21 @@
       <rtexprvalue>true</rtexprvalue>
     </attribute>
   </tag>
+	<tag>
+    <name>notsecure</name>
+    <tag-class>com.blueprintit.jspboard.tags.NotSecureTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <name>groups</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>person</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
   <tag>
   	<name>includes</name>
   	<tag-class>com.blueprintit.jspboard.tags.IncludesTag</tag-class>
@@ -59,10 +74,15 @@
     <attribute>
       <name>href</name>
       <required>true</required>
-      <rtexprvalue>false</rtexprvalue>
+      <rtexprvalue>true</rtexprvalue>
     </attribute>
     <attribute>
       <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>style</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
     </attribute>
@@ -78,6 +98,21 @@
     </attribute>
     <attribute>
       <name>method</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>onSubmit</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>enctype</name>
       <required>false</required>
       <rtexprvalue>false</rtexprvalue>
     </attribute>

@@ -5,7 +5,7 @@
 	<table>
 		<jspb:SelectCategory var="category">
 			<tr>
-				<form action="<%= context %>/update/category" method="post">
+				<jspb:form action="/update/category" method="post">
 					<input type="hidden" name="id" value='<%= category.getField("id") %>'>
 					<input type="hidden" name="redirect" value="/edit/categories.jsp">
 					<td>
@@ -14,17 +14,17 @@
 					<td>
 						<input type="submit" value="Rename">
 					</td>
-				</form>
-				<form action="<%= context %>/delete/category" method="post">
+				</jspb:form>
+				<jspb:form action="/delete/category" method="post">
 					<input type="hidden" name="id" value='<%= category.getField("id") %>'>
 					<input type="hidden" name="redirect" value="/edit/categories.jsp">
 					<td>
 						<input type="submit" value="Delete">
 					</td>
-				</form>
+				</jspb:form>
 			</tr>
 		</jspb:SelectCategory>
-		<form action="<%= context %>/add/category" method="post">
+		<jspb:form action="/add/category" method="post">
 			<input type="hidden" name="redirect" value="/edit/categories.jsp">
 			<tr>
 				<td>
@@ -34,6 +34,6 @@
 					<input type="submit" value="Create">
 				</td>
 			</tr>
-		</form>
+		</jspb:form>
 	</table>
 </jspb:includes>

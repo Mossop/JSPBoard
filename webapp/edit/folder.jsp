@@ -6,7 +6,7 @@
 	%>
 	<jspb:includes>
 		<h1><%= folder.getField("name") %></h1>
-		<form action="<%= context %>/update/folder" method="post">
+		<jspb:form action="/update/folder" method="post">
 			<input type="hidden" name="id" value='<%= folder.getField("id") %>'>
 			<input type="hidden" name="redirect" value='/view/folder.jsp?id=<%= folder.getField("id") %>'>
 			<table>
@@ -16,14 +16,14 @@
 					<td><input type="submit" value="Update"></td>
 				</tr>
 			</table>
-		</form>
+		</jspb:form>
 		<% if (!folder.getField("parent").equals("-1")) { %>
 		<hr>
-		<form action="<%= context %>/delete/folder" action="post">
+		<jspb:form action="/delete/folder" action="post">
 			<input type="hidden" name="id" value='<%= folder.getField("id") %>'>
 			<input type="hidden" name="redirect" value='/view/folder.jsp?id=<%= folder.getField("parent") %>'>
 			<input type="submit" value="Delete Folder"> (This will only work if the folder contains no threads)
-		</form>
+		</jspb:form>
 		<hr>
 		<p>If you wish to move this folder, simply select where to put it below:</p>
   	<table>
@@ -33,10 +33,20 @@
 						<td colspan="<%= depth %>"></td>
 					<% } %>
 					<td colspan="1">
-						<a href='<%= context %>/update/folder?id=<%= folder.getField("id") %>&parent=<%= id %>&redirect=/view/folder.jsp%3fid%3d<%= folder.getField("id") %>'><img align="top" src="<%= context %>/images/closedfolder.gif"></a>
+						<jspb:link href="/update/folder">
+							<jspb:param name="id"><%= folder.getField("id") %></jspb:param>
+							<jspb:param name="parent"><%= id %></jspb:param>
+							<jspb:param name="redirect">/view/folder.jsp?id=<%= folder.getField("id") %></jspb:param>
+							<img align="top" src="<%= context %>/images/closedfolder.gif">
+						</jspb:link>
 					</td>
 					<td colspan="<%= Integer.parseInt(maxdepth)-Integer.parseInt(depth)+1 %>">
-						<a class="closedfolder" href='<%= context %>/update/folder?id=<%= folder.getField("id") %>&parent=<%= id %>&redirect=/view/folder.jsp%3fid%3d<%= folder.getField("id") %>'><%= name %></a>
+						<jspb:link style="closedfolder" href="/update/folder">
+							<jspb:param name="id"><%= folder.getField("id") %></jspb:param>
+							<jspb:param name="parent"><%= id %></jspb:param>
+							<jspb:param name="redirect">/view/folder.jsp?id=<%= folder.getField("id") %></jspb:param>
+							<%= name %>
+						</jspb:link>
 					</td>
 				</tr>
 	  	</jspb:FolderTree>
