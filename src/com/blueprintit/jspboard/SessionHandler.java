@@ -1,5 +1,9 @@
 package com.blueprintit.jspboard;
 
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
+import javax.servlet.ServletContextListener;
+import javax.servlet.ServletContextEvent;
 import javax.servlet.http.HttpSession;
 import javax.servlet.ServletContext;
 import java.util.Date;
@@ -11,7 +15,7 @@ import java.sql.DriverManager;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 
-public class SessionHandler
+public class SessionHandler implements HttpSessionListener, ServletContextListener
 {
 	private ServletContext context;
 	private List sessions;
@@ -93,25 +97,25 @@ public class SessionHandler
 		}
 	}
 	
-	public void sessionCreated(HttpSession session)
+	private void sessionCreated(HttpSession session)
 	{
 		startSession(session);
 		sessions.add(session);
 	}
 	
-	public void sessionDestroyed(HttpSession session)
+	private void sessionDestroyed(HttpSession session)
 	{
 		sessions.remove(session);
 		stopSession(session);
 	}
 
-	public void contextInitialised(ServletContext context)
+	private void contextInitialised(ServletContext context)
 	{
 		this.context=context;
 		context.log("SessionHandler: Context started");
 	}
 	
-	public void contextDestroyed(ServletContext context)
+	private void contextDestroyed(ServletContext context)
 	{
 		context.log("SessionHandler: Context destroyed");
 		Iterator loop = sessions.iterator();
@@ -120,5 +124,29 @@ public class SessionHandler
 			stopSession((HttpSession)loop.next());
 		}
 		this.context=null;
+	}
+
+	// context listener code
+	public void contextInitialized(ServletContextEvent e)
+	{
+		contextInitialised(e.getServletContext());
+		e.getServletContext().setAttribute("jspboard.SessionHandler",this);
+	}
+
+	public void contextDestroyed(ServletContextEvent e)
+	{
+		contextDestroyed(e.getServletContext());
+		e.getServletContext().removeAttribute("jspboard.SessionHandler");
+	}
+
+	// session listener code
+	public void sessionCreated(HttpSessionEvent e)
+	{
+			sessionCreated(e.getSession());
+	}
+	
+	public void sessionDestroyed(HttpSessionEvent e)
+	{
+			sessionDestroyed(e.getSession());
 	}
 }

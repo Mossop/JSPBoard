@@ -7,11 +7,7 @@
 <web-app>
 
 	<listener>
-		<listener-class>com.blueprintit.jspboard.listeners.ContextListener</listener-class>
-	</listener>
-	
-	<listener>
-		<listener-class>com.blueprintit.jspboard.listeners.SessionListener</listener-class>
+		<listener-class>com.blueprintit.jspboard.SessionHandler</listener-class>
 	</listener>
 	
 	<servlet>
