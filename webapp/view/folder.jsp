@@ -92,7 +92,7 @@
 					<td colspan="2">
 						<hr>
 						<h2>Post a new thread:</h2>
-						<form action="<%= context %>/add/message" method="post">
+						<form action="<%= context %>/add/message" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="folder" value='<%= folder.getField("id") %>'>
 							<input type="hidden" name="redirect" value='/view/folder.jsp?id=<%= folderid %>'>
 							<table>
