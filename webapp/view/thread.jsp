@@ -176,6 +176,11 @@
 	              	<td>File description:</td>
 	              	<td><input name="description"></td>
 	              </tr>
+	              <tr>
+	              	<td colspan="2">
+	              		<input type="checkbox" name="sendemail" value="true"> Email this message out to the committee.
+	              	</td>
+	              </tr>
 	            	<tr>
 	                <td colspan="2">
 	                  <textarea name="content" rows="15" cols="60"></textarea>
