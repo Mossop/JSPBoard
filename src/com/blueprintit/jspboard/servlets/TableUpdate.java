@@ -102,16 +102,14 @@ public abstract class TableUpdate extends HttpServlet
 					{
 						throw new IllegalArgumentException(param);
 					}
-					if (loop.hasMoreElements())
-					{
-						updateset.append(", ");
-					}
+					updateset.append(", ");
 				}
 			}
 			String id = request.getParameter("id");
 			String redirect = request.getParameter("redirect");
 			if ((id!=null)&&(redirect!=null)&&(updateset.length()>0))
 			{
+				updateset.delete(updateset.length()-2,updateset.length());
 				String query = "UPDATE "+getTable()+" SET "+updateset+" WHERE id="+id+";";
 				conn.createStatement().executeUpdate(query);
 				request.getRequestDispatcher(redirect).forward(request,response);

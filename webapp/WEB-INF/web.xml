@@ -21,6 +21,21 @@
 	</servlet>
 	
 	<servlet>
+		<servlet-name>ThreadUpdate</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.ThreadUpdate</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>MessageUpdate</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.MessageUpdate</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>FolderUpdate</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.FolderUpdate</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>FileDownload</servlet-name>
 		<servlet-class>com.blueprintit.jspboard.servlets.FileDownload</servlet-class>
 	</servlet>
@@ -28,6 +43,21 @@
 	<servlet-mapping>
 		<servlet-name>PersonUpdate</servlet-name>
 		<url-pattern>/update/person</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>ThreadUpdate</servlet-name>
+		<url-pattern>/update/thread</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>MessageUpdate</servlet-name>
+		<url-pattern>/update/message</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>FolderUpdate</servlet-name>
+		<url-pattern>/update/folder</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
