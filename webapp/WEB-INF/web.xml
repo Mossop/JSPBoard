@@ -37,7 +37,8 @@
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Entire Application</web-resource-name>
-			<url-pattern>/*</url-pattern>
+			<url-pattern>/view/*</url-pattern>
+			<url-pattern>/edit/*</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>*</role-name>
@@ -48,7 +49,7 @@
 		<auth-method>BASIC</auth-method>
 		<realm-name>WSWYM Bulletin Board</realm-name>
 	</login-config>
-	
+
 	<!--
 	<login-config>
 		<auth-method>FORM</auth-method>
