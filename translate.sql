@@ -7,9 +7,9 @@ update JSPBoard.Thread set folder=LAST_INSERT_ID() where folder=0;
 
 insert into JSPBoard.Message (id,thread,owner,created,content) select id,thread,author,created,content from Message;
 
-insert into JSPBoard.Person (id,fullname,email,nickname,mobilephone) select id,fullname,email,nickname,phone from People;
+#insert into JSPBoard.Person (id,fullname,email,nickname,mobilephone) select id,fullname,email,nickname,phone from People;
 insert into JSPBoard.File (id,name,filename,message,description,mimetype) select id,name,filename,message,description,mimetype from File;
-insert into JSPBoard.Login (id,password,lastaccess,person) select id,password,lastaccess,person from User;
+#insert into JSPBoard.Login (id,password,lastaccess,person) select id,password,lastaccess,person from User;
 insert into JSPBoard.EditedMessage (message,person,altered) select message_id,person,altered from EditedMessage;
 insert into JSPBoard.UnreadMessage (message,person) select distinct message_id,person from UnreadMessage,User where user_id=id;
 

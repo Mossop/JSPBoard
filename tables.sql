@@ -23,7 +23,6 @@ CREATE TABLE Person (
 	title		VARCHAR(10),
 	firstnames	VARCHAR(30),
 	surname		VARCHAR(30),
-	fullname	VARCHAR(30),
 	email		VARCHAR(30),
 	nickname	VARCHAR(20),
 	homephone	VARCHAR(20),

@@ -88,6 +88,11 @@
 	</servlet>
 	
 	<servlet>
+		<servlet-name>FolderAdd</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.FolderAdd</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>FileUpload</servlet-name>
 		<servlet-class>com.blueprintit.jspboard.servlets.FileUpload</servlet-class>
 	</servlet>
@@ -145,6 +150,11 @@
 	<servlet-mapping>
 		<servlet-name>FolderDelete</servlet-name>
 		<url-pattern>/delete/folder</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>FolderAdd</servlet-name>
+		<url-pattern>/add/folder</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>

@@ -17,9 +17,17 @@
 				</tr>
 			</table>
 		</jspb:form>
+		<hr>
+		<jspb:form action="/add/folder">
+			<input type="hidden" name="parent" value='<%= folder.getField("id") %>'>
+			<input type="hidden" name="redirect" value='/view/folder.jsp?id=<%= folder.getField("id") %>'>
+			Create a subfolder: 
+			<input name="name">
+			<input type="submit" value="Create">
+		</jspb:form>
 		<% if (!folder.getField("parent").equals("-1")) { %>
 		<hr>
-		<jspb:form action="/delete/folder" action="post">
+		<jspb:form action="/delete/folder">
 			<input type="hidden" name="id" value='<%= folder.getField("id") %>'>
 			<input type="hidden" name="redirect" value='/view/folder.jsp?id=<%= folder.getField("parent") %>'>
 			<input type="submit" value="Delete Folder"> (This will only work if the folder contains no threads)
