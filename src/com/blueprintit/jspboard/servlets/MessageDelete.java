@@ -33,7 +33,7 @@ public class MessageDelete extends HttpServlet
 					conn.createStatement().executeUpdate("DELETE FROM File WHERE message="+id+";");
 					while (files.next())
 					{
-						(new File(getServletContext().getRealPath("/files/"+files.getString(1)))).delete();
+						(new File(getServletContext().getInitParameter("jspboard.Repository")+"/"+files.getString(1))).delete();
 					}
 					conn.createStatement().executeUpdate("DELETE FROM UnreadMessage WHERE message="+id+";");
 					conn.createStatement().executeUpdate("DELETE FROM EditedMessage WHERE message="+id+";");

@@ -56,6 +56,12 @@
 			<fileset dir="${outputdir}"/>
 			<fileset dir="${resdir}"/>
 		</jar>
+		<jar jarfile="${basedir}/output/${ant.project.name}.war">
+		  <fileset dir="${basedir}/webapp">
+			  <exclude name="**/CVS"/>
+				<exclude name="**/*~"/>
+			</fileset>
+		</jar>
 	</target>
 
 	<target name="docs" depends="setup" description="Extracts the documentation">

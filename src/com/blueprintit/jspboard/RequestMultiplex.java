@@ -36,7 +36,7 @@ public class RequestMultiplex extends HttpServletRequestWrapper
 		if ((content!=null)&&(content.startsWith("multipart/form-data;")))
 		{
 			multipart=true;
-			String path = context.getRealPath("/files");
+			String path = context.getInitParameter("jspboard.Repository");
 			try
 			{
 				mpr = new MultipartRequest(request,path,10000000,new DefaultFileRenamePolicy());

@@ -19,7 +19,7 @@ public class FileUpload extends HttpServlet
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		HttpSession session = request.getSession();
-		String path = getServletContext().getRealPath("/files");
+		String path = getServletContext().getInitParameter("jspboard.Repository");
 		MultipartRequest req = new MultipartRequest(request,path,10000000,new DefaultFileRenamePolicy());
 		String redirect = req.getParameter("redirect");
 		String message = req.getParameter("message");

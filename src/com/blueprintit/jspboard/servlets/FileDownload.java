@@ -18,7 +18,7 @@ public class FileDownload extends HttpServlet
 		response.setContentType(mimetype);
 		response.addHeader("Content-Disposition","attachment; filename=\""+name+"\"");
 		OutputStream out = response.getOutputStream();
-		ServletUtils.returnFile(getServletContext().getRealPath("/files/"+filename),out);
+		ServletUtils.returnFile(getServletContext().getInitParameter("jspboard.Repository")+"/"+filename,out);
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException

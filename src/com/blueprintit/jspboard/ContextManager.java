@@ -91,7 +91,7 @@ public class ContextManager implements HttpSessionListener, ServletContextListen
 		{
 			context.removeAttribute("jspboard.Contextmanager");
 			context.log("ContextManager: Context destroyed");
-			this.context=null;
+			context=null;
 			managers.clear();
 		}
 	}
@@ -100,11 +100,16 @@ public class ContextManager implements HttpSessionListener, ServletContextListen
 	public void sessionCreated(HttpSessionEvent e)
 	{
 		//context.log("ContextManager: Session created");
-		e.getSession().setAttribute("jspboard.Manager",new SessionSpy());
+		e.getSession().setAttribute("jspboard.Manager",new SessionSpy(e.getSession()));
 	}
 	
 	public void sessionDestroyed(HttpSessionEvent e)
 	{
 		//context.log("ContextManager: Session destroyed");
+		SessionSpy spy = (SessionSpy)e.getSession().getAttribute("jspboard.Manager");
+		if (spy!=null)
+		{
+			spy.sessionWillPassivate(e);
+		}
 	}
 }

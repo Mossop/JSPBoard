@@ -39,7 +39,7 @@ public class ThreadDelete extends HttpServlet
 					while (files.next())
 					{
 						conn.createStatement().executeUpdate("DELETE FROM File WHERE id="+files.getString(1)+";");
-						(new File(getServletContext().getRealPath("/files/"+files.getString(2)))).delete();
+						(new File(getServletContext().getInitParameter("jspboard.Repository")+"/"+files.getString(2))).delete();
 					}
 					conn.createStatement().executeUpdate("DELETE FROM Message WHERE thread="+id+";");
 					conn.createStatement().executeUpdate("DELETE FROM ThreadSubscriptions WHERE thread="+id+";");

@@ -10,15 +10,16 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 
-public class SessionSpy implements HttpSessionActivationListener, HttpSessionBindingListener, Serializable, Manager
+public class SessionSpy implements HttpSessionActivationListener, Serializable, Manager
 {
 	private String username;
 	private Connection dbconn;
 	private ContextManager manager;
 	private HttpSession session;
 		
-	public SessionSpy()
+	public SessionSpy(HttpSession session)
 	{
+		this.session=session;
 	}
 	
 	public void setUsername(String name)
@@ -54,7 +55,11 @@ public class SessionSpy implements HttpSessionActivationListener, HttpSessionBin
 				manager.addManager(this);
 			}
 		}
-		dbconn=manager.getConnection();
+		if (manager!=null)
+		{
+			dbconn=manager.getConnection();
+			session.getServletContext().log("SessionSpy: Database connection created");
+		}
 	}
 	
 	private void closeConnection(long time)
@@ -70,12 +75,17 @@ public class SessionSpy implements HttpSessionActivationListener, HttpSessionBin
 			catch (Exception e)
 			{
 			}
+			session.getServletContext().log("SessionSpy: Database connection closed");
 		}
 		dbconn=null;
 	}
 	
 	public Connection getDBConnection()
 	{
+		if (dbconn==null)
+		{
+			createConnection();
+		}
 		return dbconn;
 	}
 	
@@ -84,7 +94,6 @@ public class SessionSpy implements HttpSessionActivationListener, HttpSessionBin
 	{
 		session=e.getSession();
 		createConnection();
-		session.getServletContext().log("SessionSpy: Database connection created");
 		manager = (ContextManager)session.getServletContext().getAttribute("jspboard.ContextManager");
 		if (manager!=null)
 		{
@@ -100,38 +109,6 @@ public class SessionSpy implements HttpSessionActivationListener, HttpSessionBin
 			manager=null;
 		}
 		closeConnection(e.getSession().getLastAccessedTime());
-		e.getSession().getServletContext().log("SessionSpy: Database connection closed");
 		session=null;
-	}
-	
-	// session binding listener code
-	public void valueBound(HttpSessionBindingEvent e)
-	{
-		if ((e.getName().equals("jspboard.Manager"))&&(e.getValue()==this))
-		{
-			session=e.getSession();
-			manager=(ContextManager)session.getServletContext().getAttribute("jspboard.ContextManager");
-			createConnection();
-			e.getSession().getServletContext().log("SessionSpy: Database connection created");
-			if (manager!=null)
-			{
-				manager.addManager(this);
-			}
-		}		
-	}
-
-	public void valueUnbound(HttpSessionBindingEvent e)
-	{
-		if ((e.getName().equals("jspboard.Manager"))&&(e.getValue()==this))
-		{
-			if (manager!=null)
-			{
-				manager.removeManager(this);
-			}
-			closeConnection(e.getSession().getLastAccessedTime());
-			e.getSession().getServletContext().log("SessionSpy: Database connection closed");
-			session=null;
-			manager=null;
-		}
 	}
 }

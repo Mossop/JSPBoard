@@ -30,7 +30,7 @@ public class FileDelete extends HttpServlet
 				if ((results.next())||(request.isUserInRole("admin"))||(request.isUserInRole("messageadmin")))
 				{
 					conn.createStatement().executeUpdate("DELETE FROM File WHERE id="+id+";");
-					(new File(getServletContext().getRealPath("/files/"+results.getString(2)))).delete();
+					(new File(getServletContext().getInitParameter("jspboard.Repository")+"/"+results.getString(2))).delete();
 					response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+redirect));
 				}
 				else
