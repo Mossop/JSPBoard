@@ -31,21 +31,7 @@
 					</jspb:secure>
 				</td>
 				<td>
-					<%
-						SessionHandler handler = (SessionHandler)pageContext.findAttribute("jspboard.SessionHandler");
-						if (handler.isLoggedIn(login.getField("id")))
-						{
-					%>
-						Logged in
-					<%
-						}
-						else
-						{
-					%>
-						<%= login.getDate("lastaccess") %>
-					<%
-						}
-					%>
+					<%= login.getDate("lastaccess") %>
 				</td>
 				<td>
 					<jspb:SelectPerson id='<%= login.getField("person") %>' var="person">

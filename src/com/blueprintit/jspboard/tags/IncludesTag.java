@@ -2,6 +2,7 @@ package com.blueprintit.jspboard.tags;
 
 import javax.servlet.jsp.tagext.TagSupport;
 import javax.servlet.http.HttpServletRequest;
+import com.blueprintit.jspboard.Manager;
 
 public class IncludesTag extends TagSupport
 {
@@ -9,7 +10,12 @@ public class IncludesTag extends TagSupport
 	{
 		try
 		{
-			pageContext.getSession().setAttribute("jspboard.user",((HttpServletRequest)pageContext.getRequest()).getRemoteUser());
+			String user = ((HttpServletRequest)pageContext.getRequest()).getRemoteUser();
+			Manager manager = (Manager)pageContext.findAttribute("jspboard.Manager");
+			if ((user!=null)&&(manager!=null))
+			{
+				manager.setUsername(user);
+			}
 			pageContext.include("/include/header.jsp");
 			pageContext.setAttribute("context",((HttpServletRequest)pageContext.getRequest()).getContextPath());
 			return EVAL_BODY_INCLUDE;

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import com.blueprintit.jspboard.Manager;
 import com.blueprintit.jspboard.servlets.convert.Convertor;
 
 public class Password extends HttpServlet
@@ -29,7 +30,7 @@ public class Password extends HttpServlet
 			}
 			if ((oldpw!=null)&&(pw1!=null)&&(pw2!=null)&&(pw1.equals(pw2)))
 			{
-				Connection conn = (Connection)request.getSession().getAttribute("jspboard.DBConnection");
+				Connection conn = ((Manager)request.getSession().getAttribute("jspboard.Manager")).getDBConnection();
 				Convertor pass = Convertor.getConvertor("MD5PASS");
 				oldpw=pass.convert(oldpw);
 				ResultSet results = conn.createStatement().executeQuery("SELECT password FROM Login WHERE id='"+request.getRemoteUser()+"';");

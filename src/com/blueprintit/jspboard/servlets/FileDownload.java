@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.io.OutputStream;
 import com.oreilly.servlet.ServletUtils;
+import com.blueprintit.jspboard.Manager;
 
 public class FileDownload extends HttpServlet
 {
@@ -24,7 +25,7 @@ public class FileDownload extends HttpServlet
 	{
 		try
 		{
-			Connection conn = (Connection)request.getSession().getAttribute("jspboard.DBConnection");
+			Connection conn = ((Manager)request.getSession().getAttribute("jspboard.Manager")).getDBConnection();
 			String id = request.getParameter("id");
 			ResultSet results;
 			if (id==null)

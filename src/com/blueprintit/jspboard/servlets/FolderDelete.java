@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.io.File;
+import com.blueprintit.jspboard.Manager;
 import com.blueprintit.jspboard.servlets.convert.Convertor;
 
 public class FolderDelete extends HttpServlet
@@ -26,7 +27,7 @@ public class FolderDelete extends HttpServlet
 			{
 				if ((request.isUserInRole("boardadmin"))||(request.isUserInRole("admin")))
 				{
-					Connection conn = (Connection)request.getSession().getAttribute("jspboard.DBConnection");
+					Connection conn = ((Manager)request.getSession().getAttribute("jspboard.Manager")).getDBConnection();
 					ResultSet results = conn.createStatement().executeQuery("SELECT id FROM Thread WHERE folder="+id+";");
 					if (results.next())
 					{

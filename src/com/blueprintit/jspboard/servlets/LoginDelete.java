@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.io.File;
+import com.blueprintit.jspboard.Manager;
 import com.blueprintit.jspboard.servlets.convert.Convertor;
 
 public class LoginDelete extends HttpServlet
@@ -26,7 +27,7 @@ public class LoginDelete extends HttpServlet
 			{
 				if ((request.isUserInRole("loginadmin"))||(request.isUserInRole("admin")))
 				{
-					Connection conn = (Connection)request.getSession().getAttribute("jspboard.DBConnection");
+					Connection conn = ((Manager)request.getSession().getAttribute("jspboard.Manager")).getDBConnection();
 					conn.createStatement().executeUpdate("DELETE FROM Login WHERE id='"+id+"';");
 					conn.createStatement().executeUpdate("DELETE FROM UserGroup WHERE id='"+id+"';");
 					response.sendRedirect(request.getContextPath()+redirect);

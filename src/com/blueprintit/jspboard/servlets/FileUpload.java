@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.io.IOException;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.blueprintit.jspboard.Manager;
 
 public class FileUpload extends HttpServlet
 {
@@ -23,7 +24,7 @@ public class FileUpload extends HttpServlet
 		String redirect = req.getParameter("redirect");
 		String message = req.getParameter("message");
 		String description = req.getParameter("description");
-		Connection conn = (Connection)session.getAttribute("jspboard.DBConnection");
+		Connection conn = ((Manager)session.getAttribute("jspboard.Manager")).getDBConnection();
 		if (description==null)
 		{
 			description="";

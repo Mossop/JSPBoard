@@ -4,6 +4,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 import javax.servlet.jsp.tagext.Tag;
 import java.sql.Connection;
 import com.blueprintit.jspboard.DBResults;
+import com.blueprintit.jspboard.Manager;
 
 public abstract class DBResultTag extends TagSupport
 {
@@ -60,7 +61,7 @@ public abstract class DBResultTag extends TagSupport
 		try
 		{
 			String query = generateQuery();
-			Connection conn = (Connection)pageContext.findAttribute("jspboard.DBConnection");
+			Connection conn = ((Manager)pageContext.findAttribute("jspboard.Manager")).getDBConnection();
 			if (conn!=null)
 			{
 				results = new DBResults(conn.createStatement().executeQuery(query),this);

@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.StringTokenizer;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import com.blueprintit.jspboard.Manager;
 
 public class SecureTag extends TagSupport
 {
@@ -34,7 +35,7 @@ public class SecureTag extends TagSupport
 			}
 			if (person!=null)
 			{
-				Connection conn = (Connection)pageContext.findAttribute("jspboard.DBConnection");
+				Connection conn = ((Manager)pageContext.findAttribute("jspboard.Manager")).getDBConnection();
 				if (conn!=null)
 				{
 					ResultSet results = conn.createStatement().executeQuery("SELECT person FROM Login WHERE id='"+request.getRemoteUser()+"' AND person="+person+";");

@@ -2,6 +2,7 @@ package com.blueprintit.jspboard.tags;
 
 import java.sql.ResultSet;
 import java.sql.Connection;
+import com.blueprintit.jspboard.Manager;
 
 public class SelectMessageTag extends DBResultTag
 {
@@ -95,7 +96,7 @@ public class SelectMessageTag extends DBResultTag
 		{
 			try
 			{
-				Connection conn = (Connection)pageContext.findAttribute("jspboard.DBConnection");
+				Connection conn = ((Manager)pageContext.findAttribute("jspboard.Manager")).getDBConnection();
 				ResultSet msgs = conn.createStatement().executeQuery(lister);
 				while (msgs.next())
 				{

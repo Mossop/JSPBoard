@@ -14,8 +14,9 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import com.blueprintit.jspboard.servlets.convert.Convertor;
-import com.blueprintit.jspboard.SessionHandler;
 import com.blueprintit.jspboard.RequestMultiplex;
+import com.blueprintit.jspboard.Manager;
+import com.blueprintit.jspboard.ContextManager;
 
 public abstract class TableModify extends HttpServlet
 {
@@ -23,7 +24,7 @@ public abstract class TableModify extends HttpServlet
 	
 	private void prepareFields() throws Exception
 	{
-		Connection conn = SessionHandler.newConnection();
+		Connection conn = ((ContextManager)getServletContext().getAttribute("jsboard.ContextManager")).getConnection();
 		prepareFields(conn);
 		conn.close();
 	}
@@ -79,7 +80,7 @@ public abstract class TableModify extends HttpServlet
 		try
 		{
 			RequestMultiplex request = new RequestMultiplex(req,getServletContext());
-			Connection conn = (Connection)request.getSession().getAttribute("jspboard.DBConnection");
+			Connection conn = ((Manager)request.getSession().getAttribute("jspboard.Manager")).getDBConnection();
 			Enumeration loop = request.getParameterNames();
 			Map updates = new HashMap();
 			boolean valid=true;

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.io.File;
+import com.blueprintit.jspboard.Manager;
 import com.blueprintit.jspboard.servlets.convert.Convertor;
 
 public class MessageDelete extends HttpServlet
@@ -24,7 +25,7 @@ public class MessageDelete extends HttpServlet
 			String redirect = request.getParameter("redirect");
 			if ((id!=null)&&(redirect!=null))
 			{
-				Connection conn = (Connection)request.getSession().getAttribute("jspboard.DBConnection");
+				Connection conn = ((Manager)request.getSession().getAttribute("jspboard.Manager")).getDBConnection();
 				ResultSet results = conn.createStatement().executeQuery("SELECT Login.id FROM Login,Message WHERE Login.person=Message.owner AND Login.id='"+request.getRemoteUser()+"';");
 				if ((request.isUserInRole("admin"))||(request.isUserInRole("messageadmin"))||(results.next()))
 				{

@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import com.blueprintit.jspboard.DBResults;
+import com.blueprintit.jspboard.Manager;
 import com.blueprintit.jspboard.FolderInfo;
 
 public class FolderTreeTag extends TagSupport
@@ -74,8 +75,9 @@ public class FolderTreeTag extends TagSupport
 	{
 		try
 		{
-			String user = (String)pageContext.findAttribute("jspboard.user");
-			conn = (Connection)pageContext.findAttribute("jspboard.DBConnection");
+			Manager manager = (Manager)pageContext.findAttribute("jspboard.Manager");
+			String user = manager.getUsername();
+			conn = manager.getDBConnection();
 			ResultSet rs = conn.createStatement().executeQuery("SELECT person FROM Login WHERE id='"+user+"';");
 			rs.next();
 			String person = rs.getString(1);

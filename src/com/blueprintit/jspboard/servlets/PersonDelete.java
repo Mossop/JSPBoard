@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.io.File;
+import com.blueprintit.jspboard.Manager;
 import com.blueprintit.jspboard.servlets.convert.Convertor;
 
 public class PersonDelete extends HttpServlet
@@ -26,7 +27,7 @@ public class PersonDelete extends HttpServlet
 			{
 				if ((request.isUserInRole("contactadmin"))||(request.isUserInRole("admin")))
 				{
-					Connection conn = (Connection)request.getSession().getAttribute("jspboard.DBConnection");
+					Connection conn = ((Manager)request.getSession().getAttribute("jspboard.Manager")).getDBConnection();
 					conn.createStatement().executeUpdate("DELETE FROM Person WHERE id="+id+";");
 					conn.createStatement().executeUpdate("DELETE FROM UnreadMessage WHERE person="+id+";");
 					conn.createStatement().executeUpdate("DELETE FROM Login WHERE person="+id+";");

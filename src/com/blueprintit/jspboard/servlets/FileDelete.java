@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.io.File;
 import com.blueprintit.jspboard.servlets.convert.Convertor;
+import com.blueprintit.jspboard.Manager;
 
 public class FileDelete extends HttpServlet
 {
@@ -24,7 +25,7 @@ public class FileDelete extends HttpServlet
 			String redirect = request.getParameter("redirect");
 			if ((id!=null)&&(redirect!=null))
 			{
-				Connection conn = (Connection)request.getSession().getAttribute("jspboard.DBConnection");
+				Connection conn = ((Manager)request.getSession().getAttribute("jspboard.Manager")).getDBConnection();
 				ResultSet results = conn.createStatement().executeQuery("SELECT Login.id,File.filename FROM Login,Message,File WHERE Login.person=Message.owner AND Message.id=File.message AND File.id="+id+" AND Login.id='"+request.getRemoteUser()+"';");
 				if ((results.next())||(request.isUserInRole("admin"))||(request.isUserInRole("messageadmin")))
 				{

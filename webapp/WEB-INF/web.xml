@@ -7,13 +7,15 @@
 <web-app>
 
 	<listener>
-		<listener-class>com.blueprintit.jspboard.SessionHandler</listener-class>
+		<listener-class>com.blueprintit.jspboard.ContextManager</listener-class>
 	</listener>
-	
+
+	<!--
 	<servlet>
 		<servlet-name>SessionViewer</servlet-name>
 		<servlet-class>com.blueprintit.jspboard.servlets.SessionView</servlet-class>
 	</servlet>
+	-->
 	
 	<servlet>
 		<servlet-name>RequestInfo</servlet-name>
@@ -195,10 +197,12 @@
 		<url-pattern>/update/folder</url-pattern>
 	</servlet-mapping>
 	
+	<!--
 	<servlet-mapping>
 		<servlet-name>SessionViewer</servlet-name>
 		<url-pattern>/sessions</url-pattern>
 	</servlet-mapping>
+	-->
 	
 	<servlet-mapping>
 		<servlet-name>FileDownload</servlet-name>
@@ -211,7 +215,7 @@
 	</servlet-mapping>
 
   <session-config>
-    <session-timeout>10</session-timeout>
+    <session-timeout>5</session-timeout>
   </session-config>
 
   <welcome-file-list>
