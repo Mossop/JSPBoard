@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.ServletContext;
 import javax.naming.InitialContext;
 import javax.naming.Context;
-import javax.sql.DataSource;
+import java.sql.DriverManager;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +27,13 @@ public class ContextManager implements HttpSessionListener, ServletContextListen
 	{
 		users = Collections.synchronizedMap(new HashMap());
 		sessions = Collections.synchronizedList(new ArrayList());
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch (Exception e)
+		{
+		}
 	}
 	
 	public boolean isLoggedIn(String id)
@@ -43,10 +50,7 @@ public class ContextManager implements HttpSessionListener, ServletContextListen
 	{
 		try
 		{
-			Context initCtx = new InitialContext();
-			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			DataSource ds = (DataSource)envCtx.lookup("jdbc/JSPBoardDB");
-			return ds.getConnection();
+			return DriverManager.getConnection("jdbc:mysql://localhost/JSPBoard","JSPBoard","jspb379");
 		}
 		catch (Exception e)
 		{

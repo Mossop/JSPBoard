@@ -20,6 +20,7 @@
     	</tr>
     	<tr>
 				<td>
+					<p>Please enter your username and password to login to the board.</p>
 					<form action="j_security_check" method="post">
 						<table align=center>
 							<tr>

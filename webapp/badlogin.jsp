@@ -19,8 +19,31 @@
       	</td>
     	</tr>
     	<tr>
-    		<td>Bugger!</td>
-    	</tr>
+				<td>
+					<p><b>Could not log you in. Maybe you entered your username or password wrong.</b></p>
+					<form action="j_security_check" method="post">
+						<table align=center>
+							<tr>
+								<td>Username:</td>
+								<td>
+									<input type="text" name="j_username" value="">
+								</td>
+							</tr>
+							<tr>
+								<td>Password:</td>
+								<td>
+									<input type="password" name="j_password" value="">
+								</td>
+							</tr>
+							<tr>
+				  			<td colspan=2 align=center>
+							  	<input type="submit" value="Login">
+								</td>
+							</tr>
+						</table>
+				  </form>
+				</td>
+			</tr>
 		</table>
 	</body>
 </html>
