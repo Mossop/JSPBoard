@@ -1,6 +1,7 @@
 <%@ taglib uri="/WEB-INF/jspboard.tld" prefix="jspb" %>
 
-<jspb:SelectThread var="thread" id='<%= request.getParameter("id") %>'>
+<jspb:SelectLogin var="login" id="<%= request.getRemoteUser() %>">
+<jspb:SelectThread var="thread" id='<%= request.getParameter("id") %>' checkSubscriptions='<%= login.getField("person") %>'>
 	<%
 		request.setAttribute("folder",thread.getField("folder"));
 	%>
@@ -19,6 +20,27 @@
 					</jspb:secure>
         </td>
       </tr>
+      <% if (!thread.getField("subscriptions").equals("0")) { %>
+      <tr>
+      	<td valign="top" align="right" colspan="2">
+		      <jspb:link href="/threadunsubscribe">
+		        <jspb:param name="thread"><%= thread.getField("id") %></jspb:param>
+		        <jspb:param name="redirect">/view/thread.jsp?id=<%= thread.getField("id") %></jspb:param>
+						Unsubscribe from this thread
+					</jspb:link>
+      	</td>
+      </tr>
+      <% } else { %>
+      <tr>
+      	<td valign="top" align="right" colspan="2">
+		      <jspb:link href="/threadsubscribe">
+		        <jspb:param name="thread"><%= thread.getField("id") %></jspb:param>
+		        <jspb:param name="redirect">/view/thread.jsp?id=<%= thread.getField("id") %></jspb:param>
+						Subscribe to this thread
+					</jspb:link>
+      	</td>
+      </tr>
+      <% } %>
       <tr>
       	<td valign="top" align="right" colspan="2">
         	<jspb:link href="/view/printable.jsp">
@@ -30,7 +52,6 @@
       <tr>
       	<td align="center" colspan="2" width="578">
       		<% boolean foundfirst=false; %>
-      		<jspb:SelectLogin var="login" id="<%= request.getRemoteUser() %>">
       		<jspb:SelectMessage var="msg" thread='<%= thread.getField("id") %>' checkUnread='<%= login.getField("person") %>'>
 						<jspb:window>
 							<jspb:header>
@@ -152,7 +173,6 @@
 	          </jspb:window>
 	          <br>
 	        </jspb:SelectMessage>
-	        </jspb:SelectLogin>
         </td>
       </tr>
       <jspb:secure groups="messageadd">
@@ -199,3 +219,4 @@
     </table>
 	</jspb:includes>
 </jspb:SelectThread>
+</jspb:SelectLogin>

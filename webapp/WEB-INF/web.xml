@@ -18,6 +18,16 @@
 	-->
 	
 	<servlet>
+		<servlet-name>ThreadSubscribe</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.ThreadSubscribe</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>ThreadUnsubscribe</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.ThreadUnsubscribe</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>RequestInfo</servlet-name>
 		<servlet-class>com.blueprintit.jspboard.servlets.RequestInfo</servlet-class>
 	</servlet>
@@ -136,6 +146,16 @@
 		<servlet-name>FileDownload</servlet-name>
 		<servlet-class>com.blueprintit.jspboard.servlets.FileDownload</servlet-class>
 	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ThreadSubscribe</servlet-name>
+		<url-pattern>/threadsubscribe</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>ThreadUnsubscribe</servlet-name>
+		<url-pattern>/threadunsubscribe</url-pattern>
+	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>Logout</servlet-name>

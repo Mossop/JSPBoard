@@ -42,6 +42,7 @@ public class ThreadDelete extends HttpServlet
 						(new File(getServletContext().getRealPath("/files/"+files.getString(2)))).delete();
 					}
 					conn.createStatement().executeUpdate("DELETE FROM Message WHERE thread="+id+";");
+					conn.createStatement().executeUpdate("DELETE FROM ThreadSubscriptions WHERE thread="+id+";");
 					conn.createStatement().executeUpdate("DELETE FROM Thread WHERE id="+id+";");
 					response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+redirect));
 				}

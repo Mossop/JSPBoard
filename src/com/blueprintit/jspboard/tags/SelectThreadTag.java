@@ -4,6 +4,7 @@ public class SelectThreadTag extends DBResultTag
 {
 	private String folder;
 	private String owner;
+	private String checksubscription;
 	private String order = "created";
 	private String countunread;
 	
@@ -30,6 +31,11 @@ public class SelectThreadTag extends DBResultTag
 	public void setCountUnread(String value)
 	{
 		countunread=value;
+	}
+	
+	public void setCheckSubscriptions(String value)
+	{
+		checksubscription=value;
 	}
 	
 	public String getCountUnread()
@@ -74,6 +80,11 @@ public class SelectThreadTag extends DBResultTag
 		if (countunread!=null)
 		{
 			where.insert(0,"SELECT Thread.*,COUNT(person) AS unreadcount FROM Thread,Message LEFT JOIN UnreadMessage ON UnreadMessage.message=Message.id AND UnreadMessage.person="+countunread);
+			where.append(" GROUP BY Thread.id ORDER BY "+order+";");
+		}
+		else if (checksubscription!=null)
+		{
+			where.insert(0,"SELECT Thread.*,COUNT(person) AS subscriptions FROM Thread LEFT JOIN ThreadSubscriptions ON Thread.id=ThreadSubscriptions.thread AND ThreadSubscriptions.person="+checksubscription);
 			where.append(" GROUP BY Thread.id ORDER BY "+order+";");
 		}
 		else

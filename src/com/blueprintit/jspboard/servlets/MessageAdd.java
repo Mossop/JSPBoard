@@ -131,6 +131,42 @@ public class MessageAdd extends TableAdd
 		}
 	}
 	
+	private void sendSubscriptionEmails(Connection conn, Map updates, HttpServletRequest request)
+	{
+		try
+		{
+			ResultSet name = conn.createStatement().executeQuery("SELECT name FROM Thread WHERE id="+updates.get("thread")+";");
+			name.next();
+			String threadname = name.getString(1);
+	
+			name = conn.createStatement().executeQuery("SELECT CONCAT(title,' ',firstnames,' ',surname) AS fullname,email FROM Person,Login WHERE Person.id=Login.person AND Login.id='"+request.getRemoteUser()+"';");
+			name.next();
+			String person = name.getString(1);
+			String email = name.getString(2);
+				
+			StringBuffer messageheader = new StringBuffer("A message has been posted in the thread ");
+			messageheader.append("\""+threadname+"\" which you are subscribed to ");
+			messageheader.append(" by "+person+".");
+			
+			StringBuffer messagetext = new StringBuffer(request.getParameter("content"));
+			StringBuffer messagefooter = new StringBuffer("If you wish to reply to this message on the bulletin board, please click the following link:\n\n");
+			messagefooter.append("http://www.blueprintit.co.uk"+request.getContextPath()+"/view/thread.jsp?id="+updates.get("thread")+"#unread");
+	
+			Map addresses = new HashMap();
+			ResultSet emails = conn.createStatement().executeQuery("SELECT DISTINCT CONCAT(title,' ',firstnames,' ',surname) AS fullname,email FROM Person,Login,ThreadSubscriptions WHERE Person.id=Login.person AND Person.id=ThreadSubscriptions.person AND ThreadSubscriptions.thread="+updates.get("thread")+" AND Login.id!='"+request.getRemoteUser()+"';");
+			while (emails.next())
+			{
+				addresses.put(emails.getString(2),emails.getString(1));
+			}
+			
+			Email.sendMailshot(messageheader.toString(),messagefooter.toString(),request.getParameter("content"),"IEE WSWYM Bulletin board message: "+threadname,"walessw_ym@iee.org","IEE WSWYM Bulletin Board",addresses);
+		}
+		catch (Exception e)
+		{
+			log("Error mailing subscriptions",e);
+		}
+	}
+	
 	protected void postModification(Connection conn, Map updates, HttpServletRequest request, ResultSet keys) throws SQLException
 	{
 		keys.next();
@@ -160,5 +196,6 @@ public class MessageAdd extends TableAdd
 		{
 			sendEmail(conn,updates,request);
 		}
+		sendSubscriptionEmails(conn,updates,request);
 	}
 }

@@ -46,7 +46,7 @@ public class Stylise
 	
 	private static String linkUrl(String line)
 	{
-		Pattern urlreg = Pattern.compile("((.*\\s)|(^))(https?://[\\w\\./:\\?=&#]*)(($)|(\\s.*$))");
+		Pattern urlreg = Pattern.compile("((.*\\s)|(^))(https?://[\\w\\./:\\?=&#~]*)(($)|(\\s.*$))");
 		Matcher match = urlreg.matcher(line);
 		if (match.matches())
 		{
@@ -66,7 +66,7 @@ public class Stylise
 			Matcher match = smlreg.matcher(line);
 			if (match.matches())
 			{
-				return applySmiley(smiley,match.group(1),img)+"<img src=\"../images/smileys/"+img+"\">"+applySmiley(smiley,match.group(5),img);
+				return applySmiley(smiley,match.group(1),img)+"<img src=\"../images/smileys/"+img+"\" alt=\""+smiley+"\" title=\""+smiley+"\">"+applySmiley(smiley,match.group(5),img);
 			}
 			else
 			{
@@ -82,7 +82,7 @@ public class Stylise
 	private static String applySmilies(String line)
 	{
 		line=applySmiley(":)",line,"01.gif");
-		line=applySmiley(";(",line,"02.gif");
+		line=applySmiley(":(",line,"02.gif");
 		line=applySmiley(";)",line,"03.gif");
 		line=applySmiley(":D",line,"04.gif");
 		line=applySmiley(";;)",line,"05.gif");
