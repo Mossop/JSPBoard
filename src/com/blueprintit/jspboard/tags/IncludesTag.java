@@ -15,11 +15,12 @@ public class IncludesTag extends TagSupport
 		}
 		catch (Exception e)
 		{
+			pageContext.getServletContext().log("IncludesTag: Exception",e);
 			return SKIP_BODY;
 		}
 	}
 	
-	public int getEndTag()
+	public int doEndTag()
 	{
 		try
 		{
@@ -28,6 +29,7 @@ public class IncludesTag extends TagSupport
 		}
 		catch (Exception e)
 		{
+			pageContext.getServletContext().log("IncludesTag: Exception",e);
 			return SKIP_PAGE;
 		}
 	}

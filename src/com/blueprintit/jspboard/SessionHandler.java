@@ -2,21 +2,25 @@ package com.blueprintit.jspboard;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.ServletContext;
+import java.util.Date;
 import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.sql.DriverManager;
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
 
 public class SessionHandler
 {
 	private ServletContext context;
 	private List sessions;
+	private SimpleDateFormat mysqldate;
 	
 	public SessionHandler()
 	{
 		sessions = Collections.synchronizedList(new ArrayList());
+		mysqldate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
@@ -39,6 +43,7 @@ public class SessionHandler
 		}
 		catch (Exception e)
 		{
+			context.log("SessionHandler: Could not establish db connection");
 			return null;
 		}
 	}
@@ -51,20 +56,27 @@ public class SessionHandler
 	
 	private void stopSession(HttpSession session)
 	{
-		Connection conn = (Connection)session.getAttribute("jspboard.DBConnection");
-		Object user=session.getAttribute("jspboard.user");
-		try
+		if (session!=null)
 		{
-			if (user!=null)
+			Connection conn = (Connection)session.getAttribute("jspboard.DBConnection");
+			Object user=session.getAttribute("jspboard.user");
+			try
 			{
-				conn.createStatement().executeUpdate("UPDATE Login SET lastaccess=NOW() WHERE id='"+user+"';");
+				if (user!=null)
+				{
+					conn.createStatement().executeUpdate("UPDATE Login SET lastaccess='"+mysqldate.format(new Date(session.getLastAccessedTime()))+"' WHERE id='"+user+"';");
+				}
+				conn.close();
 			}
-			conn.close();
+			catch (Exception e)
+			{
+			}
+			context.log("SessionHandler: Session destroyed");
 		}
-		catch (Exception e)
+		else
 		{
+			context.log("SessionHandler: Error trying to stop null session");
 		}
-		context.log("SessionHandler: Session destroyed");
 	}
 	
 	public void sessionCreated(HttpSession session)
@@ -88,11 +100,11 @@ public class SessionHandler
 	public void contextDestroyed(ServletContext context)
 	{
 		context.log("SessionHandler: Context destroyed");
-		this.context=null;
 		Iterator loop = sessions.iterator();
 		while (loop.hasNext())
 		{
 			stopSession((HttpSession)loop.next());
 		}
+		this.context=null;
 	}
 }
