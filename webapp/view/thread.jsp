@@ -20,6 +20,14 @@
         </td>
       </tr>
       <tr>
+      	<td valign="top" align="right" colspan="2">
+        	<jspb:link href="/view/printable.jsp">
+        		<jspb:param name="id"><%= thread.getField("id") %></jspb:param>
+        		Printable view
+        	</jspb:link>
+      	</td>
+      </tr>
+      <tr>
       	<td align="center" colspan="2" width="578">
       		<% boolean foundfirst=false; %>
       		<jspb:SelectLogin var="login" id="<%= request.getRemoteUser() %>">
