@@ -61,6 +61,11 @@
 	</servlet>
 	
 	<servlet>
+		<servlet-name>PersonDelete</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.PersonDelete</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>LoginAdd</servlet-name>
 		<servlet-class>com.blueprintit.jspboard.servlets.LoginAdd</servlet-class>
 	</servlet>
@@ -153,6 +158,11 @@
 	<servlet-mapping>
 		<servlet-name>PersonAdd</servlet-name>
 		<url-pattern>/add/person</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>PersonDelete</servlet-name>
+		<url-pattern>/delete/person</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>

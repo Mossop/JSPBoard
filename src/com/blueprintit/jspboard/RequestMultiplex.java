@@ -32,7 +32,8 @@ public class RequestMultiplex extends HttpServletRequestWrapper
 	{
 		super(request);
 		context=cntxt;
-		if (request.getHeader("content-type").startsWith("multipart/form-data;"))
+		String content = request.getHeader("content-type");
+		if ((content!=null)&&(content.startsWith("multipart/form-data;")))
 		{
 			multipart=true;
 			String path = context.getRealPath("/files");

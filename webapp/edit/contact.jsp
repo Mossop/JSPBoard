@@ -2,7 +2,20 @@
 
 <jspb:SelectPerson var="person" id='<%= request.getParameter("id") %>'>
 	<jspb:includes>
-		<h1>Editing <%= person.getField("fullname") %></h1>
+		<table>
+			<tr>
+				<td>
+					<h1>Editing <%= person.getField("fullname") %></h1>
+				</td>
+				<td align="right">
+					<form action="<%= context %>/delete/person" method="post">
+						<input type="hidden" name="id" value='<%= person.getField("id") %>'>
+						<input type="hidden" name="redirect" value="/view/contacts.jsp">
+						<input type="submit" value="Delete">
+					</form>
+				</td>
+			</tr>
+		</table>
 		<form action="<%= context %>/update/person" method="post">
 			<input type="hidden" name="id" value='<%= person.getField("id") %>'>
 			<input type="hidden" name="redirect" value='/view/contact.jsp?id=<%= person.getField("id") %>'>
@@ -52,7 +65,7 @@
 	  	<form action="<%= context %>/add/login">
 	  		<input type="hidden" name="redirect" value='/view/contact.jsp?id=<%= person.getField("id") %>'>
 	  		<input type="hidden" name="person" value='<%= person.getField("id") %>'>
-	  		Username: <input type="text" name="id">
+	  		Username: <input type="text" name="id"><br>
 	  		Password: <input type="test" name="password">
 	  		<input type="submit" value="Add">
 	  	</form>
