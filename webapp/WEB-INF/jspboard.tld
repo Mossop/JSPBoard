@@ -20,6 +20,32 @@
   	<name>includes</name>
   	<tag-class>com.blueprintit.jspboard.tags.IncludesTag</tag-class>
   	<body-content>JSP</body-content>
+  	<variable>
+  		<name-given>context</name-given>
+  		<variable-class>java.lang.String</variable-class>
+  		<declare>true</declare>
+  		<scope>NESTED</scope>
+  	</variable>
+  </tag>
+	<tag>
+    <name>window</name>
+    <tag-class>com.blueprintit.jspboard.tags.WindowTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <name>borderSize</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+	<tag>
+    <name>header</name>
+    <tag-class>com.blueprintit.jspboard.tags.WindowHeaderTag</tag-class>
+    <body-content>JSP</body-content>
+  </tag>
+	<tag>
+    <name>footer</name>
+    <tag-class>com.blueprintit.jspboard.tags.WindowFooterTag</tag-class>
+    <body-content>JSP</body-content>
   </tag>
   <tag>
   	<name>FolderTree</name>

@@ -2,6 +2,11 @@
 
 <%
 	String context = ((HttpServletRequest)request).getContextPath();
+	String folder = (String)pageContext.findAttribute("folder");
+	if (folder==null)
+	{
+		folder="-1";
+	}
 %>
 
 <html>
@@ -21,13 +26,13 @@
           <table>
             <tr>
               <td>
-                <a href="index.jsp">Announcements</a>
+                <a href="<%= context %>\view\folder.jsp">Announcements</a>
               </td>
               <td>
-                <a href="contacts.jsp">Contacts</a>
+                <a href="<%= context %>\view\contacts.jsp">Contacts</a>
               </td>
               <td>
-                <a href="users.jsp">Users</a>
+                <a href="<%= context %>\view\users.jsp">Users</a>
               </td>
             </tr>
           </table>
@@ -50,10 +55,18 @@
 												<td colspan="<%= depth %>"></td>
 											<% } %>
 											<td colspan="1">
-												<a href=""><img align="top" src="images/closedfolder.gif"></a>
+												<% if (folder.equals(id)) { %>
+													<a href="<%= context %>/view/folder.jsp?id=<%= id %>"><img align="top" src="<%= context %>/images/openfolder.gif"></a>
+												<% } else { %>
+													<a href="<%= context %>/view/folder.jsp?id=<%= id %>"><img align="top" src="<%= context %>/images/closedfolder.gif"></a>
+												<% } %>
 											</td>
 											<td colspan="<%= Integer.parseInt(maxdepth)-Integer.parseInt(depth)+1 %>">
-												<a class="closedfolder" href=""><%= name %></a>
+												<% if (folder.equals(id)) { %>
+													<a class="openfolder" href="<%= context %>/view/folder.jsp?id=<%= id %>"><%= name %></a>
+												<% } else { %>
+													<a class="closedfolder" href="<%= context %>/view/folder.jsp?id=<%= id %>"><%= name %></a>
+												<% } %>
 											</td>
 										</tr>
 	              	</jspb:FolderTree>

@@ -11,6 +11,7 @@ public class IncludesTag extends TagSupport
 		{
 			pageContext.getSession().setAttribute("jspboard.user",((HttpServletRequest)pageContext.getRequest()).getRemoteUser());
 			pageContext.include("/include/header.jsp");
+			pageContext.setAttribute("context",((HttpServletRequest)pageContext.getRequest()).getContextPath());
 			return EVAL_BODY_INCLUDE;
 		}
 		catch (Exception e)
