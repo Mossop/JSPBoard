@@ -24,15 +24,21 @@
   <tag>
   	<name>dbquery</name>
   	<tag-class>com.blueprintit.jspboard.tags.DBQueryTag</tag-class>
+  	<tei-class>com.blueprintit.jspboard.tags.DBResultTEI</tei-class>
   	<body-content>JSP</body-content>
     <attribute>
       <name>query</name>
       <required>true</required>
       <rtexprvalue>true</rtexprvalue>
     </attribute>
+  	<attribute>
+  		<name>var</name>
+  		<required>false</required>
+  		<rtexprvalue>false</rtexprvalue>
+  	</attribute>
   </tag>
   <tag>
-  	<name>field</name>
+  	<name>GetField</name>
   	<tag-class>com.blueprintit.jspboard.tags.GetFieldTag</tag-class>
   	<body-content>JSP</body-content>
     <attribute>
@@ -44,13 +50,13 @@
   <tag>
   	<name>SelectFolder</name>
   	<tag-class>com.blueprintit.jspboard.tags.SelectFolderTag</tag-class>
-  	<tei-class>com.blueprintit.jspboard.tags.FolderTableTEI</tei-class>
+  	<tei-class>com.blueprintit.jspboard.tags.DBResultTEI</tei-class>
   	<body-content>JSP</body-content>
-    <attribute>
-      <name>id</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-    </attribute>
+  	<attribute>
+  		<name>var</name>
+  		<required>false</required>
+  		<rtexprvalue>false</rtexprvalue>
+  	</attribute>
     <attribute>
       <name>parentId</name>
       <required>false</required>
@@ -61,17 +67,22 @@
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
     </attribute>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
   </tag>
   <tag>
   	<name>SelectThread</name>
   	<tag-class>com.blueprintit.jspboard.tags.SelectThreadTag</tag-class>
-  	<tei-class>com.blueprintit.jspboard.tags.ThreadTableTEI</tei-class>
+  	<tei-class>com.blueprintit.jspboard.tags.DBResultTEI</tei-class>
   	<body-content>JSP</body-content>
-    <attribute>
-      <name>id</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-    </attribute>
+  	<attribute>
+  		<name>var</name>
+  		<required>false</required>
+  		<rtexprvalue>false</rtexprvalue>
+  	</attribute>
     <attribute>
       <name>owner</name>
       <required>false</required>
@@ -87,17 +98,22 @@
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
     </attribute>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
   </tag>
   <tag>
   	<name>SelectMessage</name>
   	<tag-class>com.blueprintit.jspboard.tags.SelectMessageTag</tag-class>
-  	<tei-class>com.blueprintit.jspboard.tags.MessageTableTEI</tei-class>
+  	<tei-class>com.blueprintit.jspboard.tags.DBResultTEI</tei-class>
   	<body-content>JSP</body-content>
-    <attribute>
-      <name>id</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-    </attribute>
+  	<attribute>
+  		<name>var</name>
+  		<required>false</required>
+  		<rtexprvalue>false</rtexprvalue>
+  	</attribute>
     <attribute>
       <name>owner</name>
       <required>false</required>
@@ -113,21 +129,31 @@
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
     </attribute>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
   </tag>
   <tag>
   	<name>SelectPerson</name>
   	<tag-class>com.blueprintit.jspboard.tags.SelectPersonTag</tag-class>
-  	<tei-class>com.blueprintit.jspboard.tags.PersonTableTEI</tei-class>
+  	<tei-class>com.blueprintit.jspboard.tags.DBResultTEI</tei-class>
   	<body-content>JSP</body-content>
-    <attribute>
-      <name>id</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-    </attribute>
+  	<attribute>
+  		<name>var</name>
+  		<required>false</required>
+  		<rtexprvalue>false</rtexprvalue>
+  	</attribute>
     <attribute>
       <name>extra</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
     </attribute>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
   </tag>
 </taglib>

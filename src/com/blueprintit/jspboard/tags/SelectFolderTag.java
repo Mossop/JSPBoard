@@ -1,19 +1,21 @@
 package com.blueprintit.jspboard.tags;
 
+import javax.servlet.jsp.tagext.Tag;
+
 public class SelectFolderTag extends DBResultTag
 {
-	private String parent;
+	private String parentid;
 	
 	public void setParentId(String value)
 	{
-		parent=value;
+		parentid=value;
 	}
 	
 	public String getParentId()
 	{
-		return parent;
+		return parentid;
 	}
-
+	
 	public String generateQuery()
 	{
 		StringBuffer where = new StringBuffer();
@@ -21,9 +23,9 @@ public class SelectFolderTag extends DBResultTag
 		{
 			where.append("id="+id+" AND ");
 		}
-		if (parent!=null)
+		if (parentid!=null)
 		{
-			where.append("parent="+parent+" AND ");
+			where.append("parent="+parentid+" AND ");
 		}
 		if (where.length()>0)
 		{

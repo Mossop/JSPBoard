@@ -23,7 +23,7 @@ public class GetFieldTag extends TagSupport
 		{
 			try
 			{
-				pageContext.getOut().print(tag.getField(field));
+				pageContext.getOut().print(tag.getResults().getField(field));
 			}
 			catch (Exception e)
 			{

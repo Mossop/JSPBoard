@@ -3,19 +3,23 @@ package com.blueprintit.jspboard.tags;
 import javax.servlet.jsp.tagext.TagSupport;
 import javax.servlet.jsp.tagext.Tag;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.util.Map;
-import java.util.HashMap;
+import com.blueprintit.jspboard.DBResults;
 
 public abstract class DBResultTag extends TagSupport
 {
-	private ResultSet results;
-	private ResultSetMetaData metadata;
-	private Map fields = new HashMap();
-	private Map tablefields = new HashMap();
-	private int pos;
+	private DBResults results;
 	protected String extra;
+	private String var;
+	
+	public void setVar(String value)
+	{
+		var=value;
+	}
+	
+	public String getVar()
+	{
+		return var;
+	}
 	
 	public void setExtra(String value)
 	{
@@ -29,64 +33,9 @@ public abstract class DBResultTag extends TagSupport
 
 	public abstract String generateQuery();
 
-	public ResultSet getResults()
+	public DBResults getResults()
 	{
 		return results;
-	}
-	
-	public ResultSetMetaData getMetaData()
-	{
-		return metadata;
-	}
-	
-	public int getPos()
-	{
-		return pos;
-	}
-	
-	public String getField(String field)
-	{
-		int col = findField(field);
-		if (col>=0)
-		{
-			try
-			{
-				return results.getString(col);
-			}
-			catch (Exception e)
-			{
-			}
-		}
-		return "";
-	}
-	
-	public int findField(String field)
-	{
-		try
-		{
-			int col = Integer.parseInt(field);
-			return col;
-		}
-		catch (NumberFormatException e)
-		{
-			if (field.indexOf(".")>=0)
-			{
-				Integer result = (Integer)tablefields.get(field);
-				if (result!=null)
-				{
-					return result.intValue();
-				}
-			}
-			else
-			{
-				Integer result = (Integer)fields.get(field);
-				if (result!=null)
-				{
-					return result.intValue();
-				}
-			}
-		}
-		return -1;
 	}
 	
 	public static DBResultTag findResults(Tag target, String id)
@@ -98,27 +47,12 @@ public abstract class DBResultTag extends TagSupport
 		if (target instanceof DBResultTag)
 		{
 			DBResultTag result = (DBResultTag)target;
-			if ((id==null)||(result.getId().equals(id)))
+			if ((id==null)||(result.getVar().equals(id)))
 			{
 				return result;
 			}
 		}
 		return findResults(target.getParent(),id);
-	}
-	
-	private void setupVariables()
-	{
-		try
-		{
-			for (int loop=1; loop<=metadata.getColumnCount(); loop++)
-			{
-				String varname = metadata.getColumnName(loop);
-				pageContext.setAttribute(varname,results.getString(loop));
-			}
-		}
-		catch (Exception e)
-		{
-		}
 	}
 	
 	public int doStartTag()
@@ -129,18 +63,13 @@ public abstract class DBResultTag extends TagSupport
 			Connection conn = (Connection)pageContext.findAttribute("jspboard.DBConnection");
 			if (conn!=null)
 			{
-				results = conn.createStatement().executeQuery(query);
-				metadata=results.getMetaData();
-				if (results.next())
+				results = new DBResults(conn.createStatement().executeQuery(query),this);
+				if (results.next(this))
 				{
-					for (int loop=1; loop<=metadata.getColumnCount(); loop++)
+					if (var!=null)
 					{
-						Integer thisone = new Integer(loop);
-						fields.put(metadata.getColumnName(loop),thisone);
-						tablefields.put(metadata.getTableName(loop)+"."+metadata.getColumnName(loop),thisone);
+						pageContext.setAttribute(var,results);
 					}
-					pos=0;
-					setupVariables();
 					return EVAL_BODY_INCLUDE;
 				}
 				else
@@ -164,14 +93,16 @@ public abstract class DBResultTag extends TagSupport
 	{
 		try
 		{
-			if (results.next())
+			if (results.next(this))
 			{
-				pos++;
-				setupVariables();
 				return EVAL_BODY_AGAIN;
 			}
 			else
 			{
+				if (var!=null)
+				{
+					pageContext.removeAttribute(var);
+				}
 				return SKIP_BODY;
 			}
 		}
