@@ -8,11 +8,13 @@
 					<h1>Editing <%= person.getField("fullname") %></h1>
 				</td>
 				<td align="right">
-					<form action="<%= context %>/delete/person" method="post">
-						<input type="hidden" name="id" value='<%= person.getField("id") %>'>
-						<input type="hidden" name="redirect" value="/view/contacts.jsp">
-						<input type="submit" value="Delete">
-					</form>
+					<jspb:secure groups="contactadmin">
+						<form action="<%= context %>/delete/person" method="post">
+							<input type="hidden" name="id" value='<%= person.getField("id") %>'>
+							<input type="hidden" name="redirect" value="/view/contacts.jsp">
+							<input type="submit" value="Delete">
+						</form>
+					</jspb:secure>
 				</td>
 			</tr>
 		</table>

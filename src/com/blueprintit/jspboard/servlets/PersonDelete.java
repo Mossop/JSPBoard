@@ -37,17 +37,17 @@ public class PersonDelete extends HttpServlet
 				}
 				else
 				{
-					throw new SecurityException("User does not have the required permissions to delete that folder");
+					throw new SecurityException("User does not have the required permissions to delete that person");
 				}
 			}
 			else
 			{
-				throw new IllegalArgumentException("No folder id or redirect given");
+				throw new IllegalArgumentException("No person id or redirect given");
 			}
 		}
 		catch (Exception e)
 		{
-			throw new ServletException("Exception in FolderDelete",e);
+			throw new ServletException("Exception in PersonDelete",e);
 		}
 	}
 }

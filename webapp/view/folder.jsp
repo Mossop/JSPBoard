@@ -48,9 +48,13 @@
 								<tr>
 									<td>
 										<% if (thread.getField("unreadcount").equals("0")) { %>
-											<img src="<%= context %>/images/read.gif" alt="read" align="middle">
+											<a href='<%= context %>/view/thread.jsp?id=<%= thread.getField("id") %>'>
+												<img src="<%= context %>/images/read.gif" alt="read" align="middle">
+											</a>
 										<% } else { %>
-											<img src="<%= context %>/images/unread.gif" alt="unread" align="middle">
+											<a href='<%= context %>/view/thread.jsp?id=<%= thread.getField("id") %>#unread'>
+												<img src="<%= context %>/images/unread.gif" alt="unread" align="middle">
+											</a>
 										<% } %>
 									</td>
 									<td>

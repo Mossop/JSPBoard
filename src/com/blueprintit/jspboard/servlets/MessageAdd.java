@@ -42,7 +42,7 @@ public class MessageAdd extends TableAdd
 				}
 			}
 		}
-		if (!request.isUserInRole("messageadd"))
+		if ((!request.isUserInRole("messageadd"))&&(!request.isUserInRole("admin")))
 		{
 			try
 			{
