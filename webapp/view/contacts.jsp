@@ -20,7 +20,7 @@
 			<jspb:SelectPerson var="person" order="surname" category='<%= category.getField("id") %>'>
 				<% if (!displayed) { %>
 		    	<tr>
-		    		<td colspan="5" width="578">
+		    		<td colspan="6" width="578">
 		    			<b><%= category.getField("description") %></b>
 		    			<hr>
 		    		</td>
@@ -35,6 +35,9 @@
 			      </td>
 			      <td>
 			        <b>Email</b>
+			      </td>
+			      <td>
+			      	<b>Unread</b>
 			      </td>
 			      <td></td>
 			    </tr>
@@ -52,6 +55,12 @@
 						<a href='mailto:<%= person.getField("email") %>'>
 							<%= person.getField("email") %>
 						</a>
+					</td>
+					<td>
+						<% String query = "select count(message) from UnreadMessage where person="+person.getField("id")+" group by person;"; %>
+						<jspb:dbquery var="count" query="<%= query %>">
+							<%= count.getField(1) %>
+						</jspb:dbquery>
 					</td>
 					<td>
 						<% boolean haslogin=false; %>
@@ -78,14 +87,14 @@
 			</jspb:SelectPerson>
 			<% if (displayed) { %>
 				<tr>
-					<td colspan="5"><hr></td>
+					<td colspan="6"><hr></td>
 				</tr>
 			<% displayed=false; } %>
 		</jspb:SelectCategory>
 		<jspb:SelectPerson var="person" category="-1">
 			<% if (!displayed) { %>
 	    	<tr>
-	    		<td colspan="5" width="578">
+	    		<td colspan="6" width="578">
 	    			<b>No Category</b>
 	    			<hr>
 	    		</td>
@@ -119,6 +128,12 @@
 					</a>
 				</td>
 				<td>
+					<% String query = "select count(message) from UnreadMessage where person="+person.getField("id")+" group by person;"; %>
+					<jspb:dbquery var="count" query="<%= query %>">
+						<%= count.getField(1) %>
+					</jspb:dbquery>
+				</td>
+				<td>
 					<% boolean haslogin=false; %>
 					<jspb:SelectLogin person='<%= person.getField("id") %>'>
 						<% haslogin=true; %>
@@ -143,7 +158,7 @@
 		</jspb:SelectPerson>
 		<% if (displayed) { %>
 			<tr>
-				<td colspan="5"><hr></td>
+				<td colspan="6"><hr></td>
 			</tr>
 		<% } %>
   </table>

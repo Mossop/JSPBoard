@@ -96,7 +96,7 @@ public class MessageAdd extends TableAdd
 	{
 		keys.next();
 		String id=keys.getString(1);
-		conn.createStatement().executeUpdate("INSERT IGNORE INTO UnreadMessage (message,person) SELECT "+id+",Person.id FROM Person,Login WHERE Person.id=Login.person AND Login.id!='"+request.getRemoteUser()+"';");
+		conn.createStatement().executeUpdate("INSERT IGNORE INTO UnreadMessage (message,person) SELECT "+id+",Person.id FROM Person,Login WHERE Person.id=Login.person AND Login.id!='"+request.getRemoteUser()+"' GROUP BY Person.id;");
 		String description = request.getParameter("description");
 		Enumeration loop = ((RequestMultiplex)request).getFileNames();
 		while (loop.hasMoreElements())

@@ -66,7 +66,7 @@ public class MessageUpdate extends TableUpdate
 			{
 				String person = results.getString(1);
 				conn.createStatement().executeUpdate("INSERT INTO EditedMessage (message,person,altered) VALUES ("+id+","+person+",NOW());");
-				conn.createStatement().executeUpdate("INSERT IGNORE INTO UnreadMessage (message,person) SELECT "+id+",Person.id FROM Person WHERE Person.id!="+person+";");
+				conn.createStatement().executeUpdate("INSERT IGNORE INTO UnreadMessage (message,person) SELECT "+id+",Person.id FROM Person,Login WHERE Person.id=Login.person AND Person.id!="+person+" GROUP BY Person.id;");
 			}
 		}
 	}

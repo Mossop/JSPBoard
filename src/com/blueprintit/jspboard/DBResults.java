@@ -36,21 +36,47 @@ public class DBResults
 		lock=maker;
 	}
 	
+	public boolean isNull(int col)
+	{
+		try
+		{
+			String ans = results.getString(col);
+			return results.wasNull();
+		}
+		catch (Exception e)
+		{
+			return false;
+		}
+	}
+	
 	public boolean isNull(String field)
 	{
 		int col = findField(field);
 		if (col>=0)
 		{
-			try
-			{
-				String ans = results.getString(col);
-				return results.wasNull();
-			}
-			catch (Exception e)
-			{
-			}
+			return isNull(col);
 		}
 		return true;
+	}
+	
+	public String getDate(int col)
+	{
+		try
+		{
+			String ans = results.getString(col);
+			if (results.wasNull())
+			{
+				return "";
+			}
+			else
+			{
+				return standarddf.format(mysqlparse.parse(ans));
+			}
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
 	}
 	
 	public String getDate(String field)
@@ -58,23 +84,30 @@ public class DBResults
 		int col = findField(field);
 		if (col>=0)
 		{
-			try
-			{
-				String ans = results.getString(col);
-				if (results.wasNull())
-				{
-					return "";
-				}
-				else
-				{
-					return standarddf.format(mysqlparse.parse(ans));
-				}
-			}
-			catch (Exception e)
-			{
-			}
+			return getDate(col);
 		}
 		return "";
+	}
+	
+	public String getDate(int col, String format)
+	{
+		try
+		{
+			String ans = results.getString(col);
+			if (results.wasNull())
+			{
+				return "";
+			}
+			else
+			{
+				DateFormat df = new SimpleDateFormat(format);
+				return df.format(mysqlparse.parse(ans));
+			}
+		}
+		catch (Exception e)
+		{
+			return "";
+		}
 	}
 	
 	public String getDate(String field, String format)
@@ -82,24 +115,34 @@ public class DBResults
 		int col = findField(field);
 		if (col>=0)
 		{
-			try
-			{
-				String ans = results.getString(col);
-				if (results.wasNull())
-				{
-					return "";
-				}
-				else
-				{
-					DateFormat df = new SimpleDateFormat(format);
-					return df.format(mysqlparse.parse(ans));
-				}
-			}
-			catch (Exception e)
-			{
-			}
+			return getDate(col,format);
 		}
 		return "";
+	}
+	
+	public String getField(int col)
+	{
+		try
+		{
+			String ans = results.getString(col);
+			if (results.wasNull())
+			{
+				return "";
+			}
+			else
+			{
+				ans=ans.replaceAll("&","&amp;");
+				ans=ans.replaceAll("<","&lt;");
+				ans=ans.replaceAll(">","&gt;");
+				ans=ans.replaceAll("\\\"","&quot;");
+				ans=ans.replaceAll("'","&#039;");
+				return ans;
+			}
+		}
+		catch (Exception e)
+		{
+			return "";
+		}
 	}
 	
 	public String getField(String field)
@@ -107,28 +150,29 @@ public class DBResults
 		int col = findField(field);
 		if (col>=0)
 		{
-			try
-			{
-				String ans = results.getString(col);
-				if (results.wasNull())
-				{
-					return "";
-				}
-				else
-				{
-					ans=ans.replaceAll("&","&amp;");
-					ans=ans.replaceAll("<","&lt;");
-					ans=ans.replaceAll(">","&gt;");
-					ans=ans.replaceAll("\\\"","&quot;");
-					ans=ans.replaceAll("'","&#039;");
-					return ans;
-				}
-			}
-			catch (Exception e)
-			{
-			}
+			return getField(col);
 		}
 		return "";
+	}
+	
+	public String getRaw(int col)
+	{
+		try
+		{
+			String ans = results.getString(col);
+			if (results.wasNull())
+			{
+				return "";
+			}
+			else
+			{
+				return ans;
+			}
+		}
+		catch (Exception e)
+		{
+			return "";
+		}
 	}
 	
 	public String getRaw(String field)
@@ -136,21 +180,7 @@ public class DBResults
 		int col = findField(field);
 		if (col>=0)
 		{
-			try
-			{
-				String ans = results.getString(col);
-				if (results.wasNull())
-				{
-					return "";
-				}
-				else
-				{
-					return ans;
-				}
-			}
-			catch (Exception e)
-			{
-			}
+			return getRaw(col);
 		}
 		return "";
 	}

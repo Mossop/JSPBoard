@@ -261,7 +261,7 @@
 	
 	<servlet-mapping>
 		<servlet-name>FileDownload</servlet-name>
-		<url-pattern>/file/*</url-pattern>
+		<url-pattern>/files/*</url-pattern>
 	</servlet-mapping>
 
   <session-config>
