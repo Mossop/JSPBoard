@@ -4,7 +4,7 @@
 	String folderid = request.getParameter("id");
 	if (folderid==null)
 	{
-		folderid="47";
+		folderid="48";
 	}
 	request.setAttribute("folder",folderid);
 %>
@@ -76,7 +76,7 @@
 						<h2>Post a new thread:</h2>
 						<form action="<%= context %>/add/message" method="post">
 							<input type="hidden" name="folder" value='<%= folder.getField("id") %>'>
-							<input type="hidden" name="redirect" value='<%= context %>/view/folder.jsp'>
+							<input type="hidden" name="redirect" value='/view/folder.jsp?id=<%= folderid %>'>
 							<table>
 								<tr>
 									<td>Subject:</td>
