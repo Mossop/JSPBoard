@@ -51,7 +51,7 @@
 				</td>
 				<td>
 					<jspb:SelectPerson id='<%= login.getField("person") %>' var="person">
-						<jspb:link href="contact.jsp">
+						<jspb:link href="/view/contact.jsp">
 							<jspb:param name="id"><%= person.getField("id") %></jspb:param>
 							<%= person.getField("fullname") %>
 						</jspb:link>
