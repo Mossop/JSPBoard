@@ -32,8 +32,8 @@ public class FileUpload extends HttpServlet
 		{
 			try
 			{
-				ResultSet results = conn.createStatement().executeQuery("SELECT Login.id FROM Login,Message WHERE Login.person=Message.owner AND Message.id="+message+" AND Login.id='"+request.getRemoteUser()+"';");
-				if ((request.isUserInRole("messageadmin"))||(results.next()))
+				ResultSet results = conn.createStatement().executeQuery("SELECT Login.id FROM Login,Message WHERE Login.person=Message.owner AND Message.id="+message+";");
+				if ((request.isUserInRole("admin"))||(request.isUserInRole("messageadmin"))||((results.next())&&(results.getString(1).equals(request.getRemoteUser()))))
 				{
 					Enumeration loop = req.getFileNames();
 					while (loop.hasMoreElements())

@@ -11,7 +11,7 @@ public class ThreadUpdate extends TableUpdate
 {
 	protected boolean allowQuery(Connection conn, Map fields, HttpServletRequest request)
 	{
-		if (request.isUserInRole("messageadmin"))
+		if ((request.isUserInRole("admin"))||(request.isUserInRole("messageadmin")))
 		{
 			return true;
 		}
