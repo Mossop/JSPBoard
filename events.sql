@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS Person;
+DROP TABLE IF EXISTS Validate;
+
+CREATE TABLE Person (
+	id		INTEGER AUTO_INCREMENT NOT NULL,
+	email		VARCHAR(30),
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE Validate (
+	uid		VARCHAR(16) NOT NULL,
+	user		INTEGER,
+	email		VARCHAR(30),
+	date		DATETIME,
+	PRIMARY KEY (uid)
+);
