@@ -16,6 +16,11 @@
 	</servlet>
 	
 	<servlet>
+		<servlet-name>Password</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.Password</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>MessageAdd</servlet-name>
 		<servlet-class>com.blueprintit.jspboard.servlets.MessageAdd</servlet-class>
 	</servlet>
@@ -73,6 +78,11 @@
 	<servlet-mapping>
 		<servlet-name>Logout</servlet-name>
 		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>Password</servlet-name>
+		<url-pattern>/update/password</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
