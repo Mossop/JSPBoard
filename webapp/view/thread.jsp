@@ -97,7 +97,7 @@
                       <td width="20"><%= count %>:</td>
                       <td width="400"><%= file.getField("description") %></td>
                       <td align="right" width="158">
-                      	<a href='<%= context %>/files/<%= file.getField("name") %>?id=<%= file.getField("id") %>'>
+                      	<a href='<%= context %>/view/file?id=<%= file.getField("id") %>'>
 													<%= file.getField("name") %>
 												</a>
                       </td>

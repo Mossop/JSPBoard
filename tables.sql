@@ -69,10 +69,10 @@ CREATE TABLE Message (
 
 CREATE TABLE File (
 	id		INTEGER AUTO_INCREMENT NOT NULL,
-	name		VARCHAR(30) NOT NULL,
-	filename	VARCHAR(30),
+	name		VARCHAR(50) NOT NULL,
+	filename	VARCHAR(50),
 	message		INTEGER NOT NULL,
-	description	VARCHAR(30),
+	description	VARCHAR(50),
 	mimetype	VARCHAR(30),
 	PRIMARY KEY (id)
 );

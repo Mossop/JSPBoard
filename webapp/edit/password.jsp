@@ -3,6 +3,7 @@
 <jspb:includes>
 	<form action="<%= context %>/update/password" method="post">
 		<input type="hidden" name="redirect" value="/view/folder.jsp">
+		<input type="hidden" name="error" value="/edit/badpw.jsp">
 		<table align="center">
 			<tr><td>Enter the old password:</td><td><input type="password" name="oldpassword"></td></tr>
 			<tr><td>Enter a new password:</td><td><input type="password" name="password1"></td></tr>
