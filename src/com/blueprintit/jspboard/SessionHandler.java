@@ -8,6 +8,9 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.http.HttpSession;
 import javax.servlet.ServletContext;
+import javax.naming.InitialContext;
+import javax.naming.Context;
+import javax.sql.DataSource;
 import java.util.Date;
 import java.util.Map;
 import java.util.HashMap;
@@ -65,7 +68,10 @@ public class SessionHandler implements HttpSessionListener, ServletContextListen
 	{
 		try
 		{
-			return DriverManager.getConnection("jdbc:mysql://localhost/JSPBoard","JSPBoard","jspb379");
+			Context initCtx = new InitialContext();
+			Context envCtx = (Context) initCtx.lookup("java:comp/env");
+			DataSource ds = (DataSource)envCtx.lookup("jdbc/JSPBoardDB");
+			return ds.getConnection();
 		}
 		catch (Exception e)
 		{
