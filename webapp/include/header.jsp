@@ -39,8 +39,9 @@
           <table border="0">
             <tr>
               <td width="200" valign="top">
-                <hr>
-										Change Password<br>
-										Logout<br>
+              	<jsp:include page="/include/folderview.jsp"/>
+              	<hr>
+              	<p>Change Password</p>
+								<p>Logout</p>
               </td>
               <td width="578" valign="top">
