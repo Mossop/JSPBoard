@@ -38,7 +38,7 @@ public class MessageDelete extends HttpServlet
 					conn.createStatement().executeUpdate("DELETE FROM UnreadMessage WHERE message="+id+";");
 					conn.createStatement().executeUpdate("DELETE FROM EditedMessage WHERE message="+id+";");
 					conn.createStatement().executeUpdate("DELETE FROM Message WHERE id="+id+";");
-					response.sendRedirect(request.getContextPath()+redirect);
+					response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+redirect));
 				}
 				else
 				{

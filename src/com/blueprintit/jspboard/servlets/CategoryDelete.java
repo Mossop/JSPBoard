@@ -30,7 +30,7 @@ public class CategoryDelete extends HttpServlet
 					Connection conn = ((Manager)request.getSession().getAttribute("jspboard.Manager")).getDBConnection();
 					conn.createStatement().executeUpdate("DELETE FROM Category WHERE id="+id+";");
 					conn.createStatement().executeUpdate("UPDATE Person SET category=-1 WHERE category="+id+";");
-					response.sendRedirect(request.getContextPath()+redirect);
+					response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+redirect));
 				}
 				else
 				{

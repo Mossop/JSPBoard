@@ -60,7 +60,7 @@ public class FileUpload extends HttpServlet
 			catch (Exception e)
 			{
 			}
-			response.sendRedirect(request.getContextPath()+redirect);
+			response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+redirect));
 		}
 		else
 		{

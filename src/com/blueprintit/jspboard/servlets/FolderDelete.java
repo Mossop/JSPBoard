@@ -36,7 +36,7 @@ public class FolderDelete extends HttpServlet
 					else
 					{
 						conn.createStatement().executeUpdate("DELETE FROM Folder WHERE id="+id+";");
-						response.sendRedirect(request.getContextPath()+redirect);
+						response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+redirect));
 					}
 				}
 				else

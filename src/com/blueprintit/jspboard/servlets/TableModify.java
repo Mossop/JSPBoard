@@ -117,14 +117,14 @@ public abstract class TableModify extends HttpServlet
 					stmt.executeUpdate(generateQuery(conn,new HashMap(updates),request));
 					postModification(conn,updates,request,stmt.getGeneratedKeys());
 				}
-				response.sendRedirect(request.getContextPath()+redirect);
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+redirect));
 			}
 			else
 			{
 				String error = request.getParameter("error");
 				if (error!=null)
 				{
-					response.sendRedirect(request.getContextPath()+error);
+					response.sendRedirect(response.encodeRedirectURL(request.getContextPath()+error));
 				}
 				else
 				{
