@@ -19,10 +19,13 @@ public abstract class TableUpdate extends TableModify
 			while (loop.hasNext())
 			{
 				field=loop.next().toString();
-				query.append(field+"="+updates.get(field));
-				if (loop.hasNext())
+				if (fields.containsKey(field))
 				{
-					query.append(",");
+					query.append(field+"="+updates.get(field));
+					if (loop.hasNext())
+					{
+						query.append(",");
+					}
 				}
 			}
 			query.append(" WHERE id="+id+";");

@@ -40,15 +40,18 @@ public class FileUpload extends HttpServlet
 					{
 						String fileid = loop.nextElement().toString();
 						String name = req.getOriginalFileName(fileid);
-						String filename = req.getFilesystemName(fileid);
-						String content = req.getContentType(fileid);
-						try
+						if (name!=null)
 						{
-							conn.createStatement().executeUpdate("INSERT INTO File (name,filename,message,description,mimetype) VALUES ('"+name+"','"+filename+"',"+message+",'"+description+"','"+content+"');");
-						}
-						catch (SQLException e)
-						{
-							req.getFile(fileid).delete();
+							String filename = req.getFilesystemName(fileid);
+							String content = req.getContentType(fileid);
+							try
+							{
+								conn.createStatement().executeUpdate("INSERT INTO File (name,filename,message,description,mimetype) VALUES ('"+name+"','"+filename+"',"+message+",'"+description+"','"+content+"');");
+							}
+							catch (SQLException e)
+							{
+								req.getFile(fileid).delete();
+							}
 						}
 					}
 				}

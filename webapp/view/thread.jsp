@@ -132,17 +132,25 @@
 	      <tr>
 	        <td colspan="2">
 	          <h2>Add a new reply to this thread:</h2>
-	          <form action="<%= context %>/add/message" method="post">
+	          <form action="<%= context %>/add/message" method="post" enctype="multipart/form-data">
 	          	<input type="hidden" name="thread" value='<%= thread.getField("id") %>'>
 	          	<input type="hidden" name="redirect" value='/view/thread.jsp?id=<%= thread.getField("id") %>'>
 	          	<table>
+	              <tr>
+	              	<td>Attach a file:</td>
+	              	<td><input name="file" type="file"></td>
+	              </tr>
+	              <tr>
+	              	<td>File description:</td>
+	              	<td><input name="description"></td>
+	              </tr>
 	            	<tr>
-	                <td>
+	                <td colspan="2">
 	                  <textarea name="content" rows="15" cols="60"></textarea>
 	                </td>
 	              </tr>
 	              <tr>
-	                <td align="center">
+	                <td align="center" colspan="2">
 	                	<input type="submit" value="Add">
 	                </td>
 	              </tr>

@@ -4,9 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.util.Map;
+import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.ResultSet;
 import com.blueprintit.jspboard.servlets.convert.Convertor;
+import com.blueprintit.jspboard.RequestMultiplex;
 
 public class MessageAdd extends TableAdd
 {
@@ -90,6 +92,29 @@ public class MessageAdd extends TableAdd
 
 	protected void postModification(Connection conn, Map updates, HttpServletRequest request) throws SQLException
 	{
-		conn.createStatement().executeUpdate("INSERT IGNORE INTO UnreadMessage (message,person) SELECT LAST_INSERT_ID(),Person.id FROM Person,Login WHERE Person.id=Login.person AND Login.id!='"+request.getRemoteUser()+"';");
+		ResultSet results = conn.createStatement().executeQuery("SELECT LAST_INSERT_ID();");
+		results.next();
+		String id=results.getString(1);
+		conn.createStatement().executeUpdate("INSERT IGNORE INTO UnreadMessage (message,person) SELECT "+id+",Person.id FROM Person,Login WHERE Person.id=Login.person AND Login.id!='"+request.getRemoteUser()+"';");
+		String description = request.getParameter("description");
+		Enumeration loop = ((RequestMultiplex)request).getFileNames();
+		while (loop.hasMoreElements())
+		{
+			String fileid = loop.nextElement().toString();
+			String name = ((RequestMultiplex)request).getOriginalFileName(fileid);
+			if (name!=null)
+			{
+				String filename = ((RequestMultiplex)request).getFilesystemName(fileid);
+				String content = ((RequestMultiplex)request).getContentType(fileid);
+				try
+				{
+					conn.createStatement().executeUpdate("INSERT INTO File (name,filename,message,description,mimetype) VALUES ('"+name+"','"+filename+"',"+id+",'"+description+"','"+content+"');");
+				}
+				catch (SQLException e)
+				{
+					((RequestMultiplex)request).getFile(fileid).delete();
+				}
+			}
+		}
 	}
 }

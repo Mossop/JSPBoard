@@ -98,6 +98,14 @@
 										<input type="text" name="name" size="70">
 									</td>
 								</tr>
+	              <tr>
+	              	<td>Attach a file:</td>
+	              	<td><input name="file" type="file"></td>
+	              </tr>
+	              <tr>
+	              	<td>File description:</td>
+	              	<td><input name="description"></td>
+	              </tr>
 								<tr>
 									<td colspan="2">
 										<textarea name="content" rows="15" cols="60"></textarea>

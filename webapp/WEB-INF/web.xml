@@ -16,6 +16,11 @@
 	</servlet>
 	
 	<servlet>
+		<servlet-name>RequestInfo</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.RequestInfo</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>FileDelete</servlet-name>
 		<servlet-class>com.blueprintit.jspboard.servlets.FileDelete</servlet-class>
 	</servlet>

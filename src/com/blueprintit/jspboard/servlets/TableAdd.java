@@ -17,12 +17,15 @@ public abstract class TableAdd extends TableModify
 		while (loop.hasNext())
 		{
 			field=loop.next().toString();
-			fields.append(field);
-			values.append(updates.get(field));
-			if (loop.hasNext())
+			if (this.fields.containsKey(field))
 			{
-				fields.append(",");
-				values.append(",");
+				fields.append(field);
+				values.append(updates.get(field));
+				if (loop.hasNext())
+				{
+					fields.append(",");
+					values.append(",");
+				}
 			}
 		}
 		query.append("("+fields+") VALUES ("+values+");");

@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import com.blueprintit.jspboard.servlets.convert.Convertor;
 import com.blueprintit.jspboard.SessionHandler;
+import com.blueprintit.jspboard.RequestMultiplex;
 
 public abstract class TableModify extends HttpServlet
 {
@@ -66,10 +67,11 @@ public abstract class TableModify extends HttpServlet
 		doPost(request,response);
 	}
 	
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException
+	public void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException
 	{
 		try
 		{
+			RequestMultiplex request = new RequestMultiplex(req,getServletContext());
 			Connection conn = (Connection)request.getSession().getAttribute("jspboard.DBConnection");
 			Enumeration loop = request.getParameterNames();
 			Map updates = new HashMap();
@@ -106,14 +108,14 @@ public abstract class TableModify extends HttpServlet
 					conn.createStatement().executeUpdate(generateQuery(conn,new HashMap(updates),request));
 					postModification(conn,updates,request);
 				}
-				request.getRequestDispatcher(redirect).forward(request,response);
+				req.getRequestDispatcher(redirect).forward(req,response);
 			}
 			else
 			{
 				String error = request.getParameter("error");
 				if (error!=null)
 				{
-					request.getRequestDispatcher(error).forward(request,response);
+					req.getRequestDispatcher(error).forward(req,response);
 				}
 				else
 				{
