@@ -8,12 +8,17 @@
   <short-name></short-name>
 	<tag>
     <name>secure</name>
-    <tag-class>com.blueprintit.jspboard.SecureTag</tag-class>
+    <tag-class>com.blueprintit.jspboard.tags.SecureTag</tag-class>
     <body-content>JSP</body-content>
     <attribute>
       <name>groups</name>
       <required>true</required>
       <rtexprvalue>true</rtexprvalue>
     </attribute>
+  </tag>
+  <tag>
+  	<name>includes</name>
+  	<tag-class>com.blueprintit.jspboard.tags.IncludesTag</tag-class>
+  	<body-content>JSP</body-content>
   </tag>
 </taglib>

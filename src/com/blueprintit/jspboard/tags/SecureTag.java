@@ -1,4 +1,4 @@
-package com.blueprintit.jspboard;
+package com.blueprintit.jspboard.tags;
 
 import javax.servlet.jsp.tagext.TagSupport;
 import javax.servlet.http.HttpServletRequest;
