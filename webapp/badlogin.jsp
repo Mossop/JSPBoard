@@ -1,3 +1,5 @@
+<%@ taglib uri="/WEB-INF/jspboard.tld" prefix="jspb" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <html>
@@ -21,7 +23,7 @@
     	<tr>
 				<td>
 					<p><b>Could not log you in. Maybe you entered your username or password wrong.</b></p>
-					<form action="j_security_check" method="post">
+					<jspb:form action="j_security_check">
 						<table align=center>
 							<tr>
 								<td>Username:</td>
@@ -41,7 +43,7 @@
 								</td>
 							</tr>
 						</table>
-				  </form>
+				  </jspb:form>
 				</td>
 			</tr>
 		</table>

@@ -53,6 +53,46 @@
     <body-content>JSP</body-content>
   </tag>
 	<tag>
+    <name>link</name>
+    <tag-class>com.blueprintit.jspboard.tags.LinkTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <name>href</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+	<tag>
+    <name>form</name>
+    <tag-class>com.blueprintit.jspboard.tags.FormTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <name>action</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>method</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+	<tag>
+    <name>param</name>
+    <tag-class>com.blueprintit.jspboard.tags.LinkParamTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+	<tag>
     <name>stylise</name>
     <tag-class>com.blueprintit.jspboard.tags.StyliseTag</tag-class>
     <body-content>JSP</body-content>
