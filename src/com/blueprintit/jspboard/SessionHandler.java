@@ -30,6 +30,20 @@ public class SessionHandler
 		}
 	}
 	
+	public boolean isLoggedIn(String id)
+	{
+		Iterator loop = sessions.iterator();
+		while (loop.hasNext())
+		{
+			HttpSession session = (HttpSession)loop.next();
+			if (session.getAttribute("jspboard.user").equals(id))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public List getSessions()
 	{
 		return Collections.unmodifiableList(sessions);

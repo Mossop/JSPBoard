@@ -29,6 +29,23 @@ public class DBResults
 		lock=maker;
 	}
 	
+	public boolean isNull(String field)
+	{
+		int col = findField(field);
+		if (col>=0)
+		{
+			try
+			{
+				String ans = results.getString(col);
+				return results.wasNull();
+			}
+			catch (Exception e)
+			{
+			}
+		}
+		return true;
+	}
+	
 	public String getField(String field)
 	{
 		int col = findField(field);
@@ -36,7 +53,15 @@ public class DBResults
 		{
 			try
 			{
-				return results.getString(col);
+				String ans = results.getString(col);
+				if (results.wasNull())
+				{
+					return "";
+				}
+				else
+				{
+					return ans;
+				}
 			}
 			catch (Exception e)
 			{
