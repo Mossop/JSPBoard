@@ -1,3 +1,4 @@
+
 <%@ taglib uri="/WEB-INF/jspboard.tld" prefix="jspb" %>
 
 <%
@@ -15,6 +16,19 @@
 
 <jspb:SelectFolder var="folder" id="<%= folderid %>">
 	<jspb:includes>
+		<script language="JavaScript">
+			<!--
+			function validate()
+			{
+				if (document.forms[0].elements[2].value=='')
+				{
+					alert('You must enter a title for the thread.');
+					return false;
+				}
+				return true;
+			}
+			//-->
+		</script>
 		<table border="0">
 			<tr>
 				<td valign="top">
@@ -92,7 +106,7 @@
 					<td colspan="2">
 						<hr>
 						<h2>Post a new thread:</h2>
-						<form action="<%= context %>/add/message" method="post" enctype="multipart/form-data">
+						<form name="mainform" onSubmit="return validate()" action="<%= context %>/add/message" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="folder" value='<%= folder.getField("id") %>'>
 							<input type="hidden" name="redirect" value='/view/folder.jsp?id=<%= folderid %>'>
 							<table>

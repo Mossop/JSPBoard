@@ -116,7 +116,12 @@ public class DBResults
 				}
 				else
 				{
-					return ans.replaceAll("<","&lt;").replaceAll(">","&gt;");
+					ans=ans.replaceAll("&","&amp;");
+					ans=ans.replaceAll("<","&lt;");
+					ans=ans.replaceAll(">","&gt;");
+					ans=ans.replaceAll("\\\"","&quot;");
+					ans=ans.replaceAll("'","&#039;");
+					return ans;
 				}
 			}
 			catch (Exception e)
