@@ -1,4 +1,0 @@
-#! /bin/sh
-
-cat tables.sql | mysql -u root -pdragon69 JSPBoard
-cat translate.sql | mysql -u root -pdragon69 PhpBoard

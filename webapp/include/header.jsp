@@ -35,6 +35,11 @@
 	                <jspb:link href="/view/contacts.jsp">Contacts</jspb:link>
 	              </td>
               </jspb:secure>
+            	<jspb:secure groups="eventview">
+	              <td>
+	                <jspb:link href="/view/events.jsp">Events</jspb:link>
+	              </td>
+              </jspb:secure>
             	<jspb:secure groups="loginview">
 	              <td>
 	                <jspb:link href="/view/users.jsp">Users</jspb:link>
