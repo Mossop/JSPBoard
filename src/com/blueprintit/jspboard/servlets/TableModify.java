@@ -12,18 +12,39 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import com.blueprintit.jspboard.servlets.convert.Convertor;
+import com.blueprintit.jspboard.SessionHandler;
 
 public abstract class TableModify extends HttpServlet
 {
 	private Map fields;
 	
-	private void prepareFields(ResultSetMetaData data) throws Exception
+	private void prepareFields() throws Exception
 	{
+		Connection conn = SessionHandler.newConnection();
+		prepareFields(conn);
+		conn.close();
+	}
+	
+	private void prepareFields(Connection conn) throws Exception
+	{
+		ResultSetMetaData data = conn.createStatement().executeQuery("SELECT * FROM "+getTable()+" WHERE 0=1;").getMetaData();
 		fields = new HashMap();
 		for (int loop=1; loop<=data.getColumnCount(); loop++)
 		{
 			String type = data.getColumnTypeName(loop);
 			fields.put(data.getColumnName(loop),Convertor.getConvertor(data.getColumnTypeName(loop)));
+		}
+	}
+	
+	public void init() throws ServletException
+	{
+		try
+		{
+			prepareFields();
+		}
+		catch (Exception e)
+		{
+			throw new ServletException("Error preparing fields",e);
 		}
 	}
 	
@@ -50,7 +71,6 @@ public abstract class TableModify extends HttpServlet
 		try
 		{
 			Connection conn = (Connection)request.getSession().getAttribute("jspboard.DBConnection");
-			prepareFields(conn.createStatement().executeQuery("SELECT * FROM "+getTable()+" WHERE 0=1;").getMetaData());
 			Enumeration loop = request.getParameterNames();
 			Map updates = new HashMap();
 			boolean valid=true;

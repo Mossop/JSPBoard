@@ -61,7 +61,7 @@ public class SessionHandler implements HttpSessionListener, ServletContextListen
 		return Collections.unmodifiableList(sessions);
 	}
 	
-	private Connection newConnection()
+	public static Connection newConnection()
 	{
 		try
 		{
@@ -69,7 +69,7 @@ public class SessionHandler implements HttpSessionListener, ServletContextListen
 		}
 		catch (Exception e)
 		{
-			context.log("SessionHandler: Could not establish DB connection",e);
+			//context.log("SessionHandler: Could not establish DB connection",e);
 			return null;
 		}
 	}
