@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS Login;
-DROP TABLE IF EXISTS Person;
+#DROP TABLE IF EXISTS Person;
+#DROP TABLE IF EXISTS Category;
 DROP TABLE IF EXISTS Groups;
 DROP TABLE IF EXISTS UserGroup;
 DROP TABLE IF EXISTS Folder;
@@ -17,27 +18,27 @@ CREATE TABLE Login (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE Person (
-	id		INTEGER AUTO_INCREMENT NOT NULL,
-	category	INTEGER,
-	title		VARCHAR(10),
-	firstnames	VARCHAR(30),
-	surname		VARCHAR(30),
-	email		VARCHAR(30),
-	nickname	VARCHAR(20),
-	homephone	VARCHAR(20),
-	mobilephone	VARCHAR(20),
-	workphone	VARCHAR(20),
-	fax		VARCHAR(20),
-	description	VARCHAR(100),
-	PRIMARY KEY (id)
-);
+#CREATE TABLE Person (
+#	id		INTEGER AUTO_INCREMENT NOT NULL,
+#	category	INTEGER,
+#	title		VARCHAR(10),
+#	firstnames	VARCHAR(30),
+#	surname		VARCHAR(30),
+#	email		VARCHAR(30),
+#	nickname	VARCHAR(20),
+#	homephone	VARCHAR(20),
+#	mobilephone	VARCHAR(20),
+#	workphone	VARCHAR(20),
+#	fax		VARCHAR(20),
+#	description	VARCHAR(100),
+#	PRIMARY KEY (id)
+#);
 
-CREATE TABLE Category (
-	id		INTEGER AUTO_INCREMENT NOT NULL,
-	description	VARCHAR(100),
-	PRIMARY KEY (id)
-);
+#CREATE TABLE Category (
+#	id		INTEGER AUTO_INCREMENT NOT NULL,
+#	description	VARCHAR(100),
+#	PRIMARY KEY (id)
+#);
 
 CREATE TABLE Groups (
 	id		VARCHAR(20) NOT NULL,

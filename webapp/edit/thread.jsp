@@ -24,7 +24,7 @@
 					<td colspan="<%= Integer.parseInt(maxdepth)-Integer.parseInt(depth)+1 %>">
 						<jspb:link style="closedfolder" href="/update/thread">
 							<jspb:param name="id"><%= thread.getField("id") %></jspb:param>
-							<jspb:param name="folder"><%= id %></jsbp:param>
+							<jspb:param name="folder"><%= id %></jspb:param>
 							<jspb:param name="redirect">/view/thread.jsp?id=<%= thread.getField("id") %></jspb:param>
 							<%= name %>
 						</jspb:link>
