@@ -1,5 +1,6 @@
 package com.blueprintit.jspboard.servlets;
 
+import java.io.FileInputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,7 +10,18 @@ import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.ResultSet;
 import com.blueprintit.jspboard.servlets.convert.Convertor;
+import com.blueprintit.jspboard.Stylise;
 import com.blueprintit.jspboard.RequestMultiplex;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.mail.Session;
+import javax.mail.Message;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.MessagingException;
 
 public class MessageAdd extends TableAdd
 {
@@ -92,6 +104,80 @@ public class MessageAdd extends TableAdd
 		return "Message";
 	}
 
+	private void sendEmail(Connection conn, Map updates, HttpServletRequest request)
+	{
+		try
+		{
+			ResultSet name = conn.createStatement().executeQuery("SELECT name FROM Thread WHERE id="+updates.get("thread")+";");
+			name.next();
+			String threadname = name.getString(1);
+
+			name = conn.createStatement().executeQuery("SELECT CONCAT(title,' ',firstnames,' ',surname) AS fullname,email FROM Person,Login WHERE Person.id=Login.person AND Login.id='"+request.getRemoteUser()+"';");
+			name.next();
+			String person = name.getString(1);
+			String email = name.getString(2);
+			
+			StringBuffer messagetext = new StringBuffer("The following message has been posted to the bulletin board");
+			messagetext.append(" by "+person);
+			messagetext.append(" in the thread \""+threadname+"\".\n\n");
+			messagetext.append(request.getParameter("content"));
+			messagetext.append("\n\nIf you wish to reply to this message on the bulletin board, please click the following link:\n\n");
+			messagetext.append("https://eeguinness.swan.ac.uk:8443"+request.getContextPath()+"/view/thread.jsp?id="+updates.get("thread")+"#unread\n");
+
+			Context initCtx = new InitialContext();
+			Context envCtx = (Context) initCtx.lookup("java:comp/env");
+			Session msession = (Session) envCtx.lookup("mail/Session");
+
+			Message message = new MimeMessage(msession);
+			ResultSet emails = conn.createStatement().executeQuery("SELECT DISTINCT CONCAT(title,' ',firstnames,' ',surname) AS fullname,email FROM Person,Login WHERE Person.id=Login.person");
+			while (emails.next())
+			{
+				//message.addRecipient(Message.RecipientType.BCC,new InternetAddress(emails.getString(2),emails.getString(1)));
+			}
+			message.setRecipient(Message.RecipientType.TO, new InternetAddress("dave@brass-bullet.co.uk","Dave Townsend"));
+			
+			message.setFrom(new InternetAddress(email,person));
+			message.setSubject("IEE WSWYM Bulletin board message: "+threadname);
+			MimeMultipart text = new MimeMultipart("alternate");
+			MimeBodyPart plain = new MimeBodyPart();
+			plain.setContent(messagetext.toString(),"text/plain");
+			MimeBodyPart html = new MimeBodyPart();
+			html.setContent("<html>\n<body>\n<p>"+Stylise.styliseEmail(messagetext.toString())+"</p></body></html>","text/html");
+			text.addBodyPart(plain);
+			text.addBodyPart(html);
+			
+			/*Enumeration loop = ((RequestMultiplex)request).getFileNames();
+			if (loop.hasMoreElements())
+			{
+				MimeMultipart full = new MimeMultipart();
+				MimeBodyPart textpart = new MimeBodyPart();
+				textpart.setContent(text);
+				full.addBodyPart(textpart);
+				
+				while (loop.hasMoreElements())
+				{
+					String fileid = loop.nextElement().toString();
+					String name = ((RequestMultiplex)request).getOriginalFileName(fileid);
+					if (name!=null)
+					{
+						String content = ((RequestMultiplex)request).getContentType(fileid);
+						MimeBodyPart filepart = new MimeBodyPart(new FileInputStream(((RequestMultiplex)request).getFilesystemName(fileid)));
+						filepart.setContentType(content);
+						full.addBodyPart(filepart);
+					}
+				}
+				text=full;
+			}*/
+
+			message.setContent(text);
+			Transport.send(message);
+		}
+		catch (Exception e)
+		{
+			log("Exception sending mail",e);
+		}
+	}
+	
 	protected void postModification(Connection conn, Map updates, HttpServletRequest request, ResultSet keys) throws SQLException
 	{
 		keys.next();
@@ -117,5 +203,6 @@ public class MessageAdd extends TableAdd
 				}
 			}
 		}
+		sendEmail(conn,updates,request);
 	}
 }
