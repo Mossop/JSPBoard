@@ -2,6 +2,7 @@ package com.blueprintit.jspboard.servlets;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.util.Map;
 import java.util.Enumeration;
@@ -28,10 +29,11 @@ public class MessageAdd extends TableAdd
 			{
 				try
 				{
-					conn.createStatement().executeUpdate("INSERT INTO Thread (folder,name,created,owner) SELECT "+folder+","+convert.convert(name)+",NOW(),person FROM Login WHERE id='"+request.getRemoteUser()+"';");
-					ResultSet results = conn.createStatement().executeQuery("SELECT LAST_INSERT_ID();");
-					results.next();
-					thread=results.getString(1);
+					Statement stmt = conn.createStatement();
+					stmt.executeUpdate("INSERT INTO Thread (folder,name,created,owner) SELECT "+folder+","+convert.convert(name)+",NOW(),person FROM Login WHERE id='"+request.getRemoteUser()+"';");
+					ResultSet ids = stmt.getGeneratedKeys();
+					ids.next();
+					thread=ids.getString(1);
 					fields.put("thread",thread);
 					fields.remove("name");
 					fields.remove("folder");
@@ -90,11 +92,10 @@ public class MessageAdd extends TableAdd
 		return "Message";
 	}
 
-	protected void postModification(Connection conn, Map updates, HttpServletRequest request) throws SQLException
+	protected void postModification(Connection conn, Map updates, HttpServletRequest request, ResultSet keys) throws SQLException
 	{
-		ResultSet results = conn.createStatement().executeQuery("SELECT LAST_INSERT_ID();");
-		results.next();
-		String id=results.getString(1);
+		keys.next();
+		String id=keys.getString(1);
 		conn.createStatement().executeUpdate("INSERT IGNORE INTO UnreadMessage (message,person) SELECT "+id+",Person.id FROM Person,Login WHERE Person.id=Login.person AND Login.id!='"+request.getRemoteUser()+"';");
 		String description = request.getParameter("description");
 		Enumeration loop = ((RequestMultiplex)request).getFileNames();

@@ -16,7 +16,7 @@
   <ResourceParams name="jdbc/JSPBoardDB">
       <parameter>
           <name>driverClassName</name>
-          <value>com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource</value>
+          <value>com.mysql.jdbc.jdbc2.optional.MysqlDataSource</value>
       </parameter>
       <parameter>
           <name>url</name>

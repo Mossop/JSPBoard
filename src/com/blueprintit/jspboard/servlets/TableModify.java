@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Enumeration;
@@ -58,6 +60,11 @@ public abstract class TableModify extends HttpServlet
 	
 	protected abstract String generateQuery(Connection conn, Map updates, HttpServletRequest request);
 	
+	protected void postModification(Connection conn, Map updates, HttpServletRequest request, ResultSet keys) throws SQLException
+	{
+		postModification(conn,updates,request);
+	}
+	
 	protected void postModification(Connection conn, Map updates, HttpServletRequest request) throws SQLException
 	{
 	}
@@ -105,8 +112,9 @@ public abstract class TableModify extends HttpServlet
 			{
 				if ((!updates.isEmpty())&&(allowQuery(conn,updates,request)))
 				{
-					conn.createStatement().executeUpdate(generateQuery(conn,new HashMap(updates),request));
-					postModification(conn,updates,request);
+					Statement stmt = conn.createStatement();
+					stmt.executeUpdate(generateQuery(conn,new HashMap(updates),request));
+					postModification(conn,updates,request,stmt.getGeneratedKeys());
 				}
 				response.sendRedirect(request.getContextPath()+redirect);
 			}
