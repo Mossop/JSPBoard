@@ -5,6 +5,7 @@ public class SelectMessageTag extends DBResultTag
 	private String thread;
 	private String owner;
 	private String order = "created";
+	private String checkunread;
 	
 	public void setOrder(String value)
 	{
@@ -14,6 +15,16 @@ public class SelectMessageTag extends DBResultTag
 	public String getOrder()
 	{
 		return order;
+	}
+	
+	public void setCheckUnread(String value)
+	{
+		checkunread=value;
+	}
+	
+	public String getCheckUnread()
+	{
+		return checkunread;
 	}
 	
 	public void setThread(String value)
@@ -56,8 +67,16 @@ public class SelectMessageTag extends DBResultTag
 			where.delete(where.length()-5,where.length());
 			where.insert(0," WHERE ");
 		}
-		where.insert(0,"SELECT * FROM Message");
-		where.append(" ORDER BY "+order+";");
+		if (checkunread!=null)
+		{
+			where.insert(0,"SELECT Message.*,count(person) AS unread FROM Message LEFT JOIN UnreadMessage ON message=id AND person="+checkunread);
+			where.append(" GROUP BY id ORDER BY "+order+";");
+		}
+		else
+		{
+			where.insert(0,"SELECT * FROM Message");
+			where.append(" ORDER BY "+order+";");
+		}
 		return where.toString();
 	}
 }

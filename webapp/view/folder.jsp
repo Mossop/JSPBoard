@@ -57,7 +57,7 @@
 										<% if (thread.getField("unreadcount").equals("0")) { %>
 											<a href='<%= context %>/view/thread.jsp?id=<%= thread.getField("id") %>'><%= thread.getField("name") %></a>
 										<% } else { %>
-											<a href='<%= context %>/view/thread.jsp?id=<%= thread.getField("id") %>'><i><%= thread.getField("name") %> (<%= thread.getField("unreadcount") %>)</i></a>
+											<a href='<%= context %>/view/thread.jsp?id=<%= thread.getField("id") %>#unread'><i><%= thread.getField("name") %> (<%= thread.getField("unreadcount") %>)</i></a>
 										<% } %>
 									</td>
 									<td>

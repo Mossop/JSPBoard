@@ -262,6 +262,11 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+		<attribute>
+			<name>checkUnread</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
   	<attribute>
   		<name>var</name>
   		<required>false</required>

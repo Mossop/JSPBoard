@@ -74,7 +74,7 @@ public class SelectThreadTag extends DBResultTag
 		if (countunread!=null)
 		{
 			where.insert(0,"SELECT Thread.*,COUNT(person) AS unreadcount FROM Thread,Message LEFT JOIN UnreadMessage ON UnreadMessage.message=Message.id AND UnreadMessage.person="+countunread);
-			where.append(" GROUP BY "+order+";");
+			where.append(" GROUP BY Thread.id ORDER BY "+order+";");
 		}
 		else
 		{

@@ -20,13 +20,22 @@
       </tr>
       <tr>
       	<td align="center" colspan="2" width="578">
-      		<jspb:SelectMessage var="msg" thread='<%= thread.getField("id") %>'>
+      		<% boolean foundfirst=false; %>
+      		<jspb:SelectLogin var="login" id="<%= request.getRemoteUser() %>">
+      		<jspb:SelectMessage var="msg" thread='<%= thread.getField("id") %>' checkUnread='<%= login.getField("person") %>'>
 						<jspb:window>
 							<jspb:header>
 	              <table width="100%">
 	                <tr>
 	                	<td align="left" width="15">
-	                		<img src="<%= context %>/images/read.gif" align="middle" alt="read">
+	                		<% if (msg.getField("unread").equals("1")) { %>
+	                			<% if (!foundfirst) { %>
+	                				<a name="unread"></a>
+	                			<% foundfirst=true; } %>
+		                		<img src="<%= context %>/images/unread.gif" align="middle" alt="read">
+	                		<% } else { %>
+		                		<img src="<%= context %>/images/read.gif" align="middle" alt="read">
+		                	<% } %>
 	                	</td>
 	                  <td align="left">
 											<jspb:SelectPerson var="person" id='<%= msg.getField("owner") %>'>
@@ -111,6 +120,7 @@
 	          </jspb:window>
 	          <br>
 	        </jspb:SelectMessage>
+	        </jspb:SelectLogin>
         </td>
       </tr>
       <jspb:secure groups="messageadd">
