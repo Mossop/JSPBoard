@@ -116,6 +116,30 @@ public class DBResults
 				}
 				else
 				{
+					return ans.replaceAll("<","&lt;").replaceAll(">","&gt;");
+				}
+			}
+			catch (Exception e)
+			{
+			}
+		}
+		return "";
+	}
+	
+	public String getRaw(String field)
+	{
+		int col = findField(field);
+		if (col>=0)
+		{
+			try
+			{
+				String ans = results.getString(col);
+				if (results.wasNull())
+				{
+					return "";
+				}
+				else
+				{
 					return ans;
 				}
 			}
