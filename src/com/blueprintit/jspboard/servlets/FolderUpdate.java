@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class FolderUpdate extends TableUpdate
 {
-	protected boolean allowUpdate(Connection conn, Map fields, HttpServletRequest request)
+	protected boolean allowQuery(Connection conn, Map fields, HttpServletRequest request)
 	{
 		return (request.isUserInRole("boardadmin"));
 	}

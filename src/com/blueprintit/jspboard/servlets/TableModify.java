@@ -34,9 +34,9 @@ public abstract class TableModify extends HttpServlet
 		return true;
 	}
 	
-	protected abstract String generateQuery(Map updates);
+	protected abstract String generateQuery(Connection conn, Map updates, HttpServletRequest request);
 	
-	protected void postModification(Connection conn, Map updates, String user) throws SQLException
+	protected void postModification(Connection conn, Map updates, HttpServletRequest request) throws SQLException
 	{
 	}
 	
@@ -61,13 +61,20 @@ public abstract class TableModify extends HttpServlet
 				if ((!param.equals("redirect"))&&(!param.equals("error")))
 				{
 					conv = (Convertor)fields.get(param);
-					if ((conv!=null)&&(conv.validate(request.getParameter(param))))
+					if (conv!=null)
 					{
-						updates.put(param,conv.convert(request.getParameter(param)));
+						if (conv.validate(request.getParameter(param)))
+						{
+							updates.put(param,conv.convert(request.getParameter(param)));
+						}
+						else
+						{
+							valid=false;
+						}
 					}
 					else
 					{
-						valid=false;
+						updates.put(param,request.getParameter(param));
 					}
 				}
 			}
@@ -76,8 +83,8 @@ public abstract class TableModify extends HttpServlet
 			{
 				if ((!updates.isEmpty())&&(allowQuery(conn,updates,request)))
 				{
-					conn.createStatement().executeUpdate(generateQuery(new HashMap(updates)));
-					postModification(conn,updates,request.getRemoteUser());
+					conn.createStatement().executeUpdate(generateQuery(conn,new HashMap(updates),request));
+					postModification(conn,updates,request);
 				}
 				request.getRequestDispatcher(redirect).forward(request,response);
 			}

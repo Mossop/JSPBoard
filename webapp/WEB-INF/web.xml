@@ -16,6 +16,11 @@
 	</servlet>
 	
 	<servlet>
+		<servlet-name>MessageAdd</servlet-name>
+		<servlet-class>com.blueprintit.jspboard.servlets.MessageAdd</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>FileUpload</servlet-name>
 		<servlet-class>com.blueprintit.jspboard.servlets.FileUpload</servlet-class>
 	</servlet>
@@ -53,6 +58,11 @@
 	<servlet-mapping>
 		<servlet-name>Logout</servlet-name>
 		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>MessageAdd</servlet-name>
+		<url-pattern>/add/message</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
@@ -109,111 +119,14 @@
 		<web-resource-collection>
 			<web-resource-name>General</web-resource-name>
 			<url-pattern>/include/*</url-pattern>
+			<url-pattern>/view/*</url-pattern>
+			<url-pattern>/edit/*</url-pattern>
+			<url-pattern>/update/*</url-pattern>
+			<url-pattern>/add/*</url-pattern>
+			<url-pattern>/file/*</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>*</role-name>
-		</auth-constraint>
-	</security-constraint>
-	
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Admin</web-resource-name>
-			<url-pattern>/sessions</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>admin</role-name>
-		</auth-constraint>
-	</security-constraint>
-	
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Loginview</web-resource-name>
-			<url-pattern>/view/logins.jsp</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>loginview</role-name>
-			<role-name>admin</role-name>
-		</auth-constraint>
-	</security-constraint>
-	
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Loginadmin</web-resource-name>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>loginadmin</role-name>
-			<role-name>admin</role-name>
-		</auth-constraint>
-	</security-constraint>
-	
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Contactview</web-resource-name>
-			<url-pattern>/view/contacts.jsp</url-pattern>
-			<url-pattern>/view/contact.jsp</url-pattern>
-			<url-pattern>/edit/contact.jsp</url-pattern>
-			<url-pattern>/update/person</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>contactview</role-name>
-			<role-name>admin</role-name>
-		</auth-constraint>
-	</security-constraint>
-	
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Contactadmin</web-resource-name>
-			<url-pattern>/edit/contact.jsp</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>contactadmin</role-name>
-			<role-name>admin</role-name>
-		</auth-constraint>
-	</security-constraint>
-	
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Messageview</web-resource-name>
-			<url-pattern>/view/folder.jsp</url-pattern>
-			<url-pattern>/view/thread.jsp</url-pattern>
-			<url-pattern>/view/file</url-pattern>
-			<url-pattern>/files/*</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>messageview</role-name>
-			<role-name>admin</role-name>
-		</auth-constraint>
-	</security-constraint>
-	
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Messageadd</web-resource-name>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>messageadd</role-name>
-			<role-name>admin</role-name>
-		</auth-constraint>
-	</security-constraint>
-	
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Messageadmin</web-resource-name>
-			<url-pattern>/edit/thread.jsp</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>messageadmin</role-name>
-			<role-name>admin</role-name>
-		</auth-constraint>
-	</security-constraint>
-	
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Boardadmin</web-resource-name>
-			<url-pattern>/edit/folder.jsp</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>boardadmin</role-name>
-			<role-name>admin</role-name>
 		</auth-constraint>
 	</security-constraint>
 	

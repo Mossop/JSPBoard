@@ -120,11 +120,13 @@
 	      <tr>
 	        <td colspan="2">
 	          <h2>Add a new reply to this thread:</h2>
-	          <form action="xdf.php" method="post">
+	          <form action="<%= context %>/add/message" method="post">
+	          	<input type="hidden" name="thread" value='<%= thread.getField("id") %>'>
+	          	<input type="hidden" name="redirect" value='<%= context %>/view/thread.jsp?id=<%= thread.getField("id") %>'>
 	          	<table>
 	            	<tr>
 	                <td>
-	                  <textarea name="content1" rows="15" cols="60"></textarea>
+	                  <textarea name="content" rows="15" cols="60"></textarea>
 	                </td>
 	              </tr>
 	              <tr>

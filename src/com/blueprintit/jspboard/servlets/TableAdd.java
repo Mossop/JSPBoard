@@ -2,10 +2,12 @@ package com.blueprintit.jspboard.servlets;
 
 import java.util.Map;
 import java.util.Iterator;
+import javax.servlet.http.HttpServletRequest;
+import java.sql.Connection;
 
 public abstract class TableAdd extends TableModify
 {
-	protected String generateQuery(Map updates)
+	protected String generateQuery(Connection conn, Map updates, HttpServletRequest request)
 	{
 		StringBuffer query = new StringBuffer("INSERT INTO "+getTable());
 		StringBuffer fields = new StringBuffer();

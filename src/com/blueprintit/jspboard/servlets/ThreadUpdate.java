@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 
 public class ThreadUpdate extends TableUpdate
 {
-	protected boolean allowUpdate(Connection conn, Map fields, HttpServletRequest request)
+	protected boolean allowQuery(Connection conn, Map fields, HttpServletRequest request)
 	{
 		if (request.isUserInRole("messageadmin"))
 		{

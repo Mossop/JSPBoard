@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 
 public class MessageUpdate extends TableUpdate
 {
-	protected boolean allowUpdate(Connection conn, Map fields, HttpServletRequest request)
+	protected boolean allowQuery(Connection conn, Map fields, HttpServletRequest request)
 	{
 		if (request.isUserInRole("messageadmin"))
 		{
@@ -56,17 +56,17 @@ public class MessageUpdate extends TableUpdate
 		return "Message";
 	}
 
-	protected void postModification(Connection conn, Map updates, String user) throws SQLException
+	protected void postModification(Connection conn, Map updates, HttpServletRequest request) throws SQLException
 	{
 		String id = (String)updates.get("id");
-		if ((user!=null)&&(id!=null))
+		if (id!=null)
 		{
-			ResultSet results = conn.createStatement().executeQuery("SELECT person FROM Login WHERE id='"+user+"';");
+			ResultSet results = conn.createStatement().executeQuery("SELECT person FROM Login WHERE id='"+request.getRemoteUser()+"';");
 			if (results.next())
 			{
 				String person = results.getString(1);
 				conn.createStatement().executeUpdate("INSERT INTO EditedMessage (message,person,altered) VALUES ("+id+","+person+",NOW());");
-				conn.createStatement().executeUpdate("INSERT IGNORE INTO UnreadMessage (message,person) SELECT "+id+",Person.id FROM Person,Login WHERE Person.id=Login.person AND Person.id!="+person+";");
+				conn.createStatement().executeUpdate("INSERT IGNORE INTO UnreadMessage (message,person) SELECT "+id+",Person.id FROM Person WHERE Person.id!="+person+";");
 			}
 		}
 	}

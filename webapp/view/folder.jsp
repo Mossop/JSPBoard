@@ -74,17 +74,19 @@
 					<td colspan="2">
 						<hr>
 						<h2>Post a new thread:</h2>
-						<form action="xdf.php" method="post">
+						<form action="<%= context %>/add/message" method="post">
+							<input type="hidden" name="folder" value='<%= folder.getField("id") %>'>
+							<input type="hidden" name="redirect" value='<%= context %>/view/folder.jsp'>
 							<table>
 								<tr>
 									<td>Subject:</td>
 									<td>
-										<input type="text" name="name1" size="70">
+										<input type="text" name="name" size="70">
 									</td>
 								</tr>
 								<tr>
 									<td colspan="2">
-										<textarea name="content2" rows="15" cols="60"></textarea>
+										<textarea name="content" rows="15" cols="60"></textarea>
 									</td>
 								</tr>
 								<tr>
