@@ -16,7 +16,8 @@
 			<td colspan="2" width="578">
 				<table border="0" cellspacing="1">
 					<tr>
-						<td width="338">
+						<td width="20"></td>
+						<td width="318">
 							<b>Thread</b>
 						</td>
 						<td width="100">
@@ -30,14 +31,18 @@
 						<tr>
 							<td>
 								<img src="images/read.gif" alt="read" align="middle">
-								<a href=""><%= thread.getField("name") %></a>
+							</td>
+							<td>
+								<a href=""><jspb:GetField field="name"/></a>
 							</td>
 							<td>
 								<jspb:SelectPerson var="person" id='<%= thread.getField("owner") %>'>
-									<%= person.getField("nickname") %>
+									<jspb:GetField field="nickname"/>
 								</jspb:SelectPerson>
 							</td>
-							<td align="right"></td>
+							<td align="right">
+								<jspb:GetField field="created"/>
+							</td>
 						</tr>
 					</jspb:SelectThread>
 				</table>

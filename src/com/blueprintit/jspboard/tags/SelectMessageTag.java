@@ -4,6 +4,17 @@ public class SelectMessageTag extends DBResultTag
 {
 	private String thread;
 	private String owner;
+	private String order = "created";
+	
+	public void setOrder(String value)
+	{
+		order=value;
+	}
+	
+	public String getOrder()
+	{
+		return order;
+	}
 	
 	public void setThread(String value)
 	{
@@ -46,7 +57,7 @@ public class SelectMessageTag extends DBResultTag
 			where.insert(0," WHERE ");
 		}
 		where.insert(0,"SELECT * FROM Message");
-		where.append(";");
+		where.append(" ORDER BY "+order+";");
 		return where.toString();
 	}
 }

@@ -4,6 +4,17 @@ public class SelectThreadTag extends DBResultTag
 {
 	private String folder;
 	private String owner;
+	private String order = "created";
+	
+	public void setOrder(String value)
+	{
+		order=value;
+	}
+	
+	public String getOrder()
+	{
+		return order;
+	}
 	
 	public void setFolder(String value)
 	{
@@ -46,7 +57,7 @@ public class SelectThreadTag extends DBResultTag
 			where.insert(0," WHERE ");
 		}
 		where.insert(0,"SELECT * FROM Thread");
-		where.append(";");
+		where.append(" ORDER BY "+order+";");
 		return where.toString();
 	}
 }

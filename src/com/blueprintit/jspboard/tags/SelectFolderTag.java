@@ -5,6 +5,17 @@ import javax.servlet.jsp.tagext.Tag;
 public class SelectFolderTag extends DBResultTag
 {
 	private String parentid;
+	private String order = "name";
+	
+	public void setOrder(String value)
+	{
+		order=value;
+	}
+	
+	public String getOrder()
+	{
+		return order;
+	}
 	
 	public void setParentId(String value)
 	{
@@ -33,7 +44,7 @@ public class SelectFolderTag extends DBResultTag
 			where.insert(0," WHERE ");
 		}
 		where.insert(0,"SELECT * FROM Folder");
-		where.append(";");
+		where.append(" ORDER BY "+order+";");
 		return where.toString();
 	}
 }

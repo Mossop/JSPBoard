@@ -55,7 +55,7 @@
 	              	</jspb:FolderTree>
 	              </table>
               	<hr>
-              	<p>Change Password</p>
-								<p>Logout</p>
+              	Change Password<br>
+								Logout<br>>
               </td>
               <td width="578" valign="top">

@@ -106,12 +106,22 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+		<attribute>
+			<name>order</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
   </tag>
   <tag>
   	<name>SelectThread</name>
   	<tag-class>com.blueprintit.jspboard.tags.SelectThreadTag</tag-class>
   	<tei-class>com.blueprintit.jspboard.tags.DBResultTEI</tei-class>
   	<body-content>JSP</body-content>
+		<attribute>
+			<name>order</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
   	<attribute>
   		<name>var</name>
   		<required>false</required>
@@ -143,6 +153,11 @@
   	<tag-class>com.blueprintit.jspboard.tags.SelectMessageTag</tag-class>
   	<tei-class>com.blueprintit.jspboard.tags.DBResultTEI</tei-class>
   	<body-content>JSP</body-content>
+		<attribute>
+			<name>order</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
   	<attribute>
   		<name>var</name>
   		<required>false</required>
@@ -174,6 +189,11 @@
   	<tag-class>com.blueprintit.jspboard.tags.SelectPersonTag</tag-class>
   	<tei-class>com.blueprintit.jspboard.tags.DBResultTEI</tei-class>
   	<body-content>JSP</body-content>
+		<attribute>
+			<name>order</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
   	<attribute>
   		<name>var</name>
   		<required>false</required>

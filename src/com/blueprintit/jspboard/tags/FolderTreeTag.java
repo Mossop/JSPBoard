@@ -29,7 +29,7 @@ public class FolderTreeTag extends TagSupport
 			
 	private void scanFolder(int id, int depth) throws SQLException
 	{
-		DBResults results = new DBResults(conn.createStatement().executeQuery("SELECT * FROM Folder WHERE parent="+id+";"),this);
+		DBResults results = new DBResults(conn.createStatement().executeQuery("SELECT * FROM Folder WHERE parent="+id+" ORDER BY name;"),this);
 		if (results.next(this))
 		{
 			if (depth>maxdepth)
